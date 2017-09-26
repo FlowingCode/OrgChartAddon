@@ -1,6 +1,6 @@
 # OrgChart Add-On for Vaadin
 
-OrgChart Addon is a Vaadin integration with the JQuery library [OrgChat](https://github.com/dabeng/OrgChart).
+OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https://github.com/dabeng/OrgChart).
 
 ## Online demo
 
