@@ -18,12 +18,19 @@ function() {
 
         let orgchart = $("#chart-container", element).orgchart({
         	'data' : jQuery.parseJSON(value),
-        	'nodeContent': 'title',
+        	'nodeContent': state.chartNodeContent,
+        	'nodeTitle': state.chartNodeTitle,
         	'zoom': state.chartZoom,
         	'exportButton': state.chartExportButton,
         	'exportFileextension': state.chartExportFileExtension,
         	'exportFilename': state.chartExportFileName,
-        	'direction': state.chartDirection        	
+        	'direction': state.chartDirection,
+        	'pan': state.chartPan,
+        	'zoominLimit': state.chartZoominLimit,
+        	'zoomoutLimit': state.chartZoomoutLimit,
+        	'depth': state.chartDepth,
+        	'verticalDepth': state.chartVerticalDepth,
+        	'toggleSiblingsResp': state.chartToggleSiblingsResp
         });  
         
         var title = state.chartTitle;

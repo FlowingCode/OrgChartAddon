@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.flowingcode.vaadin.orgchart.OrgChart;
 import com.flowingcode.vaadin.orgchart.OrgChartLevelItem;
+import com.flowingcode.vaadin.orgchart.enums.ChartDirectionEnum;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -42,10 +43,15 @@ public class DemoUI extends UI
       
         OrgChart component = new OrgChart(item1);        
         component.setChartTitle("My Organization Chart Demo");    
+        component.setChartNodeContent("title");
         component.setChartZoom(true);
 //        component.setChartExportButton(true);
 //        component.setChartExportFileExtension(ChartConstants.CHART_EXPORT_EXTENSION_PDF);
 //        component.setChartDirection(ChartDirectionEnum.BOTTOM_TO_TOP.getAbreviation());
+//        component.setChartDepth(3);
+//        component.setChartVerticalDepth(2);
+//        component.setChartToggleSiblingsResp(true);
+    
        
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();

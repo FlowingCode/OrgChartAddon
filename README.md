@@ -1,4 +1,4 @@
-# OrgChart Add-on for Vaadin
+# OrgChart Add-On for Vaadin
 
 OrgChart Addon is a Vaadin integration with the JQuery library [OrgChat](https://github.com/dabeng/OrgChart).
 
@@ -50,7 +50,7 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-OrgChart Add-on is written by Paola De Bartolo
+OrgChart Add-On is written by Paola De Bartolo
 
 # Developer Guide
 

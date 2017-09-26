@@ -47,6 +47,14 @@ public class OrgChart extends AbstractJavaScriptComponent {
 	    return result;
     }
     
+    public void setChartNodeTitle(String chartNodeTitle) {
+    	getState().chartNodeTitle = chartNodeTitle;
+    }
+    
+    public void setChartNodeContent(String chartNodeContent) {
+    	getState().chartNodeContent = chartNodeContent;
+    }
+    
     public void setChartDirection(String chartDirection) {
     	getState().chartDirection = chartDirection;
     }
@@ -69,6 +77,30 @@ public class OrgChart extends AbstractJavaScriptComponent {
     
     public void setChartExportFileExtension(String chartExportFileExtension) {
     	getState().chartExportFileExtension = chartExportFileExtension;
+    }
+    
+    public void setChartPan(Boolean chartPan) {
+    	getState().chartPan = chartPan;
+    }
+    
+    public void setChartZoominLimit(Double chartZoominLimit) {
+    	getState().chartZoominLimit = chartZoominLimit;
+    }
+    
+    public void setChartZoomoutLimit(Double chartZoomoutLimit) {
+    	getState().chartZoomoutLimit = chartZoomoutLimit;
+    }
+    
+    public void setChartDepth(Integer chartDepth) {
+    	getState().chartDepth = chartDepth;
+    }
+    
+    public void setChartVerticalDepth(Integer chartVerticalDepth) {
+    	getState().chartVerticalDepth = chartVerticalDepth;
+    }
+    
+    public void setChartToggleSiblingsResp(Boolean chartToggleSiblingsResp) {
+    	getState().chartToggleSiblingsResp = chartToggleSiblingsResp;
     }
     
 }
