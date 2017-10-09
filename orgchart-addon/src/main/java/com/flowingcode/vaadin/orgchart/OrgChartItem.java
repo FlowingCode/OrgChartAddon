@@ -12,23 +12,23 @@ import java.util.List;
  *
  */
 @SuppressWarnings("serial")
-public class OrgChartLevelItem implements Serializable {
+public class OrgChartItem implements Serializable {
 
 	private String name;
 	
 	private String title;
 	
-	private Integer levelId;
+	private Integer nodeId;
+		
+	private List<OrgChartItem> children = new ArrayList<>();
 	
-	private List<OrgChartLevelItem> children = new ArrayList<>();
-	
-	public OrgChartLevelItem(Integer levelId, String name, String title) {
+	public OrgChartItem(Integer nodeId, String name, String title) {
 		super();
-		this.levelId = levelId;
+		this.nodeId = nodeId;
 		this.name = name;
 		this.title = title;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -36,13 +36,13 @@ public class OrgChartLevelItem implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Integer getLevelId() {
-		return levelId;
+	
+	public Integer getNodeId() {
+		return nodeId;
 	}
 
-	public void setLevelId(Integer levelId) {
-		this.levelId = levelId;
+	public void setNodeId(Integer nodeId) {
+		this.nodeId = nodeId;
 	}
 
 	public String getTitle() {
@@ -53,11 +53,11 @@ public class OrgChartLevelItem implements Serializable {
 		this.title = title;
 	}
 
-	public List<OrgChartLevelItem> getChildren() {
+	public List<OrgChartItem> getChildren() {
 		return children;
 	}
 
-	public void setChildren(List<OrgChartLevelItem> children) {
+	public void setChildren(List<OrgChartItem> children) {
 		this.children = children;
 	}
 
@@ -65,7 +65,7 @@ public class OrgChartLevelItem implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((levelId == null) ? 0 : levelId.hashCode());
+		result = prime * result + ((nodeId == null) ? 0 : nodeId.hashCode());
 		return result;
 	}
 
@@ -77,13 +77,13 @@ public class OrgChartLevelItem implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrgChartLevelItem other = (OrgChartLevelItem) obj;
-		if (levelId == null) {
-			if (other.levelId != null)
+		OrgChartItem other = (OrgChartItem) obj;
+		if (nodeId == null) {
+			if (other.nodeId != null)
 				return false;
-		} else if (!levelId.equals(other.levelId))
+		} else if (!nodeId.equals(other.nodeId))
 			return false;
 		return true;
-	}			
+	}	
 	
 }

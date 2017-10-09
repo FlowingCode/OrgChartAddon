@@ -10,22 +10,22 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
 /**
  * OrgChart component definition. <br> 
  * Uses JQuery library <b>OrgChart</b> to show an organization chart. <br>
- * More information about this library at https://github.com/dabeng/OrgChart
+ * More information about this library at <a href="https://github.com/dabeng/OrgChart">https://github.com/dabeng/OrgChart</a>
  *  
  * @author pbartolo
  *
  */
 @SuppressWarnings("serial")
 @JavaScript({"jquery-3.2.1.min.js", "html2canvas.js", "jquery.orgchart.js", "orgchart-connector.js"})
-@StyleSheet({"jquery.orgchart.css"})
+@StyleSheet({"jquery.orgchart.css", "orgchart.css"})
 public class OrgChart extends AbstractJavaScriptComponent {
 	
-	public OrgChart(OrgChartLevelItem orgChartLevelItem) {
+	public OrgChart(OrgChartItem orgChartLevelItem) {
 		super();
 		this.setValue(orgChartLevelItem);
 	}
 	
-	public void setValue(OrgChartLevelItem orgChartLevelItem) {	
+	public void setValue(OrgChartItem orgChartLevelItem) {	
 		String value = convertToJsonObj(orgChartLevelItem);
 		getState().value = value;
 	}
@@ -35,12 +35,12 @@ public class OrgChart extends AbstractJavaScriptComponent {
         return (OrgChartState) super.getState();
     }	
   
-    private String convertToJsonObj(OrgChartLevelItem orgChartLevelItem) {    	   	    	
+    private String convertToJsonObj(OrgChartItem orgChartLevelItem) {    	   	    	
     	String result = null;
     	ObjectMapper mapper = new ObjectMapper();
     	try {
 			result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(orgChartLevelItem);
-			System.out.println(result);
+//			System.out.println(result);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}    	    
@@ -102,5 +102,8 @@ public class OrgChart extends AbstractJavaScriptComponent {
     public void setChartToggleSiblingsResp(Boolean chartToggleSiblingsResp) {
     	getState().chartToggleSiblingsResp = chartToggleSiblingsResp;
     }
-    
+     
+    public void setChartExpandCollapse(Boolean chartExpandCollapse) {
+    	getState().chartExpandCollapse = chartExpandCollapse;
+    }
 }

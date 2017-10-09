@@ -42,4 +42,6 @@ public class OrgChartState extends JavaScriptComponentState {
 	
 	public Integer chartVerticalDepth;
 	
+	public boolean chartExpandCollapse = false;
+	
 }

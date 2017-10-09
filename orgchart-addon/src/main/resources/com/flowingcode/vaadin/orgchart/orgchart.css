@@ -1,0 +1,8 @@
+#chart-container {
+  position: relative;
+  display: inline-block;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 24px);
+  text-align: center;
+}
