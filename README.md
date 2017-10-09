@@ -66,7 +66,8 @@ OrgChart Add-On is written by Paola De Bartolo
 
 Here is a simple example on how to try out the add-on component:
 
-< OrgChartItem item1 = new OrgChartItem(1, "Root item", "Root Level");
+```java
+  OrgChartItem item1 = new OrgChartItem(1, "Root item", "Root Level");
   OrgChartItem item2 = new OrgChartItem(2, "Item 2", "Level 1");
   OrgChartItem item3 = new OrgChartItem(3, "Item 3", "Level 1");        
   item1.setChildren(Arrays.asList(item2, item3));
@@ -76,6 +77,6 @@ Here is a simple example on how to try out the add-on component:
   orgChart.setChartNodeContent("title");
   orgChart.setChartExportButton(true);
   orgChart.setZomm(true);
->
+```
 
 
