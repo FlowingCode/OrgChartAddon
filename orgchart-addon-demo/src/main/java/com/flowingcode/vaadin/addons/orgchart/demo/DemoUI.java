@@ -1,12 +1,12 @@
-package com.flowingcode.vaadin.orgchart.demo;
+package com.flowingcode.vaadin.addons.orgchart.demo;
 
 import java.util.Arrays;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.flowingcode.vaadin.orgchart.OrgChart;
-import com.flowingcode.vaadin.orgchart.OrgChartItem;
-import com.flowingcode.vaadin.orgchart.enums.ChartDirectionEnum;
+import com.flowingcode.vaadin.addons.orgchart.OrgChart;
+import com.flowingcode.vaadin.addons.orgchart.OrgChartItem;
+import com.flowingcode.vaadin.addons.orgchart.enums.ChartDirectionEnum;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;

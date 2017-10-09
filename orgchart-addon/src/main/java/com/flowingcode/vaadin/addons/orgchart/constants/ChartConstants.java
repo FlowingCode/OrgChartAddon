@@ -1,4 +1,4 @@
-package com.flowingcode.vaadin.orgchart.constants;
+package com.flowingcode.vaadin.addons.orgchart.constants;
 
 public interface ChartConstants {
 

@@ -1,4 +1,4 @@
-package com.flowingcode.vaadin.orgchart;
+package com.flowingcode.vaadin.addons.orgchart;
 
 import junit.framework.Assert;
 import org.junit.Test;

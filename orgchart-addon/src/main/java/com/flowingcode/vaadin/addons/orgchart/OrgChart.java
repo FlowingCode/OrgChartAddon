@@ -1,8 +1,8 @@
-package com.flowingcode.vaadin.orgchart;
+package com.flowingcode.vaadin.addons.orgchart;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flowingcode.vaadin.orgchart.client.OrgChartState;
+import com.flowingcode.vaadin.addons.orgchart.client.OrgChartState;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.AbstractJavaScriptComponent;

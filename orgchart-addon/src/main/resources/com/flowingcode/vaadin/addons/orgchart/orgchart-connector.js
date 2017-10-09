@@ -1,4 +1,4 @@
-window.com_flowingcode_vaadin_orgchart_OrgChart =
+window.com_flowingcode_vaadin_addons_orgchart_OrgChart =
 function() {
     
     var connector = this;

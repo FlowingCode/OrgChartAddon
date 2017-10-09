@@ -28,15 +28,15 @@
 	</organization>
 <!--
 	<scm>
-		<url>git://github.com/mygithubaccount/OrgChartAddon.git</url>
-		<connection>scm:git:git://github.com/mygithubaccount/OrgChartAddon.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${componentClassName}.git</developerConnection>
+		<url>git://github.com/FlowingCode/OrgChartAddon.git</url>
+		<connection>scm:git:git://github.com/FlowingCode/OrgChartAddon.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:/FlowingCode/${componentClassName}.git</developerConnection>
 		<tag>OrgChart Add-on for Vaadin</tag>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/mygithubaccount/OrgChartAddon/issues</url>
+		<url>https://github.com/FlowingCode/OrgChartAddon/issues</url>
 	</issueManagement>
 -->
 	<licenses>

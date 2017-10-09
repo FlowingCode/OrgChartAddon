@@ -1,7 +1,7 @@
-package com.flowingcode.vaadin.orgchart.client;
+package com.flowingcode.vaadin.addons.orgchart.client;
 
-import com.flowingcode.vaadin.orgchart.constants.ChartConstants;
-import com.flowingcode.vaadin.orgchart.enums.ChartDirectionEnum;
+import com.flowingcode.vaadin.addons.orgchart.constants.ChartConstants;
+import com.flowingcode.vaadin.addons.orgchart.enums.ChartDirectionEnum;
 import com.vaadin.shared.ui.JavaScriptComponentState;
 
 /**
