@@ -5,8 +5,9 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
 ## Features
 
 - Supported library features:
-	- data(json), 
-    - pan, - zoom,
+	- data (json), 
+    - pan, 
+    - zoom,
     - zoominLimit, 
     - zoomoutLimit, 
     - direction, 
@@ -31,10 +32,10 @@ Official releases of this add-on will be available at Vaadin Directory soon.
 
 ## Building and running demo
 
-git clone repository
-mvn clean install
-cd demo
-mvn jetty:run
+>git clone repository
+>mvn clean install
+>cd demo
+>mvn jetty:run
 
 To see the demo, navigate to http://localhost:8080/
 
