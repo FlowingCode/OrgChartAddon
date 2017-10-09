@@ -5,7 +5,19 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
 ## Features
 
 - Supported library features:
-	- data(json), pan, zoom, zoominLimit, zoomoutLimit, direction, verticalDepth, depth, toggleSiblingsResp, nodeTitle, nodeContent, exportButton, exportFilename, exportFileextension (png & pdf)
+	- data(json), 
+    - pan, - zoom,
+    - zoominLimit, 
+    - zoomoutLimit, 
+    - direction, 
+    - verticalDepth, 
+    - depth, 
+    - toggleSiblingsResp, 
+    - nodeTitle, 
+    - nodeContent, 
+    - exportButton, 
+    - exportFilename, 
+    - exportFileextension (png & pdf)
 - Enable/disable exapand/collapse feature
 - Add a chart title
 
@@ -76,7 +88,11 @@ Here is a simple example on how to try out the add-on component:
   orgChart.setChartTitle("A Ttile");    
   orgChart.setChartNodeContent("title");
   orgChart.setChartExportButton(true);
-  orgChart.setZomm(true);
+  orgChart.setZoom(true);
+  
+  // add to a layout
+  VerticalLayout layout = new VerticalLayout();
+  layout.addComponent(orgChart);
 ```
 
 
