@@ -3,7 +3,7 @@ package com.flowingcode.vaadin.addons.orgchart.enums;
 
 /**
  * Enumeration of the directions that the organization chart can have. <br>
- * Default one is "t2b -> Top to Bottom".
+ * Default one is "t2b = Top to Bottom".
  * 
  * @author pbartolo
  *
