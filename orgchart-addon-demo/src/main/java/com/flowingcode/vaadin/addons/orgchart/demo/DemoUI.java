@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.flowingcode.vaadin.addons.orgchart.OrgChart;
 import com.flowingcode.vaadin.addons.orgchart.OrgChartItem;
-import com.flowingcode.vaadin.addons.orgchart.enums.ChartDirectionEnum;
+import com.flowingcode.vaadin.addons.orgchart.client.enums.ChartDirectionEnum;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;

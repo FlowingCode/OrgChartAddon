@@ -1,4 +1,4 @@
-package com.flowingcode.vaadin.addons.orgchart.enums;
+package com.flowingcode.vaadin.addons.orgchart.client.enums;
 
 
 /**
