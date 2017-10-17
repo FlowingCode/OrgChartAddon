@@ -25,8 +25,8 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		this.setValue(orgChartLevelItem);
 	}
 	
-	public void setValue(OrgChartItem orgChartLevelItem) {	
-		String value = convertToJsonObj(orgChartLevelItem);
+	public void setValue(OrgChartItem orgChartItem) {	
+		String value = convertToJsonObj(orgChartItem);
 		getState().value = value;
 	}
 	
