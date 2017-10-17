@@ -17,7 +17,7 @@ import com.vaadin.ui.AbstractJavaScriptComponent;
  */
 @SuppressWarnings("serial")
 @JavaScript({"jquery-3.2.1.min.js", "html2canvas.js", "jquery.orgchart.js", "orgchart-connector.js"})
-@StyleSheet({"jquery.orgchart.css", "orgchart.css"})
+@StyleSheet({"jquery.orgchart.css", "orgchart.css", "font-awesome.css"})
 public class OrgChart extends AbstractJavaScriptComponent {
 	
 	public OrgChart(OrgChartItem orgChartLevelItem) {
