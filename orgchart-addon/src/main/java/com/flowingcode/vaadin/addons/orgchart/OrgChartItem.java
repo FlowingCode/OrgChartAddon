@@ -20,7 +20,7 @@ public class OrgChartItem implements Serializable {
 	
 	private Integer nodeId;
 		
-	private List<OrgChartItem> children = new ArrayList<>();
+	private List<OrgChartItem> children = null;
 	
 	public OrgChartItem(Integer nodeId, String name, String title) {
 		super();
@@ -59,6 +59,12 @@ public class OrgChartItem implements Serializable {
 
 	public void setChildren(List<OrgChartItem> children) {
 		this.children = children;
+	}
+	
+	public void addChild(OrgChartItem item) {
+		if (this.children==null)
+			children = new ArrayList<OrgChartItem>();
+		children.add(item);
 	}
 
 	@Override
