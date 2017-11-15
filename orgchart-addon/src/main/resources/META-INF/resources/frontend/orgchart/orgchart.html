@@ -535,14 +535,11 @@
                 // Create the event
                 var event = new CustomEvent("load-org-chart", { detail: {
                	  parent: this.shadowRoot,
-//                  	  parent: this.shadowRoot.querySelector("#chart-container"),
               	  structure: JSON.parse(newValue)
                 }});
                 // Dispatch/Trigger/Fire the event
                 document.dispatchEvent(event);
            	}
-
-            
 
         }
         customElements.define(OrgChartTemplate.is, OrgChartTemplate);
