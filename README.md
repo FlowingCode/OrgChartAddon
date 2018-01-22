@@ -24,11 +24,11 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
 
 ## Online demo
 
-Not available yet.
+Try the add-on demo at http://addons.flowingcode.com/orgchart
 
 ## Download release
 
-Official releases of this add-on will be available at Vaadin Directory soon.
+Official releases at Vaadin Directory https://vaadin.com/directory/component/orgchart-add-on
 
 ## Building and running demo
 
@@ -41,7 +41,7 @@ To see the demo, navigate to http://localhost:8080/
 
 ## Release notes
 
-### Version 2.0.0-SNAPSHOT
+### Version 2.0.0
 - Initial Version. This version allows to visualize an organizational chart and exported as a png or a pdf file. 
 
 ## Roadmap
