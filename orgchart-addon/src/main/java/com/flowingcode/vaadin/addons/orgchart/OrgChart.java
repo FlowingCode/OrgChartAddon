@@ -40,7 +40,6 @@ public class OrgChart extends AbstractJavaScriptComponent {
     	ObjectMapper mapper = new ObjectMapper();
     	try {
 			result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(orgChartLevelItem);
-//			System.out.println(result);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}    	    
