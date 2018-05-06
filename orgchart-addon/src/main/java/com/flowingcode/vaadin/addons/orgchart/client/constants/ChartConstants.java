@@ -16,4 +16,5 @@ public interface ChartConstants {
 	
 	public static String CHART_NODE_TITLE_DEFAULT = "name";
 	
+	public static String CHART_NODE_ID_DEFAULT = "id";
 }

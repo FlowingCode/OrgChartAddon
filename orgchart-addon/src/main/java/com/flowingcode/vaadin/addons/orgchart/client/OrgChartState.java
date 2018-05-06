@@ -42,6 +42,10 @@ public class OrgChartState extends JavaScriptComponentState {
 	
 	public Integer chartVerticalDepth;
 	
-	public boolean chartExpandCollapse = false;
+	public Boolean chartExpandCollapse = false;
+	
+	public Boolean chartDraggable = false; //Note from library: this feature doesn't work on IE due to its poor support for HTML5 drag & drop APpublic Boolean chartDiscardDragButton = false;
+	
+	public String chartNodeId = ChartConstants.CHART_NODE_ID_DEFAULT;  
 	
 }

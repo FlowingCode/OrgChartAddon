@@ -34,16 +34,18 @@ public class DemoUI extends UI
         component1.setChartNodeContent("title");
         component1.setChartExportButton(true);
         component1.setChartExpandCollapse(true);
+        
+        component1.setChartDraggable(true);
     
         OrgChart component2 = getExample2();
         component2.setChartTitle("My Organization Chart Demo - Example 2 - BOTTOM TO TOP DIRECTION");    
         component2.setChartNodeContent("title");
         component2.setChartDirection(ChartDirectionEnum.BOTTOM_TO_TOP.getAbreviation());
-        
+               
         VerticalSplitPanel layout = new VerticalSplitPanel(component1, component2);
         setContent(layout);
     }    
-    
+        
     public OrgChart getExample1() {
     	OrgChartItem item1 = new OrgChartItem(1, "John Williams", "Director");
         OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");

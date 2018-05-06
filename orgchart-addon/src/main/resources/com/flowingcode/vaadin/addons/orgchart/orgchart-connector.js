@@ -4,10 +4,11 @@ function() {
     var connector = this;
     var element = connector.getElement();
     var state = connector.getState();
+    var rpcProxy = this.getRpcProxy();
     
     connector.onStateChange = function() {       
-        var value = state.value;
-        
+        var value = state.value;     
+                        
         let exportChart = state.chartExportButton;
         let exportExt = state.chartExportFileExtension;
         if(exportChart & exportExt == "pdf"){
@@ -17,7 +18,7 @@ function() {
         	addJSfile("https://cdn.rawgit.com/stefanpenner/es6-promise/master/dist/es6-promise.auto.min.js");
         }
 
-        let orgchart = $(element).orgchart({
+        var orgchart = $(element).orgchart({
         	'data' : jQuery.parseJSON(value),
         	'nodeContent': state.chartNodeContent,
         	'nodeTitle': state.chartNodeTitle,
@@ -31,9 +32,11 @@ function() {
         	'zoomoutLimit': state.chartZoomoutLimit,
         	'depth': state.chartDepth,
         	'verticalDepth': state.chartVerticalDepth,
-        	'toggleSiblingsResp': state.chartToggleSiblingsResp        	
+        	'toggleSiblingsResp': state.chartToggleSiblingsResp,
+        	'draggable': state.chartDraggable,
+        	'nodeId': state.chartNodeId        	
         });  
-        
+                
         // add title
         var title = state.chartTitle;
         if(title) {
@@ -41,7 +44,7 @@ function() {
         } 		 
         
         /*
-         * Users can enable/disable exapand/collapse feature with className "noncollapsable".
+         * Users can enable/disable expand/collapse feature with className "noncollapsable".
          * 
          * $('.orgchart').addClass('noncollapsable'); -> to deactivate	  
          * $('.orgchart').removeClass('noncollapsable'); -> to activate
@@ -54,8 +57,30 @@ function() {
         	$(element).find(".orgchart").removeClass('noncollapsable');
         }
         
-  		$(element).find(".orgchart").css("background-image", "none");  		
-  		$("div.orgchart").prev().closest("div").attr("id", "chart-container");
+        $(element).find(".orgchart").css("background-image", "none");  		
+  		$("div.orgchart").prev().closest("div").attr("id", "chart-container");  	
+        
+        // if draggable 
+  		var draggable = state.chartDraggable;
+  	  		
+  		if(draggable){
+  			orgchart.$chart.on('nodedrop.orgchart', function(event, extraParams) {
+  				  				
+  				let draggedNode = extraParams.draggedNode.attr('id');
+  				let dragZone = extraParams.dragZone.attr('id');
+  				let dropZone = extraParams.dropZone.attr('id');
+  				
+  				console.log('draggedNode:' + draggedNode  
+  				        + ', dragZone:' + dragZone
+  				        + ', dropZone:' + dropZone
+  				      );
+  				
+  				rpcProxy.updateChart(draggedNode, dragZone, dropZone);
+  				
+  			  });
+  				
+  		}
+          			
     }
     	
 };
