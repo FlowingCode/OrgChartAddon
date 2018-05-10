@@ -85,7 +85,9 @@ public class OrgChartItem implements Serializable{
 	}
 
 	public void setChildren(List<OrgChartItem> children) {
-		this.children = children;
+		if (this.children!=children) {
+			this.children = new ArrayList<>(children);
+		}
 	}
 	
 	public void addChildren(OrgChartItem item) {
