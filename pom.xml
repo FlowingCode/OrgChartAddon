@@ -23,6 +23,12 @@
 		<tag>HEAD</tag>
 	</scm>
 
+	<inceptionYear>2017</inceptionYear>
+	<organization>
+		<name>FlowingCode S.A.</name>
+		<url>http://www.flowingcode.com/</url>
+	</organization>
+	
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -37,6 +43,14 @@
 					<version>2.5</version>
 					<configuration>
 						<processAllModules>true</processAllModules>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>license-maven-plugin</artifactId>
+					<version>1.14</version>
+					<configuration>
+					  <licenseName>apache_v2</licenseName>
 					</configuration>
 				</plugin>
 			</plugins>

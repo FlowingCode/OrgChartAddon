@@ -28,6 +28,7 @@
 	</properties>
 
     
+	<inceptionYear>2017</inceptionYear>
 	<organization>
 		<name>FlowingCode S.A.</name>
 		<url>https://github.com/FlowingCode/OrgChartAddon/</url>
@@ -169,6 +170,15 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.14</version>
+				<configuration>
+				  <licenseName>apache_v2</licenseName>
+				</configuration>
 			</plugin>
 		</plugins>
 
