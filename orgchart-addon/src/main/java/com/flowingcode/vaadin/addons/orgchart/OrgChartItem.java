@@ -119,4 +119,20 @@ public class OrgChartItem implements Serializable{
 		return true;
 	}	
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		printChildren(this, sb, 0);
+		return sb.toString();
+	}
+	
+	private void printChildren(OrgChartItem item, StringBuilder sb, int count) {		
+		String tabs = count > 0 ? String.format("%-" + count + "s", "").replace(' ', '\t') : "";
+		sb.append(tabs + item.getName() + "\n");
+		count++;
+		for (int i = 0; i < item.getChildren().size(); i++) {
+			printChildren(item.getChildren().get(i), sb, count);
+		}
+	}
+	
 }

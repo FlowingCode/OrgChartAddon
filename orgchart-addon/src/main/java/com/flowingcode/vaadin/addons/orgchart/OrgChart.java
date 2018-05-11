@@ -169,6 +169,8 @@ public class OrgChart extends AbstractJavaScriptComponent {
 
 		// update new parent (add item)
 		newParentItem.addChildren(draggedItem);
+		
+		System.out.println("------ OrgChart updated - Item dragged: " + draggedItem.getName() + "------\n" +  orgChartItem.toString());
 	}
 
 	private OrgChartItem getById(Integer id, OrgChartItem item) {
