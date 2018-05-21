@@ -92,6 +92,7 @@ Here is a simple example on how to try out the add-on component:
   orgChart.setChartNodeContent("title");
   orgChart.setChartExportButton(true);
   orgChart.setZoom(true);
+  orgChart.setChartDraggable(true);
   
   // add to a layout
   VerticalLayout layout = new VerticalLayout();
