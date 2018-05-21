@@ -21,6 +21,7 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
     - exportFileextension (png & pdf)
 - Enable/disable exapand/collapse feature
 - Add a chart title
+- Drag and Drop
 
 ## Online demo
 
@@ -43,6 +44,8 @@ To see the demo, navigate to http://localhost:8080/
 
 ### Version 2.0.0
 - Initial Version. This version allows to visualize an organizational chart and exported as a png or a pdf file. 
+### Version 2.0.1
+- Drag and Drop Version. This version allows to Drag and Drop OrgChart nodes. 
 
 ## Roadmap
 
@@ -50,7 +53,6 @@ This component is developed as a hobby with no public roadmap or any guarantees 
 
 - Color changing of nodes and chart in general
 - Edition of the organization chart 
-- Drag and drop of nodes
 
 ## Issue tracking
 
