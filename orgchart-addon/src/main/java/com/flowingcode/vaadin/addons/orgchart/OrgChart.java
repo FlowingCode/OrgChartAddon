@@ -1,5 +1,8 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
+
 /*-
  * #%L
  * OrgChart Add-on
@@ -30,6 +33,8 @@ import com.flowingcode.vaadin.addons.orgchart.client.OrgChartState;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.AbstractJavaScriptComponent;
+import com.vaadin.ui.Component;
+import com.vaadin.util.ReflectTools;
 
 /**
  * OrgChart component definition. <br>
@@ -76,7 +81,6 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(orgChartItem);
-			// System.out.println(result);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
@@ -170,7 +174,7 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		// update new parent (add item)
 		newParentItem.addChildren(draggedItem);
 		
-		System.out.println("------ OrgChart updated - Item dragged: " + draggedItem.getName() + "------\n" +  orgChartItem.toString());
+		fireDragAndDropEvent(draggedItem);		
 	}
 
 	private OrgChartItem getById(Integer id, OrgChartItem item) {
@@ -188,5 +192,59 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		}
 		return result;
 	}
+	
+	/**
+	 * Adds a {@link DragAndDropListener} to the component.
+	 * 
+	 * @param dragAndDropListener
+	 * 						the listener to be added.
+	 */
+	public void addDragAndDropListener (DragAndDropListener dragAndDropListener) {
+		 addListener(DragAndDropEvent.class, dragAndDropListener,
+				 DragAndDropListener.DRAG_AND_DROP_METHOD);
+	}
+
+	/**
+	 * Fires a {@link DragAndDropEvent}.
+	 * 
+	 * @param draggedItem
+	 * 			the item being dragged.
+	 */
+	protected void fireDragAndDropEvent(OrgChartItem draggedItem) {
+        fireEvent(new DragAndDropEvent(this, draggedItem));
+    }
 		
+	/**
+	 * Event thrown when a node is dragged and dropped. 
+	 */
+	public static class DragAndDropEvent extends Component.Event {
+		
+		private final OrgChartItem draggedItem;
+						
+		public DragAndDropEvent(Component source, OrgChartItem draggedItem) {	
+			super(source);
+			this.draggedItem = draggedItem;
+		}
+
+		public OrgChartItem getDraggedItem() {
+			return draggedItem;
+		}
+		
+		public OrgChart getOrgChart() {
+			return (OrgChart)source;
+		}
+				
+	}
+	
+	/**
+     * Interface for listening for a {@link DragAndDropEvent}.
+     */
+	public interface DragAndDropListener extends Serializable {
+		
+		public static final Method DRAG_AND_DROP_METHOD = ReflectTools
+                .findMethod(DragAndDropListener.class, "onDragAndDropNode",
+                		DragAndDropEvent.class);
+		
+		public void onDragAndDropNode(DragAndDropEvent event);
+	}
 }

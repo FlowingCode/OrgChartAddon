@@ -55,6 +55,8 @@ public class DemoUI extends UI
         component1.setChartExportButton(true);
         component1.setChartExpandCollapse(true);        
         component1.setChartDraggable(true);
+        
+        component1.addDragAndDropListener(e -> System.out.println("------ OrgChart updated - Item dragged: " + e.getDraggedItem().getName() + "------\n" +  e.getOrgChart().getOrgChartItem().toString()));
     
         OrgChart component2 = getExample2();
         component2.setChartTitle("My Organization Chart Demo - Example 2 - BOTTOM TO TOP DIRECTION");    
