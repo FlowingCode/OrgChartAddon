@@ -1,6 +1,6 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 // JUnit tests here

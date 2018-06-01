@@ -1,14 +1,15 @@
 <!-- Import Web Components Polyfill -->
-<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
 <!-- Dependency resources -->
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import"
+	href="../bower_components/polymer/polymer-element.html">
 
 <!-- Defines the example-template element -->
 <dom-module id="org-chart-container">
-	<link rel="import" type="css" href="frontend/orgchart/orgchart.css">
-    <template>
-    	<style>
+<link rel="import" type="css" href="../orgchart/orgchart.css">
+<template>
+<style>
 /*
  * Organization Chart Class
  * https://github.com/dabeng/OrgChart.js
@@ -17,505 +18,505 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-
 .orgchart {
-  display: inline-block;
-  min-height: 202px;
-  min-width: 202px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: linear-gradient(90deg, rgba(200, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0) 10%), linear-gradient(rgba(200, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0) 10%);
-  background-size: 10px 10px;
-  border: 1px dashed transparent;
-  padding: 20px;
+	display: inline-block;
+	min-height: 202px;
+	min-width: 202px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: linear-gradient(90deg, rgba(200, 0, 0, 0.15) 10%,
+		rgba(0, 0, 0, 0) 10%), linear-gradient(rgba(200, 0, 0, 0.15) 10%,
+		rgba(0, 0, 0, 0) 10%);
+	background-size: 10px 10px;
+	border: 1px dashed transparent;
+	padding: 20px;
 }
 
-.orgchart .hidden, .orgchart~.hidden {
-  display: none;
+.orgchart .hidden, .orgchart ~.hidden {
+	display: none;
 }
 
-.orgchart div,
-.orgchart div::before,
-.orgchart div::after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.orgchart div, .orgchart div::before, .orgchart div::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .orgchart.b2t {
-  -ms-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 .orgchart.l2r {
-  position: absolute;
-  -ms-transform: rotate(-90deg) rotateY(180deg);
-  -moz-transform: rotate(-90deg) rotateY(180deg);
-  -webkit-transform: rotate(-90deg) rotateY(180deg);
-  transform: rotate(-90deg) rotateY(180deg);
-  -ms-transform-origin: left top;
-  -moz-transform-origin: left top;
-  -webkit-transform-origin: left top;
-  transform-origin: left top;
+	position: absolute;
+	-ms-transform: rotate(-90deg) rotateY(180deg);
+	-moz-transform: rotate(-90deg) rotateY(180deg);
+	-webkit-transform: rotate(-90deg) rotateY(180deg);
+	transform: rotate(-90deg) rotateY(180deg);
+	-ms-transform-origin: left top;
+	-moz-transform-origin: left top;
+	-webkit-transform-origin: left top;
+	transform-origin: left top;
 }
 
 .orgchart .verticalNodes ul {
-  list-style: none;
-  margin: 0;
-  padding-left: 18px;
-  text-align: left;
+	list-style: none;
+	margin: 0;
+	padding-left: 18px;
+	text-align: left;
 }
 
 .orgchart .verticalNodes ul:first-child {
-  margin-top: 3px;
+	margin-top: 3px;
 }
 
 .orgchart .verticalNodes>td::before {
-  content: '';
-  border: 1px solid rgba(217, 83, 79, 0.8);
+	content: '';
+	border: 1px solid rgba(217, 83, 79, 0.8);
 }
 
 .orgchart .verticalNodes>td>ul>li:first-child::before {
-  top: -4px;
-  height: 30px;
-  width: calc(50% - 2px);
-  border-width: 2px 0 0 2px;
+	top: -4px;
+	height: 30px;
+	width: calc(50% - 2px);
+	border-width: 2px 0 0 2px;
 }
 
 .orgchart .verticalNodes ul>li {
-  position: relative;
+	position: relative;
 }
 
-.orgchart .verticalNodes ul>li::before,
-.orgchart .verticalNodes ul>li::after {
-  content: '';
-  position: absolute;
-  left: -6px;
-  border-color: rgba(217, 83, 79, 0.8);
-  border-style: solid;
-  border-width: 0 0 2px 2px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.orgchart .verticalNodes ul>li::before, .orgchart .verticalNodes ul>li::after
+	{
+	content: '';
+	position: absolute;
+	left: -6px;
+	border-color: rgba(217, 83, 79, 0.8);
+	border-style: solid;
+	border-width: 0 0 2px 2px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .orgchart .verticalNodes ul>li::before {
-  top: -4px;
-  height: 30px;
-  width: 11px;
+	top: -4px;
+	height: 30px;
+	width: 11px;
 }
 
 .orgchart .verticalNodes ul>li::after {
-  top: 1px;
-  height: 100%;
+	top: 1px;
+	height: 100%;
 }
 
 .orgchart .verticalNodes ul>li:first-child::after {
-  top: 24px;
-  width: 11px;
-  border-width: 2px 0 0 2px;
+	top: 24px;
+	width: 11px;
+	border-width: 2px 0 0 2px;
 }
 
 .orgchart .verticalNodes ul>li:last-child::after {
-  border-width: 2px 0 0;
+	border-width: 2px 0 0;
 }
 
 .orgchart.r2l {
-  position: absolute;
-  -ms-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-  -ms-transform-origin: left top;
-  -moz-transform-origin: left top;
-  -webkit-transform-origin: left top;
-  transform-origin: left top;
+	position: absolute;
+	-ms-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-ms-transform-origin: left top;
+	-moz-transform-origin: left top;
+	-webkit-transform-origin: left top;
+	transform-origin: left top;
 }
 
 .orgchart>.spinner {
-  font-size: 100px;
-  margin-top: 30px;
-  color: rgba(68, 157, 68, 0.8);
+	font-size: 100px;
+	margin-top: 30px;
+	color: rgba(68, 157, 68, 0.8);
 }
 
 .orgchart table {
-  border-spacing: 0;
-  border-collapse: separate;
+	border-spacing: 0;
+	border-collapse: separate;
 }
 
-.orgchart>table:first-child{
-  margin: 20px auto;
+.orgchart>table:first-child {
+	margin: 20px auto;
 }
 
 .orgchart td {
-  text-align: center;
-  vertical-align: top;
-  padding: 0;
+	text-align: center;
+	vertical-align: top;
+	padding: 0;
 }
 
 .orgchart tr.lines .topLine {
-  border-top: 2px solid rgba(217, 83, 79, 0.8);
+	border-top: 2px solid rgba(217, 83, 79, 0.8);
 }
 
 .orgchart tr.lines .rightLine {
-  border-right: 1px solid rgba(217, 83, 79, 0.8);
-  float: none;
-  border-radius: 0;
+	border-right: 1px solid rgba(217, 83, 79, 0.8);
+	float: none;
+	border-radius: 0;
 }
 
 .orgchart tr.lines .leftLine {
-  border-left: 1px solid rgba(217, 83, 79, 0.8);
-  float: none;
-  border-radius: 0;
+	border-left: 1px solid rgba(217, 83, 79, 0.8);
+	float: none;
+	border-radius: 0;
 }
 
 .orgchart tr.lines .downLine {
-  background-color: rgba(217, 83, 79, 0.8);
-  margin: 0 auto;
-  height: 20px;
-  width: 2px;
-  float: none;
+	background-color: rgba(217, 83, 79, 0.8);
+	margin: 0 auto;
+	height: 20px;
+	width: 2px;
+	float: none;
 }
 
 /* node styling */
 .orgchart .node {
-  display: inline-block;
-  position: relative;
-  margin: 0;
-  padding: 3px;
-  border: 2px dashed transparent;
-  text-align: center;
-  width: 130px;
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	padding: 3px;
+	border: 2px dashed transparent;
+	text-align: center;
+	width: 130px;
 }
 
 .orgchart.l2r .node, .orgchart.r2l .node {
-  width: 50px;
-  height: 130px;
+	width: 50px;
+	height: 130px;
 }
 
 .orgchart .node>.hazy {
-  opacity: 0.2;
+	opacity: 0.2;
 }
 
 .orgchart .node>.spinner {
-  position: absolute;
-  top: calc(50% - 15px);
-  left: calc(50% - 15px);
-  vertical-align: middle;
-  font-size: 30px;
-  color: rgba(68, 157, 68, 0.8);
+	position: absolute;
+	top: calc(50% - 15px);
+	left: calc(50% - 15px);
+	vertical-align: middle;
+	font-size: 30px;
+	color: rgba(68, 157, 68, 0.8);
 }
 
 .orgchart .node:hover {
-  background-color: rgba(238, 217, 54, 0.5);
-  transition: .5s;
-  cursor: default;
-  z-index: 20;
+	background-color: rgba(238, 217, 54, 0.5);
+	transition: .5s;
+	cursor: default;
+	z-index: 20;
 }
 
 .orgchart .node.focused {
-  background-color: rgba(238, 217, 54, 0.5);
+	background-color: rgba(238, 217, 54, 0.5);
 }
 
 .orgchart .ghost-node {
-  position: fixed;
-  left: -10000px;
-  top: -10000px;
+	position: fixed;
+	left: -10000px;
+	top: -10000px;
 }
 
 .orgchart .ghost-node rect {
-  fill: #ffffff;
-  stroke: #bf0000;
+	fill: #ffffff;
+	stroke: #bf0000;
 }
 
 .orgchart .node.allowedDrop {
-  border-color: rgba(68, 157, 68, 0.9);
+	border-color: rgba(68, 157, 68, 0.9);
 }
 
 .orgchart .node .title {
-  text-align: center;
-  font-size: 12px;
-  font-weight: bold;
-  height: 20px;
-  line-height: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  background-color: rgba(217, 83, 79, 0.8);
-  color: #fff;
-  border-radius: 4px 4px 0 0; 
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background-color: rgba(217, 83, 79, 0.8);
+	color: #fff;
+	border-radius: 4px 4px 0 0;
 }
 
 .orgchart.b2t .node .title {
-  -ms-transform: rotate(-180deg);
-  -moz-transform: rotate(-180deg);
-  -webkit-transform: rotate(-180deg);
-  transform: rotate(-180deg);
-  -ms-transform-origin: center bottom;
-  -moz-transform-origin: center bottom;
-  -webkit-transform-origin: center bottom;
-  transform-origin: center bottom;
+	-ms-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	-webkit-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+	-ms-transform-origin: center bottom;
+	-moz-transform-origin: center bottom;
+	-webkit-transform-origin: center bottom;
+	transform-origin: center bottom;
 }
 
 .orgchart.l2r .node .title {
-  -ms-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  -moz-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  -webkit-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  -ms-transform-origin: bottom center;
-  -moz-transform-origin: bottom center;
-  -webkit-transform-origin: bottom center;
-  transform-origin: bottom center;
-  width: 120px;
+	-ms-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+	-moz-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+	-webkit-transform: rotate(-90deg) translate(-40px, -40px)
+		rotateY(180deg);
+	transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+	-ms-transform-origin: bottom center;
+	-moz-transform-origin: bottom center;
+	-webkit-transform-origin: bottom center;
+	transform-origin: bottom center;
+	width: 120px;
 }
 
 .orgchart.r2l .node .title {
-  -ms-transform: rotate(-90deg) translate(-40px, -40px);
-  -moz-transform: rotate(-90deg) translate(-40px, -40px);
-  -webkit-transform: rotate(-90deg) translate(-40px, -40px);
-  transform: rotate(-90deg) translate(-40px, -40px);
-  -ms-transform-origin: bottom center;
-  -moz-transform-origin: bottom center;
-  -webkit-transform-origin: bottom center;
-  transform-origin: bottom center;
-  width: 120px;
+	-ms-transform: rotate(-90deg) translate(-40px, -40px);
+	-moz-transform: rotate(-90deg) translate(-40px, -40px);
+	-webkit-transform: rotate(-90deg) translate(-40px, -40px);
+	transform: rotate(-90deg) translate(-40px, -40px);
+	-ms-transform-origin: bottom center;
+	-moz-transform-origin: bottom center;
+	-webkit-transform-origin: bottom center;
+	transform-origin: bottom center;
+	width: 120px;
 }
 
 .orgchart .node .title .symbol {
-  float: left;
-  margin-top: 4px;
-  margin-left: 2px;
+	float: left;
+	margin-top: 4px;
+	margin-left: 2px;
 }
 
 .orgchart .node .content {
-  width: 100%;
-  height: 20px;
-  font-size: 11px;
-  line-height: 18px;
-  border: 1px solid rgba(217, 83, 79, 0.8);
-  border-radius: 0 0 4px 4px;
-  text-align: center;
-  background-color: #fff;
-  color: #333;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	width: 100%;
+	height: 20px;
+	font-size: 11px;
+	line-height: 18px;
+	border: 1px solid rgba(217, 83, 79, 0.8);
+	border-radius: 0 0 4px 4px;
+	text-align: center;
+	background-color: #fff;
+	color: #333;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .orgchart.b2t .node .content {
-  -ms-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-  -ms-transform-origin: center top;
-  -moz-transform-origin: center top;
-  -webkit-transform-origin: center top;
-  transform-origin: center top;
+	-ms-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+	-ms-transform-origin: center top;
+	-moz-transform-origin: center top;
+	-webkit-transform-origin: center top;
+	transform-origin: center top;
 }
 
 .orgchart.l2r .node .content {
-  -ms-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  -moz-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  -webkit-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
-  -ms-transform-origin: top center;
-  -moz-transform-origin: top center;
-  -webkit-transform-origin: top center;
-  transform-origin: top center;
-  width: 120px;
+	-ms-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+	-moz-transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+	-webkit-transform: rotate(-90deg) translate(-40px, -40px)
+		rotateY(180deg);
+	transform: rotate(-90deg) translate(-40px, -40px) rotateY(180deg);
+	-ms-transform-origin: top center;
+	-moz-transform-origin: top center;
+	-webkit-transform-origin: top center;
+	transform-origin: top center;
+	width: 120px;
 }
 
 .orgchart.r2l .node .content {
-  -ms-transform: rotate(-90deg) translate(-40px, -40px);
-  -moz-transform: rotate(-90deg) translate(-40px, -40px);
-  -webkit-transform: rotate(-90deg) translate(-40px, -40px);
-  transform: rotate(-90deg) translate(-40px, -40px);
-  -ms-transform-origin: top center;
-  -moz-transform-origin: top center;
-  -webkit-transform-origin: top center;
-  transform-origin: top center;
-  width: 120px;
+	-ms-transform: rotate(-90deg) translate(-40px, -40px);
+	-moz-transform: rotate(-90deg) translate(-40px, -40px);
+	-webkit-transform: rotate(-90deg) translate(-40px, -40px);
+	transform: rotate(-90deg) translate(-40px, -40px);
+	-ms-transform-origin: top center;
+	-moz-transform-origin: top center;
+	-webkit-transform-origin: top center;
+	transform-origin: top center;
+	width: 120px;
 }
 
 .orgchart .node .edge {
-  font-size: 15px;
-  position: absolute;
-  color: rgba(68, 157, 68, 0.5);
-  cursor: default;
-  transition: .2s;
-  -webkit-transition: .2s;
+	font-size: 15px;
+	position: absolute;
+	color: rgba(68, 157, 68, 0.5);
+	cursor: default;
+	transition: .2s;
+	-webkit-transition: .2s;
 }
 
 .orgchart.noncollapsable .node .edge {
-  display: none;
+	display: none;
 }
 
 .orgchart .edge:hover {
-  color: #449d44;
-  cursor: pointer;
+	color: #449d44;
+	cursor: pointer;
 }
 
 .orgchart .node .verticalEdge {
-  width: calc(100% - 10px);
-  width: -webkit-calc(100% - 10px);
-  width: -moz-calc(100% - 10px);
-  left: 5px;
+	width: calc(100% - 10px);
+	width: -webkit-calc(100% - 10px);
+	width: -moz-calc(100% - 10px);
+	left: 5px;
 }
 
 .orgchart .node .topEdge {
-  top: -4px;
+	top: -4px;
 }
 
 .orgchart .node .bottomEdge {
-  bottom: -4px;
+	bottom: -4px;
 }
 
 .orgchart .node .horizontalEdge {
-  width: 15px;
-  height: calc(100% - 10px);
-  height: -webkit-calc(100% - 10px);
-  height: -moz-calc(100% - 10px);
-  top: 5px;
+	width: 15px;
+	height: calc(100% - 10px);
+	height: -webkit-calc(100% - 10px);
+	height: -moz-calc(100% - 10px);
+	top: 5px;
 }
 
 .orgchart .node .rightEdge {
-  right: -4px;
+	right: -4px;
 }
 
 .orgchart .node .leftEdge {
-  left: -4px;
+	left: -4px;
 }
 
 .orgchart .node .horizontalEdge::before {
-  position: absolute;
-  top: calc(50% - 7px);
-  top: -webkit-calc(50% - 7px);
-  top: -moz-calc(50% - 7px);
+	position: absolute;
+	top: calc(50% - 7px);
+	top: -webkit-calc(50% - 7px);
+	top: -moz-calc(50% - 7px);
 }
 
 .orgchart .node .rightEdge::before {
-  right: 3px;
+	right: 3px;
 }
 
 .orgchart .node .leftEdge::before {
-  left: 3px;
+	left: 3px;
 }
 
 .orgchart .node .toggleBtn {
-  position: absolute;
-  left: 5px;
-  bottom: -2px;
-  color: rgba(68, 157, 68, 0.6);
+	position: absolute;
+	left: 5px;
+	bottom: -2px;
+	color: rgba(68, 157, 68, 0.6);
 }
 
 .orgchart .node .toggleBtn:hover {
-  color: rgba(68, 157, 68, 0.8);
+	color: rgba(68, 157, 68, 0.8);
 }
 
 .oc-export-btn {
-  display: inline-block;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  color: #fff;
-  background-color: #5cb85c;
-  border: 1px solid transparent;
-  border-color: #4cae4c;
-  border-radius: 4px;
+	display: inline-block;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #fff;
+	background-color: #5cb85c;
+	border: 1px solid transparent;
+	border-color: #4cae4c;
+	border-radius: 4px;
 }
 
-.oc-export-btn:hover,.oc-export-btn:focus,.oc-export-btn:active  {
-  background-color: #449d44;
-  border-color: #347a34;
+.oc-export-btn:hover, .oc-export-btn:focus, .oc-export-btn:active {
+	background-color: #449d44;
+	border-color: #347a34;
 }
 
-.orgchart~.mask {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  text-align: center;
-  background-color: rgba(0,0,0,0.3);
+.orgchart ~.mask {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 999;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
-.orgchart~.mask .spinner {
-  position: absolute;
-  top: calc(50% - 54px);
-  left: calc(50% - 54px);
-  color: rgba(255,255,255,0.8);
-  font-size: 108px;
+.orgchart ~.mask .spinner {
+	position: absolute;
+	top: calc(50% - 54px);
+	left: calc(50% - 54px);
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 108px;
 }
 
 .orgchart .node {
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  top: 0;
-  left: 0;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+	top: 0;
+	left: 0;
 }
 
 .orgchart .slide-down {
-  opacity: 0;
-  top: 40px;
+	opacity: 0;
+	top: 40px;
 }
 
 .orgchart.l2r .node.slide-down, .orgchart.r2l .node.slide-down {
-  top: 130px;
+	top: 130px;
 }
 
 .orgchart .slide-up {
-  opacity: 0;
-  top: -40px;
+	opacity: 0;
+	top: -40px;
 }
 
 .orgchart.l2r .node.slide-up, .orgchart.r2l .node.slide-up {
-  top: -130px;
+	top: -130px;
 }
 
 .orgchart .slide-right {
-  opacity: 0;
-  left: 130px;
+	opacity: 0;
+	left: 130px;
 }
 
 .orgchart.l2r .node.slide-right, .orgchart.r2l .node.slide-right {
-  left: 40px;
+	left: 40px;
 }
 
 .orgchart .slide-left {
-  opacity: 0;
-  left: -130px;
+	opacity: 0;
+	left: -130px;
 }
 
 .orgchart.l2r .node.slide-left, .orgchart.r2l .node.slide-left {
-  left: -40px;
+	left: -40px;
 }
-    	</style>
-    </template>
+</style>
+</template> 
 
-    <!-- Polymer boilerplate to register the example-template element -->
-    <script>
+<script>
         class OrgChartTemplate extends Polymer.Element {
             static get is() {
                 return 'org-chart-container'
@@ -523,28 +524,62 @@
             
             static get properties() {
                 return {
-                    orgChartStructure: {
-                        type: String,
-                        value: '{}',
-                        observer:  '_orgChartStructureChanged'
-                      }
+                    orgChartStructure: {type: String,value: ''},
+                    chartTitle: {type: String,value: 'Organizational Chart'},
+                    chartNodeContent: {type: String,value: 'Name'},
+                    chartNodeTitle: {type: String,value: 'Position'},
+                    chartDirection: {type: String,value: 't2b'},
+                    chartZoom: {type: Boolean,value: false},
+                    chartPan: {type: Boolean,value: false},
+                    chartZoominLimit: {type: Number,value: 7.0},
+                    chartZoomoutLimit: {type: Number,value: 0.5},
+                    chartExportButton: {type: Boolean,value: false},
+                    chartExportFileName: {type: String,value: 'OrgChart'},
+                    chartExportFileExtension: {type: String,value: 'png'},
+                    chartToggleSiblingsResp: {type: Boolean,value: false},
+                    chartDepth: {type: String,value: '999'},
+                    chartVerticalDepth: {type: String,value: '10'},
+                    chartExpandCollapse: {type: Boolean,value: false}
                 }
-            }
-            
-            _orgChartStructureChanged(newValue, oldValue) {
-                // Create the event
-                var event = new CustomEvent("load-org-chart", { detail: {
-               	  parent: this.shadowRoot,
-              	  structure: JSON.parse(newValue)
-                }});
-                // Dispatch/Trigger/Fire the event
-                document.dispatchEvent(event);
-           	}
+              }
+              static get observers() {
+              		return [
+						  'updateChart(orgChartStructure)'
+						];
+           
+              	}
+             updateChart(orgChartStructure) {
+			            // Create the event
+			            if (orgChartStructure!="")
+			            {
+				            var event = new CustomEvent("load-org-chart", { detail: {
+				           	  parent: this.shadowRoot,
+				          	  structure: JSON.parse(orgChartStructure),
+				          	  chartTitleProperty: this.chartTitle,
+				          	  chartNodeContentProperty: this.chartNodeContent,
+				          	  chartNodeTitleProperty: this.chartNodeTitle,
+				          	  chartDirectionProperty: this.chartDirection,
+				          	  chartZoomProperty: this.chartZoom,
+				          	  chartPanProperty: this.chartPan,
+				          	  chartZoominLimitProperty: this.chartZoominLimit,
+				          	  chartZoomoutLimitProperty: this.chartZoomoutLimit,
+				          	  chartExportButtonProperty: this.chartExportButton,
+				          	  chartExportFileNameProperty: this.chartExportFileName,
+				          	  chartExportFileExtensionProperty: this.chartExportFileExtension,
+				          	  chartToggleSiblingsRespProperty: this.chartToggleSiblingsResp,
+				          	  chartDepthProperty: this.chartDepth,
+				          	  chartVerticalDepthProperty: this.chartVerticalDepth,
+				          	  chartExpandCollapseProperty: this.chartExpandCollapse
+				            }});
+				            // Dispatch/Trigger/Fire the event
+				            document.dispatchEvent(event);
+			            }
+			       	}
 
         }
         customElements.define(OrgChartTemplate.is, OrgChartTemplate);
         
     </script>
-	<script src="bundle.js"></script>
+    <script src="bundle.js"></script> 
 
 </dom-module>

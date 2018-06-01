@@ -2,9 +2,9 @@ package com.flowingcode.vaadin.addons.orgchart;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaadin.ui.Tag;
-import com.vaadin.ui.common.HtmlImport;
-import com.vaadin.ui.polymertemplate.PolymerTemplate;
+import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 
 @SuppressWarnings("serial")
 @Tag("org-chart-container")
@@ -15,6 +15,21 @@ public class OrgChart extends PolymerTemplate<OrgChartModel> {
 	
 	public OrgChart(OrgChartItem parentItem) {
 		setParentItem(parentItem);
+		
+		// defaults
+		getModel().setChartNodeTitle(ChartConstants.CHART_NODE_TITLE_DEFAULT);
+		getModel().setChartDirection(ChartDirectionEnum.TOP_TO_BOTTOM.getAbreviation());
+		getModel().setChartZoom(false);
+		getModel().setChartPan(false);
+		getModel().setChartZoominLimit(ChartConstants.CHART_ZOOM_IN_LIMIT_DEFAULT);
+		getModel().setChartZoomoutLimit(ChartConstants.CHART_ZOOM_OUT_LIMIT_DEFAULT);
+		getModel().setChartExportButton(false);
+		getModel().setChartExportFileName(ChartConstants.DEFAULT_CHART_EXPORT_FILENAME);
+		getModel().setChartExportFileExtension(ChartConstants.CHART_EXPORT_EXTENSION_PNG);
+		getModel().setChartToggleSiblingsResp(false);
+		getModel().setChartExpandCollapse(false);
+
+		
 	}
 	
     private String convertToJsonObj(OrgChartItem orgChartLevelItem) {    	   	    	
@@ -36,5 +51,25 @@ public class OrgChart extends PolymerTemplate<OrgChartModel> {
     public OrgChartItem getParentItem() {
     	return this.parentItem;
     }
+
+	public void setChartTitle(String string) {
+		getModel().setChartTitle(string);
+	}
+
+	public void setChartNodeContent(String string) {
+		getModel().setChartNodeContent(string);
+	}
+
+	public void setChartExportButton(boolean b) {
+		getModel().setChartExportButton(b);
+	}
+
+	public void setChartExpandCollapse(boolean b) {
+		getModel().setChartExpandCollapse(b);
+	}
+
+	public void setChartDirection(String abreviation) {
+		getModel().setChartDirection(abreviation);
+	}
     	    
 }

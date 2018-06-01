@@ -1,64 +1,81 @@
-/*
- * Copyright 2000-2017 Vaadin Ltd.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package com.flowingcode.vaadin.addons.orgchart.demo;
 
-import com.vaadin.flow.router.HasChildView;
-import com.vaadin.flow.router.View;
-import com.vaadin.router.RouterLink;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Composite;
-import com.vaadin.ui.Text;
-import com.vaadin.ui.common.StyleSheet;
-import com.vaadin.ui.html.Div;
-import com.vaadin.ui.html.H1;
-import com.vaadin.ui.html.H2;
+import java.util.Arrays;
+
+import javax.servlet.annotation.WebServlet;
+
+import com.flowingcode.vaadin.addons.orgchart.ChartDirectionEnum;
+import com.flowingcode.vaadin.addons.orgchart.OrgChart;
+import com.flowingcode.vaadin.addons.orgchart.OrgChartItem;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.server.VaadinServletConfiguration;
 
 /**
  * The main view contains a menu and a container for either of the hello world
  * variants.
  */
-@StyleSheet("context://styles.css")
-public class MainView extends Composite<Div> implements HasChildView {
+@SuppressWarnings("serial")
+@Route(value = "")
+public class MainView extends VerticalLayout {
 
-	private Div container;
-
+	@WebServlet(urlPatterns = "/*", name = "OrgChartDemoServlet")
+	@VaadinServletConfiguration(productionMode = false)
+	public static class Servlet extends VaadinServlet {
+	}
+	
 	public MainView() {
-		// Guiding texts
-		H1 heading = new H1("OrgChart Addon Usages");
-		Text intro = new Text("Different ways of using Organizational Chart");
+		OrgChart component1 = getExample1();
+		component1.setChartTitle("My Organization Chart Demo - Example 1 - CHART EXPORT AS PICTURE");
+		component1.setChartNodeContent("title");
+		component1.setChartExportButton(true);
+		component1.setChartExpandCollapse(true);
+		
+		OrgChart component2 = getExample2();
+		component2.setChartTitle("My Organization Chart Demo - Example 2 - BOTTOM TO TOP DIRECTION");
+		component2.setChartNodeContent("title");
+		component2.setChartDirection(ChartDirectionEnum.BOTTOM_TO_TOP.getAbreviation());
 
-		// Create links to each of the different sub views
-		RouterLink components = new RouterLink("Minimal", OrgChartView.class);
-		components.setId("components-link");
-		// Set up the container where sub views will be shown
-		container = new Div();
-		container.addClassName("container");
-
-		getContent().addClassName("main-view");
-		getContent().add(heading, intro, components, container);
+		SplitLayout layout = new SplitLayout(component1,component2);
+		layout.setOrientation(Orientation.VERTICAL);
+		layout.setSizeFull();
+		this.setSizeFull();
+		
+		add(layout);
+		
 	}
 
-	@Override
-	public void setChildView(View childView) {
-		// Update what we show whenever the sub view changes
-		container.removeAll();
-
-		if (childView != null) {
-			container.add(new H2(childView.getTitle(null)));
-			container.add((Component) childView);
-		}
+	public OrgChart getExample1() {
+		OrgChartItem item1 = new OrgChartItem(1, "John Williams", "Director");
+		OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");
+		OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");
+		item1.setChildren(Arrays.asList(item2, item3));
+		OrgChartItem item4 = new OrgChartItem(4, "Louise Night", "Department 1");
+		OrgChartItem item5 = new OrgChartItem(5, "John Porter", "Department 2");
+		OrgChartItem item6 = new OrgChartItem(6, "Charles Thomas", "Department 3");
+		item2.setChildren(Arrays.asList(item4, item5, item6));
+		OrgChartItem item7 = new OrgChartItem(7, "Michael Wood", "Section 3.1");
+		OrgChartItem item8 = new OrgChartItem(8, "Martha Brown", "Section 3.2");
+		OrgChartItem item9 = new OrgChartItem(9, "Mary Parker", "Section 3.3");
+		OrgChartItem item10 = new OrgChartItem(10, "Mary Williamson", "Section 3.4");
+		item6.setChildren(Arrays.asList(item7, item8, item9, item10));
+		return new OrgChart(item1);
 	}
+
+	public OrgChart getExample2() {
+		OrgChartItem item1 = new OrgChartItem(1, "John Williams", "Director");
+		OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");
+		OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");
+		item1.setChildren(Arrays.asList(item2, item3));
+		OrgChartItem item4 = new OrgChartItem(4, "Louise Night", "Department 1");
+		OrgChartItem item5 = new OrgChartItem(5, "John Porter", "Department 2");
+		item2.setChildren(Arrays.asList(item4, item5));
+		OrgChartItem item6 = new OrgChartItem(6, "Charles Thomas", "Department 3");
+		item5.setChildren(Arrays.asList(item6));
+		return new OrgChart(item1);
+	}
+
 }
