@@ -38,6 +38,8 @@ public class OrgChartItem implements Serializable{
 	
 	private String title;
 	
+	private String className;
+
 	private Integer id;
 		
 	private List<OrgChartItem> children = new ArrayList<>();
@@ -80,6 +82,14 @@ public class OrgChartItem implements Serializable{
 		this.title = title;
 	}
 
+	public String getClassName() {
+	    return className;
+	}
+
+	public void setClassName(String className) {
+	    this.className = className;
+	}
+	
 	public List<OrgChartItem> getChildren() {
 		return children;
 	}
