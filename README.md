@@ -46,12 +46,13 @@ To see the demo, navigate to http://localhost:8080/
 - Initial Version. This version allows to visualize an organizational chart and exported as a png or a pdf file. 
 ### Version 2.0.1
 - Drag and Drop Version. This version allows to Drag and Drop OrgChart nodes. 
+### Version 2.0.2
+- Add support for node styling (e.g. change node colors)
 
 ## Roadmap
 
 This component is developed as a hobby with no public roadmap or any guarantees of upcoming releases. That said, the following features are planned for upcoming releases:
 
-- Color changing of nodes and chart in general
 - Edition of the organization chart 
 
 ## Issue tracking
