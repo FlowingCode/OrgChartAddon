@@ -33,4 +33,9 @@ $darkgreen: darken($green, 30%);
              0px 34px 30px rgba(0,0,0,0.1);
         text-align: center;
 	}
+	
+	.orgchart .node.blue-node {
+		.title   {background-color: blue;}
+		.content {border-color: blue;}
+	}
 }

@@ -69,7 +69,9 @@ public class DemoUI extends UI
         
     public OrgChart getExample1() {
     	OrgChartItem item1 = new OrgChartItem(1, "John Williams", "Director");
+    	item1.setClassName("blue-node");
         OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");
+        item2.setClassName("blue-node");
         OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");        
         item1.setChildren(Arrays.asList(item2, item3));        
         OrgChartItem item4 = new OrgChartItem(4, "Louise Night", "Department 1");
