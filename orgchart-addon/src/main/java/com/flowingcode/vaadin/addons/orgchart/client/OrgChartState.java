@@ -68,4 +68,6 @@ public class OrgChartState extends JavaScriptComponentState {
 	
 	public String chartNodeId = ChartConstants.CHART_NODE_ID_DEFAULT;  
 	
+	public String nodeTemplate;
+	
 }

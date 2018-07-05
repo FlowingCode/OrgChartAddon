@@ -193,6 +193,10 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		return result;
 	}
 	
+	public void setNodeTemplate(String nodeTemplate) {
+		getState().nodeTemplate = nodeTemplate;
+	}
+	
 	/**
 	 * Adds a {@link DragAndDropListener} to the component.
 	 * 
@@ -247,4 +251,5 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		
 		public void onDragAndDropNode(DragAndDropEvent event);
 	}
+	
 }
