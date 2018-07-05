@@ -34,7 +34,7 @@ function() {
         	addJSfile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js");
         }
         if(exportChart & isIEBrowser() > 0){
-        	addJSfile("https://cdn.rawgit.com/stefanpenner/es6-promise/master/dist/es6-promise.auto.min.js");
+        	addJSfile("https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js");
         }
 
         var orgchart = $(element).orgchart({
