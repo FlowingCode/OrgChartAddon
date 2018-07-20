@@ -38,4 +38,17 @@ $darkgreen: darken($green, 30%);
 		.title   {background-color: blue;}
 		.content {border-color: blue;}
 	}
+		
+	.orgchart .content {
+		&.middle { border-radius: 0; border-bottom: none; }
+	}
+	
+	.orgchart .node .template {
+	    border-radius: 4px;
+    	padding: 4px;
+    	box-sizing: content-box;
+    	font-size: 14px;
+    	font-weight: bold;
+    	border: 2px solid;
+    }
 }

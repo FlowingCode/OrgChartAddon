@@ -194,9 +194,13 @@ public class OrgChart extends AbstractJavaScriptComponent {
 	}
 	
 	public void setNodeTemplate(String nodeTemplate) {
-		getState().nodeTemplate = nodeTemplate;
+		String interpolatedTemplate = TemplateLiteralParser.interpolate(nodeTemplate); 
+		setInternalNodeTemplate("return "+interpolatedTemplate+";");
 	}
 	
+	protected void setInternalNodeTemplate(String nodeTemplate) {
+		getState().nodeTemplate = nodeTemplate;
+	}
 	/**
 	 * Adds a {@link DragAndDropListener} to the component.
 	 * 
