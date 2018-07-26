@@ -22,7 +22,11 @@ package com.flowingcode.vaadin.addons.orgchart;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -44,6 +48,8 @@ public class OrgChartItem implements Serializable{
 		
 	private List<OrgChartItem> children = new ArrayList<>();
 	
+	private Map<String,String> data;
+	
 	public OrgChartItem(Integer id, String name, String title) {
 		super();
 		this.id = id;
@@ -57,7 +63,22 @@ public class OrgChartItem implements Serializable{
 			orgChartCopy.addChildren(new OrgChartItem(child));
 		} 
 	}
+		
+	public Map<String, String> getData() {
+		return Optional.ofNullable(data).map(Collections::unmodifiableMap).orElse(Collections.emptyMap());
+	}
 	
+	public void setData(String name, String value) {
+        if (data==null) {
+            data = new HashMap<>();
+        }
+		if (value!=null) {
+			data.put(name, value);
+		} else {
+			data.remove(name);
+		}
+	}
+
 	public String getName() {
 		return name;
 	}
