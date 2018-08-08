@@ -50,7 +50,8 @@ public class DemoUI extends UI
     protected void init(VaadinRequest request) {
     	// org chart 1
         OrgChart component1 = getExample1();
-        component1.setNodeTemplate("<div class='title'>${item.title}</div><div class='middle content'>${item.name}</div><div class='custom content'>${item.data?item.data.mail:''}</div>");
+		component1.setNodeTemplate("<div class='title'>${item.title}</div><div class='middle content'>${item.name}</div>${item.data.mail?`<div class='custom content'>${item.data.mail}</div>`:''}");		
+				
         component1.setChartTitle("My Organization Chart Demo - Example 1 - CHART EXPORT AS PICTURE AND DRAG & DROP");    
         component1.setChartNodeContent("title");
         component1.setChartExportButton(true);
