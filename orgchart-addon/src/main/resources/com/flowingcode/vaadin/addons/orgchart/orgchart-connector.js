@@ -49,8 +49,8 @@ function() {
         	'pan': state.chartPan,
         	'zoominLimit': state.chartZoominLimit,
         	'zoomoutLimit': state.chartZoomoutLimit,
-        	'depth': state.chartDepth,
-        	'verticalDepth': state.chartVerticalDepth,
+        	'visibleLevel': state.chartDepth,
+        	'verticalLevel': state.chartVerticalDepth,
         	'toggleSiblingsResp': state.chartToggleSiblingsResp,
         	'draggable': state.chartDraggable,
         	'nodeId': state.chartNodeId        	
