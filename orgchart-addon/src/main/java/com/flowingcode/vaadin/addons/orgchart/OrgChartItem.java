@@ -64,10 +64,14 @@ public class OrgChartItem implements Serializable{
 		} 
 	}
 		
+	/**Return the map of {@linkplain #setData(String, String) custom properties}.*/
 	public Map<String, String> getData() {
 		return Optional.ofNullable(data).map(Collections::unmodifiableMap).orElse(Collections.emptyMap());
 	}
 	
+	/**Add or remove a custom property.
+	 * @param name the name of the custom property
+	 * @param value the value of the custom property */ 
 	public void setData(String name, String value) {
         if (data==null) {
             data = new HashMap<>();

@@ -70,4 +70,6 @@ public class OrgChartState extends JavaScriptComponentState {
 	
 	public String nodeTemplate;
 	
+	public String nodeTemplateParam = "item";	
+	
 }

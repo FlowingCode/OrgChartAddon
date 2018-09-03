@@ -38,8 +38,8 @@ function() {
         }
 
         var nodeTemplate;
-        if (state.nodeTemplate) {
-        	nodeTemplate = Function("item", state.nodeTemplate);
+        if (state.nodeTemplate && state.nodeTemplateParam) {
+        	nodeTemplate = Function(state.nodeTemplateParam, state.nodeTemplate);
         }
         
         var orgchart = $(element).orgchart({

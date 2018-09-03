@@ -1,16 +1,21 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
 /**
- * ES6 template literal parser that rewrites the literal as an ES5 expression
+ * ES6 template literal parser that rewrites the literal as an ES5 expression.
+ * This class is experimental and subject to change.
  *  
  * @author Javier Godoy / Flowing Code
  */
-class TemplateLiteralParser {
+public class TemplateLiteralParser {
 	
 	//https://www.ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components
 	
+	public static String rewriteFunction(String s) {
+		return "return "+rewrite(s)+";";
+	}
+	
 	// rewrites an ES6 template literal as an ES5 expression
-	static String interpolate(String s) {
+	public static String rewrite(String s) {
 		StringBuilder sb = new StringBuilder();
 		sb.ensureCapacity(s.length()+1);
 		rewriteTemplate(s, 0, sb, true);

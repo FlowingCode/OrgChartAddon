@@ -26,6 +26,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.flowingcode.vaadin.addons.orgchart.OrgChart;
 import com.flowingcode.vaadin.addons.orgchart.OrgChartItem;
+import com.flowingcode.vaadin.addons.orgchart.TemplateLiteralParser;
 import com.flowingcode.vaadin.addons.orgchart.client.enums.ChartDirectionEnum;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -50,7 +51,10 @@ public class DemoUI extends UI
     protected void init(VaadinRequest request) {
     	// org chart 1
         OrgChart component1 = getExample1();
-		component1.setNodeTemplate("<div class='title'>${item.title}</div><div class='middle content'>${item.name}</div>${item.data.mail?`<div class='custom content'>${item.data.mail}</div>`:''}");		
+        String nodeTemplate = "<div class='title'>${item.title}</div>"+
+        		"<div class='middle content'>${item.name}</div>" +
+        		"${item.data.mail?`<div class='custom content'>${item.data.mail}</div>`:''}";
+		component1.setNodeTemplate("item", TemplateLiteralParser.rewriteFunction(nodeTemplate));		
 				
         component1.setChartTitle("My Organization Chart Demo - Example 1 - CHART EXPORT AS PICTURE AND DRAG & DROP");    
         component1.setChartNodeContent("title");
