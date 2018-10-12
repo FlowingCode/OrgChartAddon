@@ -88,18 +88,10 @@ function() {
   				let draggedNode = extraParams.draggedNode.attr('id');
   				let dragZone = extraParams.dragZone.attr('id');
   				let dropZone = extraParams.dropZone.attr('id');
-  				
-  				console.log('draggedNode:' + draggedNode  
-  				        + ', dragZone:' + dragZone
-  				        + ', dropZone:' + dropZone
-  				      );
-  				
-  				rpcProxy.updateChart(draggedNode, dragZone, dropZone);
-  				
-  			  });
-  				
-  		}
-          			
+  				  				
+  				rpcProxy.updateChart(draggedNode, dragZone, dropZone);  				
+  			  });  				
+  		} 			
     }
     	
 };
