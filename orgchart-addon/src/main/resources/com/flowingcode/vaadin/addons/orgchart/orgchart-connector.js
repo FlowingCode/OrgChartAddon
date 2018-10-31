@@ -37,6 +37,11 @@ function() {
         	addJSfile("https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js");
         }
 
+        var nodeTemplate;
+        if (state.nodeTemplate && state.nodeTemplateParam) {
+        	nodeTemplate = Function(state.nodeTemplateParam, state.nodeTemplate);
+        }
+        
         var orgchart = $(element).orgchart({
         	'data' : jQuery.parseJSON(value),
         	'nodeContent': state.chartNodeContent,
@@ -53,7 +58,8 @@ function() {
         	'verticalLevel': state.chartVerticalDepth,
         	'toggleSiblingsResp': state.chartToggleSiblingsResp,
         	'draggable': state.chartDraggable,
-        	'nodeId': state.chartNodeId        	
+        	'nodeId': state.chartNodeId,
+        	'nodeTemplate': nodeTemplate,
         });  
                 
         // add title

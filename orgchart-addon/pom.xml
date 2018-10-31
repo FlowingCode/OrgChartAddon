@@ -76,13 +76,18 @@
 			<scope>provided</scope>
 		</dependency>
 			
-		<!-- This can be replaced with TestNG or some other test framework supported by the surefire plugin -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+      		<groupId>org.assertj</groupId>
+      		<artifactId>assertj-core</artifactId>
+      		<version>2.5.0</version>
+    	</dependency>
+    
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -178,6 +183,15 @@
 				<version>1.14</version>
 				<configuration>
 				  <licenseName>apache_v2</licenseName>
+				  <failOnMissingHeader>true</failOnMissingHeader>
+				  <failOnNotUptodateHeader>true</failOnNotUptodateHeader>
+				  <excludes>
+					<exclude>**/font-awesome.css</exclude>
+					<exclude>**/html2canvas.js</exclude>
+					<exclude>**/jquery-*.js</exclude>
+					<exclude>**/jquery.orgchart.css</exclude>
+					<exclude>**/jquery.orgchart.js</exclude>
+				  </excludes>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -198,6 +198,33 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		}
 		return result;
 	}
+		
+	/**
+	 * Sets the template generation function used to customize the internal structure of nodes. 
+	 * {@code functionBody} is the body of a javascript function that recieves one parameter 
+	 * (the JSON datasoure representing a node) and returns an HTML snippet. 
+	 * The name of this parameter is given by {@code parameterName}.
+	 * 
+	 * Example:
+	 * <code>
+	 * setNodeTemplate("item","return '<span>'+item.name+'</span>';")
+	 * </code>
+	 * configures the following JS function as node template:
+	 * <code>
+	 * function(item) { return '<span>'+item.name+'</span>'; }
+	 * </code>
+	 * 
+	 * {@linkplain OrgChartItem#setData(String, String) custom properties} 
+	 * are accessible through {@code item.data}
+	 * <br>
+	 * 
+	 * @param parameterName the name of the parameter of a javascript function
+	 * @param functionBody the body of a javascript function
+	 */
+	public void setNodeTemplate(String parameterName, String functionBody) {
+		getState().nodeTemplateParam = parameterName;
+		getState().nodeTemplate = functionBody;
+	}
 	
 	/**
 	 * Adds a {@link DragAndDropListener} to the component.
@@ -253,4 +280,5 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		
 		public void onDragAndDropNode(DragAndDropEvent event);
 	}
+	
 }

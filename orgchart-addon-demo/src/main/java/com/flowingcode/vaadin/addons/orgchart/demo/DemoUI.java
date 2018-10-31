@@ -27,6 +27,7 @@ import javax.servlet.annotation.WebServlet;
 import com.flowingcode.vaadin.addons.orgchart.OrgChart;
 import com.flowingcode.vaadin.addons.orgchart.OrgChartItem;
 import com.flowingcode.vaadin.addons.orgchart.client.enums.ChartDirectionEnum;
+import com.flowingcode.vaadin.addons.orgchart.extra.TemplateLiteralRewriter;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -49,8 +50,13 @@ public class DemoUI extends UI
     @Override
     protected void init(VaadinRequest request) {
     	// org chart 1
-        OrgChart component1 = getExample1();        
-        component1.setChartTitle("My Organization Chart Demo - Example 1 - CHART EXPORT AS PICTURE AND DRAG & DROP");    
+        OrgChart component1 = getExample1();
+        String nodeTemplate = "<div class='title'>${item.title}</div>"+
+        		"<div class='middle content'>${item.name}</div>" +
+        		"${item.data.mail?`<div class='custom content'>${item.data.mail}</div>`:''}";
+		component1.setNodeTemplate("item", TemplateLiteralRewriter.rewriteFunction(nodeTemplate));		
+				
+        component1.setChartTitle("My Organization Chart Demo - Example 1 - CHART EXPORT AS PICTURE AND DRAG & DROP, CUSTOM TEMPLATE");    
         component1.setChartNodeContent("title");
         component1.setChartExportButton(true);
         component1.setChartExpandCollapse(true);        
@@ -69,18 +75,24 @@ public class DemoUI extends UI
         
     public OrgChart getExample1() {
     	OrgChartItem item1 = new OrgChartItem(1, "John Williams", "Director");
+    	item1.setData("mail", "jwilliams@example.com");
     	item1.setClassName("blue-node");
         OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");
+        item2.setData("mail", "athomp@example.com");
         item2.setClassName("blue-node");
-        OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");        
+        OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");
+        item3.setData("mail", "tjonees@example.com");
         item1.setChildren(Arrays.asList(item2, item3));        
         OrgChartItem item4 = new OrgChartItem(4, "Louise Night", "Department 1");
+        item4.setData("mail", "lnight@example.com");
         OrgChartItem item5 = new OrgChartItem(5, "John Porter", "Department 2");
+        item5.setData("mail", "jporter@example.com");
         OrgChartItem item6 = new OrgChartItem(6, "Charles Thomas", "Department 3");
+        item6.setData("mail", "ctomas@example.com");
         item2.setChildren(Arrays.asList(item4, item5, item6));
         OrgChartItem item7 = new OrgChartItem(7, "Michael Wood", "Section 3.1");
         OrgChartItem item8 = new OrgChartItem(8, "Martha Brown", "Section 3.2");
-        OrgChartItem item9 = new OrgChartItem(9, "Mary Parker", "Section 3.3");
+        OrgChartItem item9 = new OrgChartItem(9, "Mary Parker", "Section 3.3");        
         OrgChartItem item10 = new OrgChartItem(10, "Mary Williamson", "Section 3.4");
         item6.setChildren(Arrays.asList(item7, item8, item9, item10));
         return new OrgChart(item1);
