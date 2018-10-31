@@ -54,8 +54,8 @@ function() {
         	'pan': state.chartPan,
         	'zoominLimit': state.chartZoominLimit,
         	'zoomoutLimit': state.chartZoomoutLimit,
-        	'depth': state.chartDepth,
-        	'verticalDepth': state.chartVerticalDepth,
+        	'visibleLevel': state.chartDepth,
+        	'verticalLevel': state.chartVerticalDepth,
         	'toggleSiblingsResp': state.chartToggleSiblingsResp,
         	'draggable': state.chartDraggable,
         	'nodeId': state.chartNodeId,
@@ -94,18 +94,10 @@ function() {
   				let draggedNode = extraParams.draggedNode.attr('id');
   				let dragZone = extraParams.dragZone.attr('id');
   				let dropZone = extraParams.dropZone.attr('id');
-  				
-  				console.log('draggedNode:' + draggedNode  
-  				        + ', dragZone:' + dragZone
-  				        + ', dropZone:' + dropZone
-  				      );
-  				
-  				rpcProxy.updateChart(draggedNode, dragZone, dropZone);
-  				
-  			  });
-  				
-  		}
-          			
+  				  				
+  				rpcProxy.updateChart(draggedNode, dragZone, dropZone);  				
+  			  });  				
+  		} 			
     }
     	
 };

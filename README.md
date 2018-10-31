@@ -48,6 +48,10 @@ To see the demo, navigate to http://localhost:8080/
 - Drag and Drop Version. This version allows to Drag and Drop OrgChart nodes. 
 ### Version 2.0.2
 - Add support for node styling (e.g. change node colors)
+### Version 2.0.3
+- Update OrgChart library to version [2.1.3](https://github.com/dabeng/OrgChart/releases/tag/v2.1.3)
+- Fix options chartDepth and chartVerticalDepth
+- Fix export support in IE
 
 ## Roadmap
 

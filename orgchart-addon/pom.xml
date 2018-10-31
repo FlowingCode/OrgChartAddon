@@ -183,6 +183,15 @@
 				<version>1.14</version>
 				<configuration>
 				  <licenseName>apache_v2</licenseName>
+				  <failOnMissingHeader>true</failOnMissingHeader>
+				  <failOnNotUptodateHeader>true</failOnNotUptodateHeader>
+				  <excludes>
+					<exclude>**/font-awesome.css</exclude>
+					<exclude>**/html2canvas.js</exclude>
+					<exclude>**/jquery-*.js</exclude>
+					<exclude>**/jquery.orgchart.css</exclude>
+					<exclude>**/jquery.orgchart.js</exclude>
+				  </excludes>
 				</configuration>
 			</plugin>
 		</plugins>

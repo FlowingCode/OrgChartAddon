@@ -58,9 +58,9 @@ public class OrgChartState extends JavaScriptComponentState {
 	
 	public Boolean chartToggleSiblingsResp = false;
 	
-	public Integer chartDepth;
+	public Integer chartDepth; // orgchart visibleLevel option
 	
-	public Integer chartVerticalDepth;
+	public Integer chartVerticalDepth; // orgchart verticalLevel options
 	
 	public Boolean chartExpandCollapse = false;
 	

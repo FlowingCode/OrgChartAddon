@@ -131,10 +131,16 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		getState().chartZoomoutLimit = chartZoomoutLimit;
 	}
 
+	/**
+	 *  orgchart visibleLevel option 
+	 */
 	public void setChartDepth(Integer chartDepth) {
 		getState().chartDepth = chartDepth;
 	}
 
+	/**
+	 *  orgchart verticalLevel option 
+	 */
 	public void setChartVerticalDepth(Integer chartVerticalDepth) {
 		getState().chartVerticalDepth = chartVerticalDepth;
 	}

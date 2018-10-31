@@ -1,22 +1,3 @@
-/*-
- * #%L
- * OrgChart Add-on
- * %%
- * Copyright (C) 2017 - 2018 FlowingCode S.A.
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
- */
 /*
  * jQuery OrgChart Plugin
  * https://github.com/dabeng/OrgChart
@@ -363,9 +344,9 @@
         'name': $li.contents().eq(0).text().trim(),
         'relationship': ($li.parent().parent().is('li') ? '1': '0') + ($li.siblings('li').length ? 1: 0) + ($li.children('ul').length ? 1 : 0)
       };
-      if ($li.attr('data-id')) {
-        subObj.id = $li.attr('data-id');
-      }
+      $.each($li.data(), function(key, value) {
+         subObj[key] = value;
+      });
       $li.children('ul').children().each(function() {
         if (!subObj.children) { subObj.children = []; }
         subObj.children.push(that.buildJsonDS($(this)));
@@ -808,7 +789,7 @@
         // start up loading status
         if (this.startLoading($topEdge)) {
           var opts = this.options;
-          var url = $.isFunction(opts.ajaxURL.parent) ? opts.ajaxURL.parent(event.data.nodeData) : opts.ajaxURL.parent + $node[0].id;
+          var url = $.isFunction(opts.ajaxURL.parent) ? opts.ajaxURL.parent($node.data('nodeData')) : opts.ajaxURL.parent + $node[0].id;
           this.loadNodes('parent', url, $topEdge);
         }
       }
@@ -831,7 +812,7 @@
       } else { // load the new children nodes of the specified node by ajax request
         if (this.startLoading($bottomEdge)) {
           var opts = this.options;
-          var url = $.isFunction(opts.ajaxURL.children) ? opts.ajaxURL.children(event.data.nodeData) : opts.ajaxURL.children + $node[0].id;
+          var url = $.isFunction(opts.ajaxURL.children) ? opts.ajaxURL.children($node.data('nodeData')) : opts.ajaxURL.children + $node[0].id;
           this.loadNodes('children', url, $bottomEdge);
         }
       }
@@ -874,8 +855,8 @@
         if (this.startLoading($hEdge)) {
           var nodeId = $node[0].id;
           var url = (this.getNodeState($node, 'parent').exist) ?
-            ($.isFunction(opts.ajaxURL.siblings) ? opts.ajaxURL.siblings(event.data.nodeData) : opts.ajaxURL.siblings + nodeId) :
-            ($.isFunction(opts.ajaxURL.families) ? opts.ajaxURL.families(event.data.nodeData) : opts.ajaxURL.families + nodeId);
+            ($.isFunction(opts.ajaxURL.siblings) ? opts.ajaxURL.siblings($node.data('nodeData')) : opts.ajaxURL.siblings + nodeId) :
+            ($.isFunction(opts.ajaxURL.families) ? opts.ajaxURL.families($node.data('nodeData')) : opts.ajaxURL.families + nodeId);
           this.loadNodes('siblings', url, $hEdge);
         }
       }
@@ -911,9 +892,6 @@
       var opts = this.options;
       var origEvent = event.originalEvent;
       var isFirefox = /firefox/.test(window.navigator.userAgent.toLowerCase());
-      if (isFirefox) {
-        origEvent.dataTransfer.setData('text/html', 'hack for firefox');
-      }
       var ghostNode, nodeCover;
       if (!document.querySelector('.ghost-node')) {
         ghostNode = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -926,9 +904,10 @@
         nodeCover = $(ghostNode).children().get(0);
       }
       var transValues = $nodeDiv.closest('.orgchart').css('transform').split(',');
-      var scale = Math.abs(window.parseFloat((opts.direction === 't2b' || opts.direction === 'b2t') ? transValues[0].slice(transValues[0].indexOf('(') + 1) : transValues[1]));
-      ghostNode.setAttribute('width', $nodeDiv.outerWidth(false));
-      ghostNode.setAttribute('height', $nodeDiv.outerHeight(false));
+      var isHorizontal = opts.direction === 't2b' || opts.direction === 'b2t';
+      var scale = Math.abs(window.parseFloat(isHorizontal ? transValues[0].slice(transValues[0].indexOf('(') + 1) : transValues[1]));
+      ghostNode.setAttribute('width', isHorizontal ? $nodeDiv.outerWidth(false) : $nodeDiv.outerHeight(false));
+      ghostNode.setAttribute('height', isHorizontal ? $nodeDiv.outerHeight(false) : $nodeDiv.outerWidth(false));
       nodeCover.setAttribute('x',5 * scale);
       nodeCover.setAttribute('y',5 * scale);
       nodeCover.setAttribute('width', 120 * scale);
@@ -978,6 +957,7 @@
     },
     //
     dragstartHandler: function (event) {
+      event.originalEvent.dataTransfer.setData('text/html', 'hack for firefox');
       // if users enable zoom or direction options
       if (this.$chart.css('transform') !== 'none') {
         this.createGhostNode(event);
@@ -1164,6 +1144,10 @@
         $nodeDiv.append('<div class="title">' + data[opts.nodeTitle] + '</div>')
           .append(typeof opts.nodeContent !== 'undefined' ? '<div class="content">' + (data[opts.nodeContent] || '') + '</div>' : '');
       }
+      //
+      var nodeData = $.extend({}, data);
+      delete nodeData.children;
+      $nodeDiv.data('nodeData', nodeData);
       // append 4 direction arrows or expand/collapse buttons
       var flags = data.relationship || '';
       if (opts.verticalLevel && level >= opts.verticalLevel) {
@@ -1187,9 +1171,9 @@
 
       $nodeDiv.on('mouseenter mouseleave', this.nodeEnterLeaveHandler.bind(this));
       $nodeDiv.on('click', this.nodeClickHandler.bind(this));
-      $nodeDiv.on('click', '.topEdge', { 'nodeData': data }, this.topEdgeClickHandler.bind(this));
-      $nodeDiv.on('click', '.bottomEdge', { 'nodeData': data }, this.bottomEdgeClickHandler.bind(this));
-      $nodeDiv.on('click', '.leftEdge, .rightEdge', { 'nodeData': data }, this.hEdgeClickHandler.bind(this));
+      $nodeDiv.on('click', '.topEdge', this.topEdgeClickHandler.bind(this));
+      $nodeDiv.on('click', '.bottomEdge', this.bottomEdgeClickHandler.bind(this));
+      $nodeDiv.on('click', '.leftEdge, .rightEdge', this.hEdgeClickHandler.bind(this));
       $nodeDiv.on('click', '.toggleBtn', this.toggleVNodes.bind(this));
 
       if (opts.draggable) {
