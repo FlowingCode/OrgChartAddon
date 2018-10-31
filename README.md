@@ -50,6 +50,7 @@ To see the demo, navigate to http://localhost:8080/
 - Add support for node styling (e.g. change node colors)
 ### Version 2.0.3
 - Update OrgChart library to version [2.1.3](https://github.com/dabeng/OrgChart/releases/tag/v2.1.3)
+- Add support for [node templates](https://rawgit.com/dabeng/OrgChart/master/demo/custom-template.html)
 - Fix options chartDepth and chartVerticalDepth
 - Fix export support in IE
 
@@ -93,7 +94,7 @@ Here is a simple example on how to try out the add-on component:
   item1.setChildren(Arrays.asList(item2, item3));
   
   OrgChart orgChart = new OrgChart(item1);
-  orgChart.setChartTitle("A Ttile");    
+  orgChart.setChartTitle("A Title");
   orgChart.setChartNodeContent("title");
   orgChart.setChartExportButton(true);
   orgChart.setZoom(true);
