@@ -1,11 +1,11 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
-import static com.flowingcode.vaadin.addons.orgchart.TemplateLiteralParser.rewrite;
+import static com.flowingcode.vaadin.addons.orgchart.extra.TemplateLiteralRewriter.rewrite;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-public class TemplateLiteralParserTest {
+public class TemplateLiteralRewriterTest {
 	private static String quoted(String string) {
 		return string.replace('\"', '\uFF00').replace('\'', '"').replace('\uFF00', '\'');
 	}

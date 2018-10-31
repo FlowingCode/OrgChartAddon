@@ -1,12 +1,13 @@
-package com.flowingcode.vaadin.addons.orgchart;
+package com.flowingcode.vaadin.addons.orgchart.extra;
 
 /**
  * ES6 template literal parser that rewrites the literal as an ES5 expression.
- * This class is experimental and subject to change.
+ * This class is experimental and subject to change, with no guarantee of completeness
+ * (but it should work for simple expressions).
  *  
  * @author Javier Godoy / Flowing Code
  */
-public class TemplateLiteralParser {
+public class TemplateLiteralRewriter {
 	
 	//https://www.ecma-international.org/ecma-262/6.0/#sec-template-literal-lexical-components
 	
