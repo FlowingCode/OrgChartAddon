@@ -5,7 +5,7 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
 ## Features
 
 - Supported library features:
-	- data (json), 
+	- data, 
     - pan, 
     - zoom,
     - zoominLimit, 
@@ -16,10 +16,10 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
     - toggleSiblingsResp, 
     - nodeTitle, 
     - nodeContent, 
+	- nodeTemplate
     - exportButton, 
     - exportFilename, 
     - exportFileextension (png & pdf)
-    - nodeTemplate
 - Enable/disable expand/collapse feature
 - Add a chart title
 - Drag and Drop
