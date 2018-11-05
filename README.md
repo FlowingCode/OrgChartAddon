@@ -50,10 +50,11 @@ To see the demo, navigate to http://localhost:8080/
 ### Version 2.0.2
 - Add support for node styling (e.g. change node colors)
 ### Version 2.0.3
-- Update OrgChart library to version [2.1.3](https://github.com/dabeng/OrgChart/releases/tag/v2.1.3)
 - Add support for [node templates](https://rawgit.com/dabeng/OrgChart/master/demo/custom-template.html)
 - Fix options chartDepth and chartVerticalDepth
 - Fix export support in IE
+- Update OrgChart library to version [2.1.3](https://github.com/dabeng/OrgChart/releases/tag/v2.1.3)
+- Update jackson-databind dependency because of security vulnerabilities [(#7)](https://github.com/FlowingCode/OrgChartAddon/issues/7)
 
 ## Roadmap
 
