@@ -42,8 +42,10 @@ function() {
         	nodeTemplate = Function(state.nodeTemplateParam, state.nodeTemplate);
         }
         
+        var jsonData = jQuery.parseJSON(value)
+               
         var orgchart = $(element).orgchart({
-        	'data' : jQuery.parseJSON(value),
+        	'data' : jsonData,
         	'nodeContent': state.chartNodeContent,
         	'nodeTitle': state.chartNodeTitle,
         	'zoom': state.chartZoom,
@@ -60,6 +62,11 @@ function() {
         	'draggable': state.chartDraggable,
         	'nodeId': state.chartNodeId,
         	'nodeTemplate': nodeTemplate,
+        	'createNode': function($node, data) {
+    	        $node.on('click', function() {
+    	        	rpcProxy.onNodeClick(data.id); 
+    	        });
+    	      }
         });  
                 
         // add title
@@ -98,6 +105,7 @@ function() {
   				rpcProxy.updateChart(draggedNode, dragZone, dropZone);  				
   			  });  				
   		} 			
+  		
     }
     	
 };

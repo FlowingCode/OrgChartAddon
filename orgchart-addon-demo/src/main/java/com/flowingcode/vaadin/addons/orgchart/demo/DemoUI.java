@@ -33,6 +33,7 @@ import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalSplitPanel;
 
@@ -64,6 +65,8 @@ public class DemoUI extends UI
         
         component1.addDragAndDropListener(e -> System.out.println("------ OrgChart updated - Item dragged: " + e.getDraggedItem().getName() + "------\n" +  e.getOrgChart().getOrgChartItem().toString()));
     
+        component1.addOnNodeClickListener(e -> Notification.show("Item clicked: " + e.getClickedItem().getName()));
+        
         OrgChart component2 = getExample2();
         component2.setChartTitle("My Organization Chart Demo - Example 2 - BOTTOM TO TOP DIRECTION");    
         component2.setChartNodeContent("title");

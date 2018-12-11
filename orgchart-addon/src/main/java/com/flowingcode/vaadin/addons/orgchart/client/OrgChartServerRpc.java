@@ -24,6 +24,20 @@ import com.vaadin.shared.communication.ServerRpc;
 
 public interface OrgChartServerRpc extends ServerRpc {
 
+	/**
+	 * Updates chart after a node has been dragged.
+	 * 
+	 * @param draggedNode
+	 * @param dragZone
+	 * @param dropZone
+	 */
 	void updateChart(String draggedNode, String dragZone, String dropZone);
+	
+	/**
+	 * Fires event on node click.
+	 * 
+	 * @param nodeId
+	 */
+	void onNodeClick(String nodeId);
 	
 }

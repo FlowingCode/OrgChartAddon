@@ -62,6 +62,11 @@ public class OrgChart extends AbstractJavaScriptComponent {
 			public void updateChart(String draggedNode, String dragZone, String dropZone) {
 				updateDraggedNode(draggedNode, dragZone, dropZone);
 			}
+
+			@Override
+			public void onNodeClick(String nodeId) {
+				onClick(nodeId);				
+			}
 		
 		});
 	}
@@ -86,7 +91,7 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		}
 		return result;
 	}
-
+		
 	public void setChartNodeTitle(String chartNodeTitle) {
 		getState().chartNodeTitle = chartNodeTitle;
 	}
@@ -164,6 +169,25 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		return orgChartItem;
 	}
 
+	/**
+	 * Fires event on node click.
+	 * 
+	 * @param nodeId
+	 */
+	private void onClick(String nodeId) {		
+		Integer clickedNodeId = Integer.valueOf(nodeId);
+		OrgChartItem clickedItem = getById(clickedNodeId, orgChartItem);
+	
+		fireNodeClickEvent(clickedItem);
+	}
+	
+	/**
+	 * Updates chart after drag and drop event.
+	 * 
+	 * @param draggedNode
+	 * @param dragZone
+	 * @param dropZone
+	 */
 	private void updateDraggedNode(String draggedNode, String dragZone, String dropZone) {
 	
 		Integer draggedNodeId = Integer.valueOf(draggedNode);
@@ -281,4 +305,60 @@ public class OrgChart extends AbstractJavaScriptComponent {
 		public void onDragAndDropNode(DragAndDropEvent event);
 	}
 	
+	
+	/**
+	 * Adds a {@link OnNodeClickListener} to the component.
+	 * 
+	 * @param onNodeClickListener
+	 * 						the listener to be added.
+	 */
+	public void addOnNodeClickListener (OnNodeClickListener onNodeClickListener) {
+		 addListener(NodeClickEvent.class, onNodeClickListener,
+				 OnNodeClickListener.ON_CLICK_METHOD);
+	}
+
+	/**
+	 * Fires a {@link NodeClickEvent}.
+	 * 
+	 * @param clickedItem
+	 * 			the item being clicked.
+	 */
+	protected void fireNodeClickEvent(OrgChartItem clickedItem) {
+        fireEvent(new NodeClickEvent(this, clickedItem));
+    }	
+	
+	/**
+	 * Event thrown when a node is clicked. 
+	 */
+	public static class NodeClickEvent extends Component.Event {
+		
+		private final OrgChartItem clickedItem;
+						
+		public NodeClickEvent(Component source, OrgChartItem clickedItem) {	
+			super(source);
+			this.clickedItem = clickedItem;
+		}
+
+		public OrgChartItem getClickedItem() {
+			return clickedItem;
+		}
+		
+		public OrgChart getOrgChart() {
+			return (OrgChart)source;
+		}
+				
+	}
+	
+	/**
+     * Interface for listening for a {@link NodeClickEvent}.
+     */
+	public interface OnNodeClickListener extends Serializable {
+		
+		public static final Method ON_CLICK_METHOD = ReflectTools
+                .findMethod(OnNodeClickListener.class, "onNodeClick",
+                		NodeClickEvent.class);
+		
+		public void onNodeClick(NodeClickEvent event);
+	}
+		
 }
