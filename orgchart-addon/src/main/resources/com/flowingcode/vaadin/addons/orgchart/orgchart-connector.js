@@ -66,6 +66,16 @@ function() {
     	        $node.on('click', function() {
     	        	rpcProxy.onNodeClick(data.id); 
     	        });
+    	        
+    	        $node.on('mouseover', function(event) {
+    	            var target = event.target;
+    	            if (!$(target).attr('title')) {
+    	                if ($(target).prop('scrollWidth') > $(target).prop('clientWidth')) {
+    	                    $(target).attr('title', target.innerText);
+    	                }
+    	            }
+    	        });    	        
+    	        
     	      }
         });  
                 

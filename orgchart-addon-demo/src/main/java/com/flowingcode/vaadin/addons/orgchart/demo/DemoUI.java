@@ -83,8 +83,8 @@ public class DemoUI extends UI
         OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");
         item2.setData("mail", "athomp@example.com");
         item2.setClassName("blue-node");
-        OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");
-        item3.setData("mail", "tjonees@example.com");
+        OrgChartItem item3 = new OrgChartItem(3, "Timothy Albert Henry Jones ", "Sub-Director of Administration Department");
+        item3.setData("mail", "timothy.albert.jones@example.com");
         item1.setChildren(Arrays.asList(item2, item3));        
         OrgChartItem item4 = new OrgChartItem(4, "Louise Night", "Department 1");
         item4.setData("mail", "lnight@example.com");
@@ -106,8 +106,8 @@ public class DemoUI extends UI
         OrgChartItem item2 = new OrgChartItem(2, "Anna Thompson", "Administration");
         OrgChartItem item3 = new OrgChartItem(3, "Timothy Jones", "Sub-Director");        
         item1.setChildren(Arrays.asList(item2, item3));        
-        OrgChartItem item4 = new OrgChartItem(4, "Louise Night", "Department 1");
-        OrgChartItem item5 = new OrgChartItem(5, "John Porter", "Department 2");
+        OrgChartItem item4 = new OrgChartItem(4, "Louise Night, Louise Night, Louise Night", "Department 1");
+        OrgChartItem item5 = new OrgChartItem(5, "John Porter", "Department 2, Department 2, Department 2, Department 2, Department 2");
         item2.setChildren(Arrays.asList(item4, item5));       
         OrgChartItem item6 = new OrgChartItem(6, "Charles Thomas", "Department 3");	
         item5.setChildren(Arrays.asList(item6));        
