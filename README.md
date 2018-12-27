@@ -1,3 +1,5 @@
+[![Build Status](https://jenkins.flowingcode.com/job/OrgChart-addon/badge/icon)](https://jenkins.flowingcode.com/job/OrgChart-addon)
+
 # OrgChart Add-On for Vaadin 8.x
 
 OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https://github.com/dabeng/OrgChart).
