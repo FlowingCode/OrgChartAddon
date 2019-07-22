@@ -57,6 +57,8 @@ To see the demo, navigate to http://localhost:8080/
 - Fix export support in IE
 - Update OrgChart library to version [2.1.3](https://github.com/dabeng/OrgChart/releases/tag/v2.1.3)
 - Update jackson-databind dependency because of security vulnerabilities [(#7)](https://github.com/FlowingCode/OrgChartAddon/issues/7)
+### Version 2.0.4
+- Add support for click events [(#4)](https://github.com/FlowingCode/OrgChartAddon/issues/4) and tooltips in orgchart nodes  [(#9)](https://github.com/FlowingCode/OrgChartAddon/issues/9)
 
 ## Roadmap
 
