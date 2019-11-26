@@ -1,8 +1,10 @@
-[![Build Status](https://jenkins.flowingcode.com/job/OrgChart-addon/badge/icon)](https://jenkins.flowingcode.com/job/OrgChart-addon)
+[![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/orgchart-add-on)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/orgchart-add-on.svg)](https://vaadin.com/directory/component/orgchart-add-on)
+[![Build Status](https://jenkins.flowingcode.com/job/OrgChart-14-addon/badge/icon)](https://jenkins.flowingcode.com/job/OrgChart-14-addon/)
 
-# OrgChart Add-On for Vaadin 8.x
+# OrgChart Add-On
 
-OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https://github.com/dabeng/OrgChart).
+OrgChart Add-On is a Vaadin 14+ NPM mode integration of the library [OrgChart](https://github.com/dabeng/OrgChart).
 
 ## Features
 
@@ -28,7 +30,7 @@ OrgChart Add-On is a Vaadin integration with the JQuery library [OrgChart](https
 
 ## Online demo
 
-Try the add-on demo at http://addons.flowingcode.com/orgchart
+Try the add-on demo at http://addonsv14.flowingcode.com/orgchart
 
 ## Download release
 
@@ -59,6 +61,8 @@ To see the demo, navigate to http://localhost:8080/
 - Update jackson-databind dependency because of security vulnerabilities [(#7)](https://github.com/FlowingCode/OrgChartAddon/issues/7)
 ### Version 2.0.4
 - Add support for click events [(#4)](https://github.com/FlowingCode/OrgChartAddon/issues/4) and tooltips in orgchart nodes  [(#9)](https://github.com/FlowingCode/OrgChartAddon/issues/9)
+### Version 4.0.0
+- Initial release for Vaadin 14+ (npm mode) 
 
 ## Roadmap
 

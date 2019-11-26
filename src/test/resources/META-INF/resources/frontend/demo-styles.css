@@ -1,0 +1,33 @@
+
+.chart-container {
+  position: relative;
+  display: inline-block;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 24px);
+  text-align: center;
+}
+
+.orgchart .node.blue-node  .title   {
+	background-color: blue;
+}
+
+.orgchart .node.blue-node .content {
+	border-color: blue;
+}
+	
+.orgchart .node .content { 
+	border-radius: 0 !important; 
+	border-bottom-width: 0 !important; 
+}
+
+.orgchart .node .content:first-of-type { 
+	border-top-width: 1px !important;
+	border-top-right-radius: 4px !important;
+	border-top-left-radius: 4px !important;
+}
+.orgchart .node .content:last-of-type{ 
+	border-bottom-width: 1px !important;
+	border-bottom-right-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
+}

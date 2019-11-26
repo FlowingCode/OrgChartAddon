@@ -6,3 +6,12 @@
 /orgchart-addon-demo/.settings
 /orgchart-addon-demo/target
 /orgchart-addon-demo/.classpath
+/.project
+/.settings
+/target
+/package.json
+/webpack.config.js
+/webpack.generated.js
+/node_modules
+/package-lock.json
+/.classpath
