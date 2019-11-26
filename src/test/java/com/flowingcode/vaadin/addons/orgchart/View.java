@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.vaadin.test;
+package com.flowingcode.vaadin.addons.orgchart;
 
 import java.util.Arrays;
 
