@@ -35,9 +35,9 @@ import com.vaadin.flow.router.Route;
 @Route("")
 @CssImport(value = "./demo-styles.css")
 @CssImport(value = "./font-awesome.css")
-public class View extends Div {
+public class DemoView extends Div {
 
-    public View() {
+    public DemoView() {
     	// org chart 1
         OrgChart component1 = getExample1();
         String nodeTemplate = "<div class='title'>${item.title}</div>"+
