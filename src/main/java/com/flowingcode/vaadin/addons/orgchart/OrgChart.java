@@ -47,6 +47,7 @@ import com.vaadin.flow.shared.Registration;
  */
 @SuppressWarnings("serial")
 @NpmPackage(value = "orgchart", version = "2.1.4")
+@JsModule("jquery/dist/jquery.js")
 @JsModule("orgchart/dist/js/jquery.orgchart.js")
 @CssImport("orgchart/dist/css/jquery.orgchart.css")
 @Tag("fc-orgchart")

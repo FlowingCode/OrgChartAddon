@@ -1,5 +1,5 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-import $ from "jquery";
+import jQuery from "jquery";
 import html2canvas from 'html2canvas';
 
 /**
@@ -13,15 +13,20 @@ import html2canvas from 'html2canvas';
 class FCOrgChart extends PolymerElement {
 
 	initializeOrgChart(statestring,data,identifier) {
+        var $ = window.jQuery || jQuery;
         var state = $.parseJSON(statestring);
 		
         let exportChart = state.chartExportButton;
         let exportExt = state.chartExportFileExtension;
         if(exportChart & exportExt == "pdf"){
-        	addJSfile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js");
+        	var src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js";
+    	    var jsfile = $("<script type='text/javascript' src='"+src+"'>");
+    	    $("head").append(jsfile); 
         }
         if(exportChart & this.isIEBrowser() > 0){
-        	addJSfile("https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js");
+        	var src = "https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js";
+    	    var jsfile = $("<script type='text/javascript' src='"+src+"'>");
+    	    $("head").append(jsfile); 
         }
 
         var nodeTemplate;
@@ -85,13 +90,13 @@ class FCOrgChart extends PolymerElement {
          */
         var chartExpandCollapse = state.chartExpandCollapse;
         if(chartExpandCollapse){
-        	$('#' + identifier).find(".orgchart").addClass('noncollapsable');
+        	this.querySelector(".orgchart").classList.add("noncollapsable")
         } else {
-        	$('#' + identifier).find(".orgchart").removeClass('noncollapsable');
+        	this.querySelector(".orgchart").classList.remove("noncollapsable")
         }
         
-        $('#' + identifier).find(".orgchart").css("background-image", "none");  		
-  		$("div.orgchart").prev().closest("div").attr("id", "chart-container");  	
+  		$("div.orgchart").prev().closest("div").attr("id", "chart-container");
+  		this.querySelector(".orgchart").style.setProperty("background-image","none")
         
         // if draggable 
   		var draggable = state.chartDraggable;
@@ -103,13 +108,12 @@ class FCOrgChart extends PolymerElement {
   				let dragZone = extraParams.dragZone.attr('id');
   				let dropZone = extraParams.dropZone.attr('id');
   				  				
-  				//rpcProxy.updateChart(draggedNode, dragZone, dropZone);
   				currOrgChart.$server.updateDraggedNode(draggedNode, dragZone, dropZone);
   			  });  				
   		} 			
 		
 	}
-	
+		
 	isIEBrowser() {
 		  var sAgent = window.navigator.userAgent;
 		  var Idx = sAgent.indexOf("MSIE");
