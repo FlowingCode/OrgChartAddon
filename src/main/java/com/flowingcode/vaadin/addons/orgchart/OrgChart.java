@@ -46,10 +46,12 @@ import com.vaadin.flow.shared.Registration;
  *
  */
 @SuppressWarnings("serial")
-@NpmPackage(value = "orgchart", version = "2.1.4")
+//@NpmPackage(value = "orgchart", version = "2.1.4")
+@NpmPackage(value = "html2canvas", version = "^0.5.0-beta4")
+@NpmPackage(value = "jquery", version = "3.4.1")
 @JsModule("jquery/dist/jquery.js")
-@JsModule("orgchart/dist/js/jquery.orgchart.js")
-@CssImport("orgchart/dist/css/jquery.orgchart.css")
+@JsModule("./orgchart/dist/js/jquery.orgchart.js")
+@CssImport("./orgchart/dist/css/jquery.orgchart.css")
 @Tag("fc-orgchart")
 @JsModule("./fc-orgchart.js")
 public class OrgChart extends Div {
@@ -77,7 +79,7 @@ public class OrgChart extends Div {
 	}
 
 	protected OrgChartState getState() {
-		return (OrgChartState) this.state;
+		return this.state;
 	}
 
 	private String convertToJsonObj(Object orgChartItem) {
