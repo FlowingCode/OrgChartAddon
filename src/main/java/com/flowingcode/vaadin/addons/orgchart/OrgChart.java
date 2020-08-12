@@ -30,9 +30,9 @@ import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.shared.Registration;
 
@@ -51,7 +51,7 @@ import com.vaadin.flow.shared.Registration;
 @NpmPackage(value = "jquery", version = "3.4.1")
 @JsModule("jquery/dist/jquery.js")
 @JsModule("./orgchart/dist/js/jquery.orgchart.js")
-@CssImport("./orgchart/dist/css/jquery.orgchart.css")
+@StyleSheet("./jquery.orgchart.min.css")
 @Tag("fc-orgchart")
 @JsModule("./fc-orgchart.js")
 public class OrgChart extends Div {

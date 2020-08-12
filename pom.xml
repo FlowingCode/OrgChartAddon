@@ -220,6 +220,7 @@
                     </supportedPackagings>
                     <webAppConfig>
                         <resourceBases>
+	                        <resourceBase>src/main/resources/META-INF/resources</resourceBase>
 	                        <resourceBase>src/test/resources/META-INF/resources</resourceBase>
 	                    </resourceBases>
 	                </webAppConfig>
