@@ -51,7 +51,7 @@ import com.vaadin.flow.shared.Registration;
 @NpmPackage(value = "jquery", version = "3.4.1")
 @JsModule("jquery/dist/jquery.js")
 @JsModule("./orgchart/dist/js/jquery.orgchart.js")
-@StyleSheet("./jquery.orgchart.min.css")
+@StyleSheet("context://frontend/jquery.orgchart.min.css")
 @Tag("fc-orgchart")
 @JsModule("./fc-orgchart.js")
 public class OrgChart extends Div {
