@@ -69,7 +69,7 @@ class FCOrgChart extends PolymerElement {
         	'pan': state.chartPan,
         	'zoominLimit': state.chartZoominLimit,
         	'zoomoutLimit': state.chartZoomoutLimit,
-//        	'visibleLevel': state.chartDepth,
+        	'visibleLevel': state.chartDepth,
         	'verticalLevel': state.chartVerticalDepth,
         	'toggleSiblingsResp': state.chartToggleSiblingsResp,
         	'draggable': state.chartDraggable,
