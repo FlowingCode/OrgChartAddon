@@ -333,5 +333,10 @@ public class OrgChart extends Div {
 				
 	}
 	
-		
+	/**
+	 * Collapses all nodes except the root
+	 */
+	public void setCollapsedNodes() {
+		setChartDepth(1);
+	}
 }
