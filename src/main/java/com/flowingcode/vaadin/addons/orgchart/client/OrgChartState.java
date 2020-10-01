@@ -57,7 +57,7 @@ public class OrgChartState {
 	
 	public Boolean chartToggleSiblingsResp = false;
 	
-	public Integer chartDepth; // orgchart visibleLevel option
+	public Integer chartDepth = ChartConstants.CHART_DEPTH_DEFAULT; // orgchart visibleLevel option
 	
 	public Integer chartVerticalDepth; // orgchart verticalLevel options
 	
