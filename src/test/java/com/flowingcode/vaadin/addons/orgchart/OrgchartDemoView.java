@@ -2,6 +2,7 @@ package com.flowingcode.vaadin.addons.orgchart;
 
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -12,8 +13,8 @@ import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @Route("orgchart")
-@CssImport(value = "./demo-styles.css")
-@CssImport(value = "./font-awesome.css")
+@StyleSheet("./styles/orgchart/demo-styles.css")
+@CssImport(value = "./styles/orgchart/font-awesome.css")
 public class OrgchartDemoView extends VerticalLayout {
 
 	private static final String DRAGNDROP_DEMO = "Drag and Drop";
