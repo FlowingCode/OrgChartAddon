@@ -82,15 +82,15 @@ public class OrgchartDemoView extends VerticalLayout {
 		String response;
 		switch (demo) {
 		case DRAGNDROP_DEMO:
-			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"http://gist-it.appspot.com/"
+			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
 					+ DRAGNDROP_SOURCE + "\"></script></body></html>";
 			break;
 		case BOTTOMTOP_DEMO:
-			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"http://gist-it.appspot.com/"
+			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
 					+ BOTTOMTOP_SOURCE + "\"></script></body></html>";
 			break;
 		default:
-			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"http://gist-it.appspot.com/"
+			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
 					+ DRAGNDROP_SOURCE + "\"></script></body></html>";
 			break;
 		}
