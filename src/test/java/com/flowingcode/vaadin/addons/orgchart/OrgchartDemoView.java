@@ -1,5 +1,6 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
+import com.flowingcode.vaadin.addons.DemoLayout;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -12,7 +13,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
-@Route("orgchart")
+@Route(value = "orgchart", layout = DemoLayout.class)
 @StyleSheet("./styles/orgchart/demo-styles.css")
 @CssImport("./styles/orgchart/font-awesome.css")
 public class OrgchartDemoView extends VerticalLayout {
