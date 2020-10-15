@@ -59,19 +59,19 @@ public class OrgchartDemoView extends VerticalLayout {
 			this.removeAll();
 			switch (e.getSelectedTab().getLabel()) {
 			case DRAGNDROP_DEMO:
-				iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_DEMO));
+				iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_SOURCE));
 				layout.addToPrimary(new DragAndDropExportDemo());
 				layout.addToSecondary(iframe);
 				add(tabs, layout);
 				break;
-			case "Bottom to Top":
-				iframe.getElement().setAttribute("srcdoc", getSrcdoc(BOTTOMTOP_DEMO));
+			case BOTTOMTOP_DEMO:
+				iframe.getElement().setAttribute("srcdoc", getSrcdoc(BOTTOMTOP_SOURCE));
 				layout.addToPrimary(new BottomTopDemo());
 				layout.addToSecondary(iframe);
 				add(tabs, layout);
 				break;
 			default:
-				iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_DEMO));
+				iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_SOURCE));
 				layout.addToPrimary(new DragAndDropExportDemo());
 				layout.addToSecondary(iframe);
 				add(tabs, layout);
@@ -80,22 +80,8 @@ public class OrgchartDemoView extends VerticalLayout {
 		});
 	}
 
-	private String getSrcdoc(String demo) {
-		String response;
-		switch (demo) {
-		case DRAGNDROP_DEMO:
-			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
-					+ DRAGNDROP_SOURCE + "\"></script></body></html>";
-			break;
-		case BOTTOMTOP_DEMO:
-			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
-					+ BOTTOMTOP_SOURCE + "\"></script></body></html>";
-			break;
-		default:
-			response = "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
-					+ DRAGNDROP_SOURCE + "\"></script></body></html>";
-			break;
-		}
-		return response;
+	private String getSrcdoc(String sourceUrl) {
+		return "<html style=\"overflow-y:hidden; height:100%;\"><body style=\"overflow-y: scroll; height:100%;\"><script src=\"https://gist-it.appspot.com/"
+				+ sourceUrl + "\"></script></body></html>";
 	}
 }
