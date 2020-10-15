@@ -462,6 +462,7 @@
 										<exclude>**/test/*</exclude>
 										<exclude>**/integration/*</exclude>
 										<exclude>**/DemoView.class</exclude>
+										<exclude>**/DemoLayout.class</exclude>
 									</excludes>
 								</configuration>
 							</execution>
