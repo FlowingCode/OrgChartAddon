@@ -5,7 +5,9 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.IFrame;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
@@ -14,7 +16,7 @@ import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
 @Route(value = "orgchart", layout = DemoLayout.class)
-@StyleSheet("./styles/orgchart/demo-styles.css")
+@StyleSheet("context://frontend/styles/orgchart/demo-styles.css")
 @CssImport("./styles/orgchart/font-awesome.css")
 public class OrgchartDemoView extends VerticalLayout {
 
@@ -30,12 +32,34 @@ public class OrgchartDemoView extends VerticalLayout {
 		layout.setSizeFull();
 		IFrame iframe = new IFrame();
 		iframe.getElement().setAttribute("frameborder", "0");
-		iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_DEMO));
+		iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_SOURCE));
 		iframe.setSizeFull();
 		layout.addToSecondary(iframe);
 
+		Tabs tabs = new Tabs();
+		Tab demo1 = new Tab(DRAGNDROP_DEMO);
+		Tab demo2 = new Tab(BOTTOMTOP_DEMO);
+
+		tabs.setWidthFull();
+		tabs.add(demo1, demo2);
+		tabs.setSelectedTab(demo1);
+
+		Checkbox orientationCB = new Checkbox("Toggle Orientation");
+		orientationCB.setValue(true);
+		orientationCB.addClassName("smallcheckbox");
+		orientationCB.addValueChangeListener(cb -> {
+			if (cb.getValue()) {
+				layout.setOrientation(Orientation.HORIZONTAL);
+			} else {
+				layout.setOrientation(Orientation.VERTICAL);
+			}
+			layout.setSplitterPosition(50);
+			layout.getPrimaryComponent().getElement().setAttribute("style", "width: 100%; height: 100%");
+			iframe.setSizeFull();
+		});
 		Checkbox codeCB = new Checkbox("Show Source Code");
 		codeCB.setValue(true);
+		codeCB.addClassName("smallcheckbox");
 		codeCB.addValueChangeListener(cb -> {
 			if (cb.getValue()) {
 				layout.setSplitterPosition(50);
@@ -43,15 +67,11 @@ public class OrgchartDemoView extends VerticalLayout {
 				layout.setSplitterPosition(100);
 			}
 		});
-
-		Tabs tabs = new Tabs();
-		Tab demo1 = new Tab(DRAGNDROP_DEMO);
-		Tab demo2 = new Tab(BOTTOMTOP_DEMO);
-
-		tabs.setWidthFull();
-		tabs.add(demo1, demo2, codeCB);
-		add(tabs, layout);
-		tabs.setSelectedTab(demo1);
+		HorizontalLayout footer = new HorizontalLayout();
+		footer.setWidthFull();
+		footer.setJustifyContentMode(JustifyContentMode.END);
+		footer.add(codeCB, orientationCB);
+		add(tabs, layout, footer);
 
 		setSizeFull();
 
@@ -62,19 +82,19 @@ public class OrgchartDemoView extends VerticalLayout {
 				iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_SOURCE));
 				layout.addToPrimary(new DragAndDropExportDemo());
 				layout.addToSecondary(iframe);
-				add(tabs, layout);
+				add(tabs, layout, footer);
 				break;
 			case BOTTOMTOP_DEMO:
 				iframe.getElement().setAttribute("srcdoc", getSrcdoc(BOTTOMTOP_SOURCE));
 				layout.addToPrimary(new BottomTopDemo());
 				layout.addToSecondary(iframe);
-				add(tabs, layout);
+				add(tabs, layout, footer);
 				break;
 			default:
 				iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_SOURCE));
 				layout.addToPrimary(new DragAndDropExportDemo());
 				layout.addToSecondary(iframe);
-				add(tabs, layout);
+				add(tabs, layout, footer);
 				break;
 			}
 		});
