@@ -50,3 +50,7 @@
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
 }
+
+vaadin-checkbox.smallcheckbox {
+	font-size: small;
+}
