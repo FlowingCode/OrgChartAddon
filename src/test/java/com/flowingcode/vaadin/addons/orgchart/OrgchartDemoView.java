@@ -7,7 +7,6 @@ import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 import com.vaadin.flow.component.tabs.Tab;
@@ -32,6 +31,8 @@ public class OrgchartDemoView extends VerticalLayout {
 		layout.setSizeFull();
 		IFrame iframe = new IFrame();
 		iframe.getElement().setAttribute("frameborder", "0");
+		iframe.setMinHeight("0");
+		iframe.setMinWidth("0");
 		iframe.getElement().setAttribute("srcdoc", getSrcdoc(DRAGNDROP_SOURCE));
 		iframe.setSizeFull();
 		layout.addToSecondary(iframe);
@@ -53,7 +54,6 @@ public class OrgchartDemoView extends VerticalLayout {
 			} else {
 				layout.setOrientation(Orientation.VERTICAL);
 			}
-			layout.setSplitterPosition(50);
 			layout.getPrimaryComponent().getElement().setAttribute("style", "width: 100%; height: 100%");
 			iframe.setSizeFull();
 		});
@@ -63,10 +63,13 @@ public class OrgchartDemoView extends VerticalLayout {
 		codeCB.addValueChangeListener(cb -> {
 			if (cb.getValue()) {
 				layout.setSplitterPosition(50);
+				orientationCB.setEnabled(true);
 			} else {
 				layout.setSplitterPosition(100);
+				orientationCB.setEnabled(false);
 			}
 		});
+
 		HorizontalLayout footer = new HorizontalLayout();
 		footer.setWidthFull();
 		footer.setJustifyContentMode(JustifyContentMode.END);

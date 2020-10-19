@@ -54,3 +54,7 @@
 vaadin-checkbox.smallcheckbox {
 	font-size: small;
 }
+
+fc-orgchart p {
+	max-width:70%;
+}
