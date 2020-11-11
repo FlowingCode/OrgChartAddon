@@ -20,6 +20,7 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
 import com.flowingcode.vaadin.addons.DemoLayout;
+import com.flowingcode.vaadin.addons.GithubLink;
 import com.flowingcode.vaadin.addons.demo.impl.TabbedDemoImpl;
 import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -29,6 +30,7 @@ import com.vaadin.flow.router.Route;
 @Route(value = "orgchart", layout = DemoLayout.class)
 @StyleSheet("context://frontend/styles/orgchart/demo-styles.css")
 @StyleSheet("context://frontend/styles/orgchart/font-awesome.css")
+@GithubLink("https://github.com/FlowingCode/OrgChartAddon")
 public class OrgchartDemoView extends VerticalLayout {
 
 	private static final String DRAGNDROP_DEMO = "Drag and Drop";
