@@ -21,9 +21,8 @@ package com.flowingcode.vaadin.addons.orgchart;
 
 import com.flowingcode.vaadin.addons.DemoLayout;
 import com.flowingcode.vaadin.addons.GithubLink;
-import com.flowingcode.vaadin.addons.demo.impl.TabbedDemoImpl;
+import com.flowingcode.vaadin.addons.demo.TabbedDemo;
 import com.vaadin.flow.component.dependency.StyleSheet;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
@@ -31,7 +30,7 @@ import com.vaadin.flow.router.Route;
 @StyleSheet("context://frontend/styles/orgchart/demo-styles.css")
 @StyleSheet("context://frontend/styles/orgchart/font-awesome.css")
 @GithubLink("https://github.com/FlowingCode/OrgChartAddon")
-public class OrgchartDemoView extends VerticalLayout {
+public class OrgchartDemoView extends TabbedDemo {
 
 	private static final String DRAGNDROP_DEMO = "Drag and Drop";
 	private static final String BOTTOMTOP_DEMO = "Bottom to Top";
@@ -39,10 +38,7 @@ public class OrgchartDemoView extends VerticalLayout {
 	private static final String BOTTOMTOP_SOURCE = "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/BottomTopDemo.java";
 
 	public OrgchartDemoView() {
-		TabbedDemoImpl<DragAndDropExportDemo> orgDemo = new TabbedDemoImpl<>(new DragAndDropExportDemo(),
-				DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
-		orgDemo.addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
-		setSizeFull();
-		add(orgDemo);
+		addDemo(new DragAndDropExportDemo(), DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
+		addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
 	}
 }
