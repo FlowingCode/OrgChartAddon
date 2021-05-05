@@ -115,7 +115,20 @@ class FCOrgChart extends PolymerElement {
         }
         
   		$("div.orgchart").prev().closest("div").attr("id", "chart-container");
-  		this.querySelector(".orgchart").style.setProperty("background-image","none")
+  		this.querySelector(".orgchart").style.setProperty("background-image","none");
+  		
+  		// workaround  for direction b2t with node template  without content div
+  		var direction = state.chartDirection;
+  		var nodeTemplate = nodeTemplate;
+  		if(direction && direction == "b2t" && nodeTemplate){
+  			 this.querySelectorAll(".node").forEach(node => {
+  				 var title = node.querySelector(".title");
+  				 var content = node.querySelector(".content");
+  				 if(title && !content){
+  					  title.style.transformOrigin = "center";
+  				 }  				
+  			 });	
+  		}  		
         
         // if draggable 
   		var draggable = state.chartDraggable;
