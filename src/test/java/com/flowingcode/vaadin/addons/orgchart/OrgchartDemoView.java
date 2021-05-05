@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,13 +32,15 @@ import com.vaadin.flow.router.Route;
 @GithubLink("https://github.com/FlowingCode/OrgChartAddon")
 public class OrgchartDemoView extends TabbedDemo {
 
-	private static final String DRAGNDROP_DEMO = "Drag and Drop";
-	private static final String BOTTOMTOP_DEMO = "Bottom to Top";
-	private static final String DRAGNDROP_SOURCE = "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/DragAndDropExportDemo.java";
-	private static final String BOTTOMTOP_SOURCE = "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/BottomTopDemo.java";
+  private static final String DRAGNDROP_DEMO = "Drag and Drop";
+  private static final String BOTTOMTOP_DEMO = "Bottom to Top";
+  private static final String DRAGNDROP_SOURCE =
+      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/DragAndDropExportDemo.java";
+  private static final String BOTTOMTOP_SOURCE =
+      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/BottomTopDemo.java";
 
-	public OrgchartDemoView() {
-		addDemo(new DragAndDropExportDemo(), DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
-		addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
-	}
+  public OrgchartDemoView() {
+    addDemo(new DragAndDropExportDemo(), DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
+    addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
+  }
 }
