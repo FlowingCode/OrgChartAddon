@@ -19,10 +19,11 @@
  */
 package com.flowingcode.vaadin.addons.orgchart;
 
+import java.util.Arrays;
+
 import com.flowingcode.vaadin.addons.orgchart.extra.TemplateLiteralRewriter;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import java.util.Arrays;
 
 @SuppressWarnings("serial")
 public class DragAndDropExportDemo extends VerticalLayout {
@@ -42,7 +43,6 @@ public class DragAndDropExportDemo extends VerticalLayout {
     component1.setChartExportButton(true);
     component1.setChartExpandCollapse(true);
     component1.setChartDraggable(true);
-    component1.initializeChart();
     component1.addDragAndDropListener(
         e ->
             System.out.println(

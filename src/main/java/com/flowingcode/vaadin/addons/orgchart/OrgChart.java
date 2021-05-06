@@ -23,6 +23,7 @@ package com.flowingcode.vaadin.addons.orgchart;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flowingcode.vaadin.addons.orgchart.client.OrgChartState;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -66,12 +67,23 @@ public class OrgChart extends Div {
     this.setId(identifier);
   }
 
-  public void initializeChart() {
-    String identifier = "orgchart" + this.hashCode();
+  @Override
+  protected void onAttach(AttachEvent attachEvent) {
+    super.onAttach(attachEvent);
     this.getElement()
         .executeJs(
-            "this.initializeOrgChart($0,$1,$2)", convertToJsonObj(state), state.value, identifier);
+            "this.initializeOrgChart($0,$1,$2)",
+            convertToJsonObj(state),
+            state.value,
+            this.getId().get());
   }
+
+  /**
+   * @deprecated This method is no longer needed. Initialization is done in {@link
+   *     #onAttach(AttachEvent)}.
+   */
+  @Deprecated
+  public void initializeChart() {}
 
   public void setValue(OrgChartItem orgChartItem) {
     String value = convertToJsonObj(orgChartItem);

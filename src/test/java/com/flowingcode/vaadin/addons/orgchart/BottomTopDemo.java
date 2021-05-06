@@ -32,7 +32,6 @@ public class BottomTopDemo extends VerticalLayout {
     component2.setChartTitle("My Organization Chart Demo - Example 2 - BOTTOM TO TOP DIRECTION");
     component2.setChartNodeContent("title");
     component2.setChartDirection(ChartDirectionEnum.BOTTOM_TO_TOP.getAbreviation());
-    component2.initializeChart();
 
     setSizeFull();
     add(component2);
