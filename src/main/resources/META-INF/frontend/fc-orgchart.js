@@ -77,7 +77,7 @@ class FCOrgChart extends PolymerElement {
         	'nodeTemplate': nodeTemplate,
         	'createNode': function($node, data) {
     	        $node.on('click', function() {
-    	        	currOrgChart.$server.onClick(data.id);
+    	        	currOrgChart.$server.onClick(data.id.toString());
     	        });
     	        
     	        $node.on('mouseover', function(event) {
