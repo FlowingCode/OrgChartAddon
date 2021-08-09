@@ -108,7 +108,7 @@ class FCOrgChart extends PolymerElement {
          * 
          */
         var chartExpandCollapse = state.chartExpandCollapse;
-        if(chartExpandCollapse){
+        if(!chartExpandCollapse){
         	this.querySelector(".orgchart").classList.add("noncollapsable")
         } else {
         	this.querySelector(".orgchart").classList.remove("noncollapsable")
