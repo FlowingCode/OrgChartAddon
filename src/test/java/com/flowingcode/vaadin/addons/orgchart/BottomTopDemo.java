@@ -19,11 +19,18 @@
  */
 package com.flowingcode.vaadin.addons.orgchart;
 
-import com.flowingcode.vaadin.addons.orgchart.client.enums.ChartDirectionEnum;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.Arrays;
 
+import com.flowingcode.vaadin.addons.demo.DemoSource;
+import com.flowingcode.vaadin.addons.orgchart.client.enums.ChartDirectionEnum;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+
 @SuppressWarnings("serial")
+@PageTitle("Bottom to Top")
+@DemoSource
+@Route(value = "orgchart/bottom-top", layout = OrgchartDemoView.class)
 public class BottomTopDemo extends VerticalLayout {
 
   public BottomTopDemo() {

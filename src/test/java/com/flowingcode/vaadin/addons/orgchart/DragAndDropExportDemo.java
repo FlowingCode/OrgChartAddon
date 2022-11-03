@@ -21,11 +21,17 @@ package com.flowingcode.vaadin.addons.orgchart;
 
 import java.util.Arrays;
 
+import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.orgchart.extra.TemplateLiteralRewriter;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
+@PageTitle("Drag and Drop")
+@DemoSource
+@Route(value = "orgchart/drag-and-drop", layout = OrgchartDemoView.class)
 public class DragAndDropExportDemo extends VerticalLayout {
 
   public DragAndDropExportDemo() {

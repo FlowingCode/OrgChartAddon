@@ -32,19 +32,22 @@ import com.vaadin.flow.router.Route;
 @GithubLink("https://github.com/FlowingCode/OrgChartAddon")
 public class OrgchartDemoView extends TabbedDemo {
 
-  private static final String DRAGNDROP_DEMO = "Drag and Drop";
-  private static final String BOTTOMTOP_DEMO = "Bottom to Top";
-  private static final String DRAGNDROP_SOURCE =
-      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/DragAndDropExportDemo.java";
-  private static final String BOTTOMTOP_SOURCE =
-      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/BottomTopDemo.java";
-  private static final String IMAGETITILE_DEMO = "Image in Title";
-  private static final String IMAGETITILE_SOURCE =     
-	  "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/ImageInTitleDemo.java";
+//  private static final String DRAGNDROP_DEMO = "Drag and Drop";
+//  private static final String BOTTOMTOP_DEMO = "Bottom to Top";
+//  private static final String DRAGNDROP_SOURCE =
+//      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/DragAndDropExportDemo.java";
+//  private static final String BOTTOMTOP_SOURCE =
+//      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/BottomTopDemo.java";
+//  private static final String IMAGETITILE_DEMO = "Image in Title";
+//  private static final String IMAGETITILE_SOURCE =     
+//	  "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/ImageInTitleDemo.java";
 
   public OrgchartDemoView() {
-    addDemo(new DragAndDropExportDemo(), DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
-    addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
-    addDemo(new ImageInTitleDemo(), IMAGETITILE_DEMO, IMAGETITILE_SOURCE);
+	addDemo(DragAndDropExportDemo.class);
+	addDemo(BottomTopDemo.class);
+	addDemo(ImageInTitleDemo.class);
+//    addDemo(new DragAndDropExportDemo(), DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
+//    addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
+//    addDemo(new ImageInTitleDemo(), IMAGETITILE_DEMO, IMAGETITILE_SOURCE);
   }
 }
