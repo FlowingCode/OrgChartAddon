@@ -58,3 +58,13 @@ vaadin-checkbox.smallcheckbox {
 fc-orgchart p {
 	max-width:70%;
 }
+
+.image-title-demo .orgchart .title .symbol {
+	display:none
+}
+
+.image-title-demo img {
+	float: left;
+	margin-top: 4px;
+    margin-left: 2px;
+}
