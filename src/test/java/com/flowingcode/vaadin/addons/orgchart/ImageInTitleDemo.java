@@ -21,10 +21,16 @@ package com.flowingcode.vaadin.addons.orgchart;
 
 import java.util.Arrays;
 
+import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.orgchart.extra.TemplateLiteralRewriter;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
+@PageTitle("Image in Title")
+@DemoSource
+@Route(value = "orgchart/image-title", layout = OrgchartDemoView.class)
 public class ImageInTitleDemo extends VerticalLayout {
 
   public ImageInTitleDemo() {
