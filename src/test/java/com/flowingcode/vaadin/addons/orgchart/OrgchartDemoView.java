@@ -23,31 +23,20 @@ import com.flowingcode.vaadin.addons.DemoLayout;
 import com.flowingcode.vaadin.addons.GithubLink;
 import com.flowingcode.vaadin.addons.demo.TabbedDemo;
 import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
 
 @SuppressWarnings("serial")
-@Route(value = "orgchart", layout = DemoLayout.class)
+@ParentLayout(DemoLayout.class)
+@Route("orgchart")
 @StyleSheet("context://frontend/styles/orgchart/demo-styles.css")
 @StyleSheet("context://frontend/styles/orgchart/font-awesome.css")
 @GithubLink("https://github.com/FlowingCode/OrgChartAddon")
 public class OrgchartDemoView extends TabbedDemo {
 
-//  private static final String DRAGNDROP_DEMO = "Drag and Drop";
-//  private static final String BOTTOMTOP_DEMO = "Bottom to Top";
-//  private static final String DRAGNDROP_SOURCE =
-//      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/DragAndDropExportDemo.java";
-//  private static final String BOTTOMTOP_SOURCE =
-//      "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/BottomTopDemo.java";
-//  private static final String IMAGETITILE_DEMO = "Image in Title";
-//  private static final String IMAGETITILE_SOURCE =     
-//	  "https://github.com/FlowingCode/OrgChartAddon/blob/master/src/test/java/com/flowingcode/vaadin/addons/orgchart/ImageInTitleDemo.java";
-
   public OrgchartDemoView() {
 	addDemo(DragAndDropExportDemo.class);
 	addDemo(BottomTopDemo.class);
 	addDemo(ImageInTitleDemo.class);
-//    addDemo(new DragAndDropExportDemo(), DRAGNDROP_DEMO, DRAGNDROP_SOURCE);
-//    addDemo(new BottomTopDemo(), BOTTOMTOP_DEMO, BOTTOMTOP_SOURCE);
-//    addDemo(new ImageInTitleDemo(), IMAGETITILE_DEMO, IMAGETITILE_SOURCE);
   }
 }
