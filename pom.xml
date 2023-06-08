@@ -193,6 +193,9 @@
 				  <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
 				  <excludes>
 					<exclude>**/font-awesome.css</exclude>
+					<exclude>**/jquery.orgchart.js</exclude>
+					<exclude>**/jquery.orgchart.min.js</exclude>
+					<exclude>**/jquery.orgchart.min.css</exclude>
 				  </excludes>
 				</configuration>
 			</plugin>
