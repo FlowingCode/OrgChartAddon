@@ -1,0 +1,86 @@
+/*-
+ * #%L
+ * OrgChart Add-on
+ * %%
+ * Copyright (C) 2017 - 2023 Flowing Code S.A.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+.hybrid-chart .orgchart .node {
+	width: 220px;
+}
+
+.hybrid-chart .orgchart .node .title {
+	height: 80px !important;
+	text-align: left;
+	line-height: 18px;
+	font-size: 11px;
+	border-radius: 0;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid var(--lumo-body-text-color);
+	color: var(--lumo-body-text-color);
+	padding: 10px 4px 4px 0;
+}
+
+.hybrid-chart .orgchart .node .avatar {
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin-top: 8px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.hybrid-chart .orgchart .node .item-name {
+	font-weight: 800;
+}
+
+.hybrid-chart .orgchart .node .item-name, .item-title, .item-email,
+	.item-phone {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.hybrid-chart .orgchart .node .item-email i, .item-phone i {
+	margin-right: 4px;
+}
+
+.hybrid-chart .orgchart .title .symbol {
+	display: none
+}
+
+.hybrid-chart .orgchart .lines .rightLine {
+	border-right-color: var(--lumo-body-text-color);
+}
+
+.hybrid-chart .orgchart .lines .leftLine {
+    border-left-color: var(--lumo-body-text-color);
+}
+
+.hybrid-chart .orgchart .lines .topLine {
+	border-top-color: var(--lumo-body-text-color);
+}
+
+.hybrid-chart .orgchart .verticalNodes>td::before {
+    border-color: var(--lumo-body-text-color);
+}
+
+.hybrid-chart .orgchart .lines .downLine {
+    background-color: var(--lumo-body-text-color); 
+}
+
+.hybrid-chart .orgchart .verticalNodes ul>li::after, .hybrid-chart .orgchart .verticalNodes ul>li::before {
+    border-color: var(--lumo-body-text-color);
+}
