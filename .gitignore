@@ -16,3 +16,5 @@
 /package-lock.json
 /.classpath
 /node
+tsconfig.json
+types.d.ts
