@@ -23,6 +23,8 @@ import java.util.Arrays;
 import com.flowingcode.vaadin.addons.demo.DemoSource;
 import com.flowingcode.vaadin.addons.orgchart.extra.TemplateLiteralRewriter;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -39,7 +41,7 @@ import com.vaadin.flow.router.Route;
 @CssImport("./styles/orgchart/hybrid-demo-styles.css")
 public class HybridEnhancedChartDemo extends VerticalLayout {
 
-  public HybridEnhancedChartDemo() {
+  public HybridEnhancedChartDemo() {    
     OrgChart orgchart = getExample1();
     String nodeTemplate = "<div class='title'>"
         + "${item.data.imageUrl?`<img class='avatar'src=${item.data.imageUrl}></img>`:''}"
@@ -55,10 +57,18 @@ public class HybridEnhancedChartDemo extends VerticalLayout {
     // make the chart to show children as vertical starting in level 3
     orgchart.setChartVerticalDepth(3);
 
-    orgchart.setChartTitle("My Organization Chart Demo - Example 4 - HYBRID CHART WITH CUSTOM TEMPLATE");
+    // images license
+    Div iconsDiv = new Div();
+    Anchor iconsAnchor = new Anchor("https://www.flaticon.com/free-icons/people", "People icons created by Creartive - Flaticon");
+    iconsAnchor.setTitle("people icons");
+    iconsDiv.add(iconsAnchor);
+    
+    orgchart.setChartTitle("My Organization Chart Demo - Example 4 - HYBRID CHART WITH CUSTOM TEMPLATE" + iconsDiv.getElement());
 
     setSizeFull();
     add(orgchart);
+    
+    
   }
 
   private OrgChart getExample1() {
