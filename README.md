@@ -116,7 +116,7 @@ Then, follow these steps for creating a contibution:
 
 This add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-OrgChart Add-On is written by Paola De Bartolo
+OrgChart Add-On is written by Flowing Code S.A.
 
 Hybrid Demo uses [People icons created by Creartive - Flaticon](https://www.flaticon.com/free-icons/people)
 
