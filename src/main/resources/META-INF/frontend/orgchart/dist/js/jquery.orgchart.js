@@ -14,7 +14,7 @@ import jQuery from "jquery";
 
 (function (factory) {
   if (typeof module === 'object' && typeof module.exports === 'object') {
-    factory(require('jquery'), window, document);
+    factory(jQuery, window, document);
   } else {
     factory(jQuery, window, document);
   }
