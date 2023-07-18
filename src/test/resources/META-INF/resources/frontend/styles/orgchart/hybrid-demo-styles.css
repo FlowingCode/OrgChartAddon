@@ -22,7 +22,8 @@
 }
 
 .hybrid-chart .orgchart .node .title {
-	height: 80px !important;
+	height: 95px !important;
+	width: 210px;
 	text-align: left;
 	line-height: 18px;
 	font-size: 11px;
@@ -57,30 +58,22 @@
 	margin-right: 4px;
 }
 
-.hybrid-chart .orgchart .title .symbol {
+.hybrid-chart .orgchart .title .parentNodeSymbol {
 	display: none
 }
 
-.hybrid-chart .orgchart .lines .rightLine {
-	border-right-color: var(--lumo-body-text-color);
+.hybrid-chart .orgchart .node:not(:only-child)::after{
+	background-color: var(--lumo-body-text-color);
 }
 
-.hybrid-chart .orgchart .lines .leftLine {
-    border-left-color: var(--lumo-body-text-color);
-}
-
-.hybrid-chart .orgchart .lines .topLine {
-	border-top-color: var(--lumo-body-text-color);
-}
-
-.hybrid-chart .orgchart .verticalNodes>td::before {
+.hybrid-chart .orgchart .hierarchy::before {
     border-color: var(--lumo-body-text-color);
 }
 
-.hybrid-chart .orgchart .lines .downLine {
+.hybrid-chart .orgchart>ul>li>ul li>.node::before {
     background-color: var(--lumo-body-text-color); 
 }
 
-.hybrid-chart .orgchart .verticalNodes ul>li::after, .hybrid-chart .orgchart .verticalNodes ul>li::before {
+.hybrid-chart .orgchart .nodes.vertical .hierarchy::after, .hybrid-chart .orgchart .nodes.vertical .hierarchy::before {
     border-color: var(--lumo-body-text-color);
 }
