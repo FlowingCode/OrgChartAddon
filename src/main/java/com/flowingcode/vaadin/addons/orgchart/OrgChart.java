@@ -28,9 +28,9 @@ import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.shared.Registration;
 import java.util.List;
@@ -45,12 +45,12 @@ import java.util.stream.Collectors;
  * @author pbartolo
  */
 @SuppressWarnings("serial")
-// @NpmPackage(value = "orgchart", version = "2.1.4")
-@NpmPackage(value = "html2canvas", version = "^0.5.0-beta4")
-@NpmPackage(value = "jquery", version = "3.4.1")
+@NpmPackage(value = "orgchart", version = "3.7.0")
+@NpmPackage(value = "html2canvas", version = "1.4.1")
+@NpmPackage(value = "jquery", version = "3.6.2")
 @JsModule("jquery/dist/jquery.js")
-@JsModule("./orgchart/dist/js/jquery.orgchart.js")
-@StyleSheet("context://frontend/jquery.orgchart.min.css")
+@JsModule("orgchart/dist/js/jquery.orgchart.js")
+@CssImport("orgchart/dist/css/jquery.orgchart.min.css")
 @Tag("fc-orgchart")
 @JsModule("./fc-orgchart.js")
 public class OrgChart extends Div {
