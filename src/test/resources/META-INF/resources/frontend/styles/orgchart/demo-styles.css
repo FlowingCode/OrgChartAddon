@@ -36,7 +36,6 @@
 	
 .orgchart .node .content { 
 	border-radius: 0 !important; 
-	border-bottom-width: 0 !important; 
 }
 
 .orgchart .node .content:first-of-type { 
@@ -54,15 +53,11 @@ vaadin-checkbox.smallcheckbox {
 	font-size: small;
 }
 
-fc-orgchart p {
-	max-width:calc(100% - 70px);
-}
-
 .orgchart {
 	padding: 0;
 }
 
-.image-title-demo .orgchart .title .symbol {
+.image-title-demo .orgchart .title .parentNodeSymbol {
 	display:none
 }
 
