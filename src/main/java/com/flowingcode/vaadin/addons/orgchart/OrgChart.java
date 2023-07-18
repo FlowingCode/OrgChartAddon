@@ -53,6 +53,7 @@ import java.util.stream.Collectors;
 @CssImport("orgchart/dist/css/jquery.orgchart.min.css")
 @Tag("fc-orgchart")
 @JsModule("./fc-orgchart.js")
+@CssImport("./fc-orgchart-styles.css")
 public class OrgChart extends Div {
 
   private OrgChartItem orgChartItem;
