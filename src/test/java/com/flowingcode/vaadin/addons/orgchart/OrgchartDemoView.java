@@ -20,6 +20,7 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
 import com.flowingcode.vaadin.addons.DemoLayout;
+import com.flowingcode.vaadin.addons.GithubBranch;
 import com.flowingcode.vaadin.addons.GithubLink;
 import com.flowingcode.vaadin.addons.demo.TabbedDemo;
 import com.vaadin.flow.component.dependency.StyleSheet;
@@ -32,6 +33,7 @@ import com.vaadin.flow.router.Route;
 @StyleSheet("context://frontend/styles/orgchart/demo-styles.css")
 @StyleSheet("context://frontend/styles/orgchart/font-awesome.css")
 @GithubLink("https://github.com/FlowingCode/OrgChartAddon")
+@GithubBranch("v4.x")
 public class OrgchartDemoView extends TabbedDemo {
 
   public OrgchartDemoView() {
