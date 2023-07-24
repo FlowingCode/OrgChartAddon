@@ -26,7 +26,7 @@
 		<url>git://github.com/FlowingCode/orgchart-addon.git</url>
 		<connection>scm:git://github.com/FlowingCode/orgchart-addon.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:/FlowingCode/orgchart-addon.git</developerConnection>
-		<tag>OrgChart add-on for Vaadin 14+</tag>
+		<tag>v4.x</tag>
 	</scm>
 
     <licenses>
