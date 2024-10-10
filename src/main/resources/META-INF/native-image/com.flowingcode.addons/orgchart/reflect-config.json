@@ -1,0 +1,15 @@
+[
+{
+  "name":"com.flowingcode.vaadin.addons.orgchart.OrgChartItem",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getClassName","parameterTypes":[] }, {"name":"getData","parameterTypes":[] }, {"name":"getId","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getTitle","parameterTypes":[] }]
+},
+{
+  "name":"com.flowingcode.vaadin.addons.orgchart.client.OrgChartState",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+}
+]
