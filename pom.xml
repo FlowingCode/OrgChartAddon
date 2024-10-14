@@ -29,6 +29,14 @@
 		<tag>OrgChart add-on for Vaadin 14+</tag>
 	</scm>
 
+    <developers>
+	<developer>
+	    <id>flowingcode</id>
+	    <organization>Flowing Code</organization>
+	    <organizationUrl>https://www.flowingcode.com</organizationUrl>
+	</developer>
+    </developers>
+	
     <licenses>
         <license>
             <name>Apache 2</name>
