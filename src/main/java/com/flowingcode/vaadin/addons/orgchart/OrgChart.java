@@ -257,9 +257,9 @@ public class OrgChart extends Div {
   }
 
   /**
-   * Adds a {@link DragAndDropListener} to the component.
+   * Adds a {@link DragAndDropEvent} listener to the component.
    *
-   * @param dragAndDropListener the listener to be added.
+   * @param listener the listener to be added.
    */
   public void addDragAndDropListener(ComponentEventListener<DragAndDropEvent> listener) {
     addListener(DragAndDropEvent.class, listener);
