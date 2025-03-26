@@ -20,6 +20,7 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import jQuery from "jquery";
 import html2canvas from 'html2canvas';
+import JSONDigger from "json-digger/dist/json-digger.js";
 
 /**
  * `fc-orgchart`
@@ -93,6 +94,7 @@ class FCOrgChart extends PolymerElement {
         });  
         
         window.html2canvas = html2canvas;
+        window.JSONDigger  = JSONDigger;
 
         // add title
         var title = state.chartTitle;

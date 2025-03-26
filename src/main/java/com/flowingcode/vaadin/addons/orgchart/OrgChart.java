@@ -54,6 +54,7 @@ import java.util.stream.Collectors;
 @Tag("fc-orgchart")
 @JsModule("./fc-orgchart.js")
 @CssImport("./fc-orgchart-styles.css")
+@NpmPackage(value = "json-digger", version = "2.0.2")
 public class OrgChart extends Div {
 
   private OrgChartItem orgChartItem;
