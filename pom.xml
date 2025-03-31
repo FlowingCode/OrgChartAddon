@@ -260,6 +260,12 @@
 	                        <resourceBase>src/test/resources/META-INF/resources</resourceBase>
 	                    </resourceBases>
 	                </webAppConfig>
+	                <webApp>
+                        <resourceBases>
+	                        <resourceBase>src/main/resources/META-INF/resources</resourceBase>
+	                        <resourceBase>src/test/resources/META-INF/resources</resourceBase>
+	                    </resourceBases>
+	                </webApp>
                 </configuration>
             </plugin>
         </plugins>
