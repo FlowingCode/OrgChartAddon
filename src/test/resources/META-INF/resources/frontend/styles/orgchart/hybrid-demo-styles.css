@@ -2,7 +2,7 @@
  * #%L
  * OrgChart Add-on
  * %%
- * Copyright (C) 2017 - 2023 Flowing Code S.A.
+ * Copyright (C) 2017 - 2025 Flowing Code S.A.
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
  * limitations under the License.
  * #L%
  */
+
 .hybrid-chart .orgchart .node {
 	width: 220px;
 }
