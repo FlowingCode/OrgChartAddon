@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /** @author pbartolo */
 @SuppressWarnings("serial")
 public class OrgChartItem implements Serializable {
@@ -43,6 +45,8 @@ public class OrgChartItem implements Serializable {
   private List<OrgChartItem> children = new ArrayList<>();
 
   private Map<String, String> data;
+
+  private boolean hybrid;
 
   public OrgChartItem(Integer id, String name, String title) {
     super();
@@ -127,6 +131,30 @@ public class OrgChartItem implements Serializable {
 
   public void addChildren(OrgChartItem item) {
     this.children.add(item);
+  }
+
+  /**
+   * Indicates whether this item is a hybrid node.
+   * A hybrid node arranges its descendant children vertically instead of
+   * horizontally.
+   *
+   * @return {@code true} if this item is hybrid; {@code false} otherwise
+   */
+  public boolean isHybrid() {
+    return this.hybrid;
+  }
+
+  /**
+   * Sets whether this item is a hybrid node.
+   * When {@code true}, the item's descendant children will be arranged
+   * vertically.
+   *
+   * @param hybrid {@code true} to mark this node as hybrid; {@code false}
+   *               otherwise
+   */
+  @JsonProperty("isHybrid")
+  public void setHybrid(boolean hybrid) {
+    this.hybrid = hybrid;
   }
 
   @Override

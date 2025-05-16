@@ -64,7 +64,7 @@ public class HybridEnhancedChartDemo extends VerticalLayout {
     iconsAnchor.setTitle("people icons");
     iconsDiv.add(iconsAnchor);
     
-    orgchart.setChartTitle("My Organization Chart Demo - Example 4 - HYBRID CHART WITH CUSTOM TEMPLATE" + iconsDiv.getElement());
+    orgchart.setChartTitle("My Organization Chart Demo - Example 4 - HYBRID CHART USING VERTICALLEVEL PROPERTY WITH CUSTOM TEMPLATE" + iconsDiv.getElement());
 
     setSizeFull();
     add(orgchart);
