@@ -26,3 +26,7 @@
 .orgchart .node .content {
 	overflow: hidden;
 }
+
+.orgchart {
+	background-image: none;
+}
