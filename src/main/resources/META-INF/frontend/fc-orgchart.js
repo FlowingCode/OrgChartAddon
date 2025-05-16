@@ -118,7 +118,6 @@ class FCOrgChart extends PolymerElement {
         }
         
   		$("div.orgchart").prev().closest("div").attr("id", "chart-container");
-  		this.querySelector(".orgchart").style.setProperty("background-image","none");
   		
   		// workaround  for direction b2t with node template  without content div
   		var direction = state.chartDirection;
