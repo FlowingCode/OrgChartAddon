@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.flowingcode.vaadin.addons</groupId>
 	<artifactId>orgchart-addon</artifactId>
-	<version>5.2.0-SNAPSHOT</version>
+	<version>5.2.0</version>
 	<name>OrgChart Add-on</name>
 
     <properties>
@@ -26,7 +26,7 @@
 		<url>git://github.com/FlowingCode/orgchart-addon.git</url>
 		<connection>scm:git://github.com/FlowingCode/orgchart-addon.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com:/FlowingCode/orgchart-addon.git</developerConnection>
-		<tag>OrgChart add-on for Vaadin 14+</tag>
+		<tag>orgchart-addon-5.2.0</tag>
 	</scm>
 
     <developers>
