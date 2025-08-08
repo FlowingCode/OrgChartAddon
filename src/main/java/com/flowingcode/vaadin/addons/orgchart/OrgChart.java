@@ -23,6 +23,11 @@ package com.flowingcode.vaadin.addons.orgchart;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flowingcode.vaadin.addons.orgchart.client.OrgChartState;
+import com.flowingcode.vaadin.addons.orgchart.event.ChildrenAddedEvent;
+import com.flowingcode.vaadin.addons.orgchart.event.NodeUpdatedEvent;
+import com.flowingcode.vaadin.addons.orgchart.event.NodesRemovedEvent;
+import com.flowingcode.vaadin.addons.orgchart.event.ParentAddedEvent;
+import com.flowingcode.vaadin.addons.orgchart.event.SiblingsAddedEvent;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.ComponentEvent;
@@ -33,14 +38,18 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.shared.Registration;
+import elemental.json.JsonArray;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
  * OrgChart component definition. <br>
  * Uses JQuery library <b>OrgChart</b> to show an organization chart. <br>
- * More information about this library at <a href=
- * "https://github.com/dabeng/OrgChart">https://github.com/dabeng/OrgChart</a>
+ * More information about this library at
+ * <a href= "https://github.com/dabeng/OrgChart">https://github.com/dabeng/OrgChart</a>
  *
  * @author pbartolo
  */
@@ -72,17 +81,13 @@ public class OrgChart extends Div {
   @Override
   protected void onAttach(AttachEvent attachEvent) {
     super.onAttach(attachEvent);
-    this.getElement()
-        .executeJs(
-            "this.initializeOrgChart($0,$1,$2)",
-            convertToJsonObj(state),
-            state.value,
-            this.getId().get());
+    this.getElement().executeJs("this.initializeOrgChart($0,$1,$2)", convertToJsonObj(state),
+        state.value, this.getId().get());
   }
 
   /**
-   * @deprecated This method is no longer needed. Initialization is done in {@link
-   *     #onAttach(AttachEvent)}.
+   * @deprecated This method is no longer needed. Initialization is done in
+   *             {@link #onAttach(AttachEvent)}.
    */
   @Deprecated
   public void initializeChart() {}
@@ -208,10 +213,8 @@ public class OrgChart extends Div {
     OrgChartItem newParentItem = getById(Integer.valueOf(dropZone), orgChartItem);
 
     // update old parent (remove item)
-    List<OrgChartItem> oldParentUpdated =
-        oldParentItem.getChildren().stream()
-            .filter(i -> !draggedNodeId.equals(i.getId()))
-            .collect(Collectors.toList());
+    List<OrgChartItem> oldParentUpdated = oldParentItem.getChildren().stream()
+        .filter(i -> !draggedNodeId.equals(i.getId())).collect(Collectors.toList());
     oldParentItem.setChildren(oldParentUpdated);
 
     // update new parent (add item)
@@ -242,7 +245,8 @@ public class OrgChart extends Div {
    * datasoure representing a node) and returns an HTML snippet. The name of this parameter is given
    * by {@code parameterName}.
    *
-   * <p>Example: <code>
+   * <p>
+   * Example: <code>
    * setNodeTemplate("item","return '<span>'+item.name+'</span>';")
    * </code> configures the following JS function as node template: <code>
    * function(item) { return '<span>'+item.name+'</span>'; }
@@ -330,4 +334,386 @@ public class OrgChart extends Div {
   public void setCollapsedNodes() {
     setChartDepth(1);
   }
+
+  /**
+   * Finds the parent of a node with the given ID in the org chart. <br>
+   * This method is used to find the parent of a node after the chart has been initialized.
+   * 
+   * @param childId the ID of the child node whose parent is to be found
+   * @param root the root of the org chart from which to start searching
+   * @return the parent {@link OrgChartItem} of the node with the given ID, or {@code null} if not
+   *         found
+   */
+  private OrgChartItem findParent(Integer childId, OrgChartItem root) {
+    if (root.getChildren() != null) {
+      for (OrgChartItem child : root.getChildren()) {
+        if (childId.equals(child.getId())) {
+          return root;
+        }
+        OrgChartItem parent = findParent(childId, child);
+        if (parent != null) {
+          return parent;
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Converts a JsonArray of IDs to a List of Integers.
+   * 
+   * @param jsonIds array of numeric IDs
+   * @return list of converted integer IDs
+   */
+  private List<Integer> convertJsonArrayToIntegerList(JsonArray jsonIds) {
+    List<Integer> idList = new ArrayList<>();
+    for (int i = 0; i < jsonIds.length(); i++) {
+      idList.add((int) jsonIds.getNumber(i));
+    }
+    return idList;
+  }
+
+  /**
+   * Appends a list of items to a parent node's children list. * @param parentNode the node to which
+   * children will be added
+   * 
+   * @param itemsToAdd the list of items to add
+   */
+  private void appendItemsToParent(OrgChartItem parentNode, List<OrgChartItem> itemsToAdd) {
+    if (parentNode != null) {
+      List<OrgChartItem> currentChildren = parentNode.getChildren();
+      if (currentChildren == null) {
+        currentChildren = new ArrayList<>();
+      }
+      currentChildren.addAll(itemsToAdd);
+      parentNode.setChildren(currentChildren);
+    }
+  }
+
+  /**
+   * Adds one or more sibling nodes to a target node in the chart.
+   * <p>
+   * This method inserts the new items at the same level as the target node, under the same parent.
+   * It updates both the internal data structure and the client-side visual representation.
+   *
+   * @param nodeId the ID of the existing node that will serve as the anchor for adding siblings.
+   *        This must not be the root node's ID.
+   * @param siblings a list of {@link OrgChartItem} objects to be added as siblings
+   * @throws IllegalArgumentException if the {@code nodeId} belongs to the root node of the chart,
+   *         as the root cannot have siblings
+   */
+  public void addSiblings(Integer nodeId, List<OrgChartItem> siblings) {
+    // First check if selected node is not the root node
+    if (nodeId.equals(this.orgChartItem.getId())) {
+      throw new IllegalArgumentException("Cannot add siblings to the root node.");
+    }
+    // Update the internal data structure
+    OrgChartItem targetNode = getById(nodeId, orgChartItem);
+    if (targetNode != null) {
+      // Find parent of the target node
+      OrgChartItem parentNode = findParent(nodeId, orgChartItem);
+      if (parentNode != null) {
+        // Update parent's children list with the new siblings
+        appendItemsToParent(parentNode, siblings);
+      }
+    }
+
+    // Update the visual representation by calling the client-side method addSiblings
+    String siblingsJson = convertToJsonObj(siblings);
+    this.getElement().executeJs("this.addSiblings($0, $1)", nodeId, siblingsJson);
+  }
+
+  /**
+   * Handles sibling addition events from the client side. Converts the received JsonArray of
+   * sibling IDs to a List and fires a {@link SiblingsAddedEvent}.
+   *
+   * @param nodeId the ID of the node that received new siblings
+   * @param siblingIds array of IDs for the newly added siblings
+   */
+  @ClientCallable
+  private void onSiblingsAdded(String nodeId, JsonArray siblingIds) {
+    // Find the node where siblings were added
+    OrgChartItem targetItem = getById(Integer.valueOf(nodeId), orgChartItem);
+
+    // Convert the JsonArray to a simple list of integer IDs
+    List<Integer> newSiblingIdList = convertJsonArrayToIntegerList(siblingIds);
+
+    // Convert the list of IDs into a list of the actual OrgChartItem objects
+    List<OrgChartItem> newSiblingItems = newSiblingIdList.stream()
+        .map(id -> getById(id, orgChartItem)).filter(Objects::nonNull).collect(Collectors.toList());
+
+    // Fire the event with the parent and the fully populated list of child items
+    fireSiblingsAddedEvent(targetItem, newSiblingItems, true);
+  }
+
+  /**
+   * Adds a listener for sibling addition events. The listener will be notified when new siblings
+   * are added to any node in the chart.
+   *
+   * @param listener the listener to be added
+   * @return a {@link Registration} for removing the listener
+   */
+  public void addSiblingsAddedListener(ComponentEventListener<SiblingsAddedEvent> listener) {
+    addListener(SiblingsAddedEvent.class, listener);
+  }
+
+  /**
+   * Fires a siblings added event.
+   *
+   * @param item the node that received new siblings
+   * @param newSibling list of the newly added siblings
+   * @param fromClient whether the event originated from the client side
+   */
+  protected void fireSiblingsAddedEvent(OrgChartItem item, List<OrgChartItem> newSiblings,
+      boolean fromClient) {
+    fireEvent(new SiblingsAddedEvent(this, item, newSiblings, fromClient));
+  }
+
+  /**
+   * Adds one or more child nodes to a specified parent node in the chart.
+   * <p>
+   * This method updates both the internal data model and the client-side visuals. Note the specific
+   * client-side behavior: if the parent node has no existing children, this uses the library's
+   * {@code addChildren} function. If the parent already has children, it uses the
+   * {@code addSiblings} function on the first existing child to append the new nodes.
+   *
+   * @param nodeId the ID of the parent node to which the new children will be added
+   * @param children a list of {@link OrgChartItem} objects to be added as new children
+   */
+  public void addChildren(Integer nodeId, List<OrgChartItem> children) {
+    // Update the internal data structure
+    OrgChartItem targetNode = getById(nodeId, orgChartItem);
+    boolean currentChildrenEmpty = targetNode.getChildren().isEmpty();
+    if (targetNode != null) {
+      // Add new children while preserving existing ones
+      appendItemsToParent(targetNode, children);
+    }
+
+    // Update the visual representation
+    String itemsJson = convertToJsonObj(children);
+    if (currentChildrenEmpty) {
+      this.getElement().executeJs("this.addChildren($0, $1)", nodeId, itemsJson);
+    } else {
+      this.getElement().executeJs("this.addSiblings($0, $1)",
+          targetNode.getChildren().get(0).getId(), itemsJson);
+    }
+  }
+
+  @ClientCallable
+  private void onChildrenAdded(String nodeId, JsonArray childIds) {
+    // Find the parent node where children were added
+    OrgChartItem parentItem = getById(Integer.valueOf(nodeId), orgChartItem);
+
+    // Convert the JsonArray to a simple list of integer IDs
+    List<Integer> newChildIdList = convertJsonArrayToIntegerList(childIds);
+
+    // Convert the list of IDs into a list of the actual OrgChartItem objects
+    List<OrgChartItem> newChildItems = newChildIdList.stream().map(id -> getById(id, orgChartItem))
+        .filter(Objects::nonNull).collect(Collectors.toList());
+
+    // Fire the event with the parent and the fully populated list of child items
+    fireChildrenAddedEvent(parentItem, newChildItems, true);
+  }
+
+  /**
+   * Adds a listener for child addition events. The listener will be notified when new children are
+   * added to any node in the chart.
+   *
+   * @param listener the listener to be added
+   * @return a {@link Registration} for removing the listener
+   */
+  public Registration addChildrenAddedListener(
+      ComponentEventListener<ChildrenAddedEvent> listener) {
+    return addListener(ChildrenAddedEvent.class, listener);
+  }
+
+  /**
+   * Fires a children added event.
+   *
+   * @param item the node that received new children
+   * @param newChildren list of the newly added children
+   * @param fromClient whether the event originated from the client side
+   */
+  protected void fireChildrenAddedEvent(OrgChartItem item, List<OrgChartItem> newChildren,
+      boolean fromClient) {
+    fireEvent(new ChildrenAddedEvent(this, item, newChildren, fromClient));
+  }
+
+  /**
+   * Removes a specified node and all of its descendants from the chart.
+   * <p>
+   * This action updates both the server-side data model and the client-side visualization. If the
+   * root node is removed, the chart will likely become empty. This operation is permanent for the
+   * current state of the chart.
+   *
+   * @param nodeId the ID of the node to remove. All children and subsequent descendants of this
+   *        node will also be removed from the chart.
+   */
+  public void removeNodes(Integer nodeId) {
+    // Find the node set for removal
+    OrgChartItem nodeToRemove = getById(nodeId, orgChartItem);
+    if (nodeToRemove != null) {
+      // Clear the removed node's children
+      nodeToRemove.setChildren(Collections.emptyList());
+      // Find parent and remove node from its children
+      OrgChartItem parentNode = findParent(nodeId, orgChartItem);
+      if (parentNode != null) {
+        List<OrgChartItem> currentChildren = parentNode.getChildren();
+        currentChildren.removeIf(child -> nodeId.equals(child.getId()));
+        parentNode.setChildren(currentChildren);
+      }
+
+      // Update the visual representation
+      this.getElement().executeJs("this.removeNodes($0)", nodeId);
+    }
+  }
+
+  @ClientCallable
+  private void onNodesRemoved(String nodeId) {
+    fireNodesRemovedEvent(Integer.valueOf(nodeId), true);
+  }
+
+  /**
+   * Adds a listener for node removal events. The listener will be notified when a node and its
+   * descendants are removed from the chart.
+   *
+   * @param listener the listener to be added
+   * @return a {@link Registration} for removing the listener
+   */
+  public Registration addNodesRemovedListener(ComponentEventListener<NodesRemovedEvent> listener) {
+    return addListener(NodesRemovedEvent.class, listener);
+  }
+
+  /**
+   * Fires a nodes removed event.
+   *
+   * @param nodeId the ID of the removed node
+   * @param fromClient whether the event originated from the client side
+   */
+  protected void fireNodesRemovedEvent(Integer nodeId, boolean fromClient) {
+    fireEvent(new NodesRemovedEvent(this, nodeId, fromClient));
+  }
+
+  /**
+   * Adds a new parent node to the organization chart. This method:
+   * <ul>
+   * <li>Updates the visual representation of the chart</li>
+   * <li>Maintains the internal data structure by updating the root item</li>
+   * </ul>
+   * 
+   * @param parentItem the new root item of the chart
+   */
+  public void addParent(OrgChartItem newParentItem) {
+    // Update the internal data structure
+    if (this.orgChartItem != null) {
+      // Set the old root as the only child of the new parent node
+      newParentItem.setChildren(Collections.singletonList(this.orgChartItem));
+    }
+    // Update the chart's root to point to the new parent
+    this.orgChartItem = newParentItem;
+
+    // Update the visual representation by calling the client-side method addParent
+    String parentJson = convertToJsonObj(newParentItem);
+    this.getElement().executeJs("this.addParent($0)", parentJson);
+  }
+
+  /**
+   * Handles parent addition events from the client side. The client sends the ID of the new
+   * parent/root node.
+   *
+   * @param newParentId the ID of the newly added parent node
+   */
+  @ClientCallable
+  private void onParentAdded(String newParentId) {
+    OrgChartItem newParentItem = getById(Integer.valueOf(newParentId), orgChartItem);
+    if (newParentItem != null) {
+      fireParentAddedEvent(newParentItem, true);
+    }
+  }
+
+  /**
+   * Adds a listener for parent addition event. The listener will be notified when a new parent
+   * (root) is added to the chart.
+   *
+   * @param listener the listener to be added
+   * @return a {@link Registration} for removing the listener
+   */
+  public Registration addParentAddedListener(ComponentEventListener<ParentAddedEvent> listener) {
+    return addListener(ParentAddedEvent.class, listener);
+  }
+
+  /**
+   * Fires a parent added event.
+   *
+   * @param newParent the node that was added as the new parent/root
+   * @param fromClient whether the event originated from the client side
+   */
+  protected void fireParentAddedEvent(OrgChartItem newParent, boolean fromClient) {
+    fireEvent(new ParentAddedEvent(this, newParent, fromClient));
+  }
+
+  /**
+   * Updates a node in the chart with new data.
+   * <p>
+   * This method updates the server-side data model and then calls the client-side function to
+   * visually redraw the node with the new information.
+   *
+   * @param nodeId the ID of the node to update
+   * @param newDataItem an {@link OrgChartItem} containing the new data to be merged. The ID of this
+   *        item is ignored; only its other properties (name, title, custom data, etc) are used for
+   *        the update.
+   */
+  public void updateNode(Integer nodeId, OrgChartItem newDataItem) {
+    OrgChartItem nodeToUpdate = getById(nodeId, this.orgChartItem);
+    if (nodeToUpdate != null) {
+      // Update the server-side object
+      if (newDataItem.getName() != null) {
+        nodeToUpdate.setName(newDataItem.getName());
+      }
+      if (newDataItem.getTitle() != null) {
+        nodeToUpdate.setTitle(newDataItem.getTitle());
+      }
+      if (newDataItem.getClassName() != null) {
+        nodeToUpdate.setClassName(newDataItem.getClassName());
+      }
+      nodeToUpdate.setHybrid(newDataItem.isHybrid());
+
+      if (newDataItem.getData() != null) {
+        newDataItem.getData().forEach(nodeToUpdate::setData);
+      }
+
+      // Call the client-side JS function to update the visual representation
+      String newDataJson = convertToJsonObj(newDataItem);
+      this.getElement().executeJs("this.updateNode($0, $1)", nodeId.toString(), newDataJson);
+    }
+  }
+
+  @ClientCallable
+  private void onNodeUpdated(String nodeId) {
+    OrgChartItem updatedItem = getById(Integer.valueOf(nodeId), orgChartItem);
+    if (updatedItem != null) {
+      fireNodeUpdatedEvent(updatedItem, true);
+    }
+  }
+
+  /**
+   * Adds a listener for node updated event.
+   *
+   * @param listener the listener to be added
+   * @return a {@link Registration} for removing the listener
+   */
+  public Registration addNodeUpdatedListener(ComponentEventListener<NodeUpdatedEvent> listener) {
+    return addListener(NodeUpdatedEvent.class, listener);
+  }
+
+  /**
+   * Fires a node updated event.
+   *
+   * @param item the updated node
+   * @param fromClient whether the event originated from the client side
+   */
+  protected void fireNodeUpdatedEvent(OrgChartItem item, boolean fromClient) {
+    fireEvent(new NodeUpdatedEvent(this, item, fromClient));
+  }
+
 }

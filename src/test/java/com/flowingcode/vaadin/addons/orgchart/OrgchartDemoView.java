@@ -41,5 +41,6 @@ public class OrgchartDemoView extends TabbedDemo {
 	addDemo(ImageInTitleDemo.class);
 	addDemo(HybridEnhancedChartDemo.class);
 	addDemo(HybridDataPropertyDemo.class);
+	addDemo(EditChartDemo.class);
   }
 }
