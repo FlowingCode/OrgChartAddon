@@ -453,8 +453,8 @@ public class OrgChart extends Div {
    * @param listener the listener to be added
    * @return a {@link Registration} for removing the listener
    */
-  public void addSiblingsAddedListener(ComponentEventListener<SiblingsAddedEvent> listener) {
-    addListener(SiblingsAddedEvent.class, listener);
+  public Registration addSiblingsAddedListener(ComponentEventListener<SiblingsAddedEvent> listener) {
+    return addListener(SiblingsAddedEvent.class, listener);
   }
 
   /**
