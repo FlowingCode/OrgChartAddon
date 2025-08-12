@@ -602,7 +602,7 @@ public class OrgChart extends Div {
    * <li>Maintains the internal data structure by updating the root item</li>
    * </ul>
    * 
-   * @param parentItem the new root item of the chart
+   * @param newParentItem the new root item of the chart
    */
   public void addParent(OrgChartItem newParentItem) {
     // Update the internal data structure
