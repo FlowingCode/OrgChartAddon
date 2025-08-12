@@ -374,9 +374,9 @@ public class OrgChart extends Div {
   }
 
   /**
-   * Appends a list of items to a parent node's children list. * @param parentNode the node to which
-   * children will be added
+   * Appends a list of items to a parent node's children list.
    * 
+   * @param parentNode the node to which children will be added
    * @param itemsToAdd the list of items to add
    */
   private void appendItemsToParent(OrgChartItem parentNode, List<OrgChartItem> itemsToAdd) {
