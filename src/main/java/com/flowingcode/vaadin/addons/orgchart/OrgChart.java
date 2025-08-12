@@ -483,7 +483,8 @@ public class OrgChart extends Div {
   public void addChildren(Integer nodeId, List<OrgChartItem> children) {
     // Update the internal data structure
     OrgChartItem targetNode = getById(nodeId, orgChartItem);
-    boolean currentChildrenEmpty = targetNode.getChildren().isEmpty();
+    boolean currentChildrenEmpty =
+        targetNode.getChildren() == null || targetNode.getChildren().isEmpty();
     if (targetNode != null) {
       // Add new children while preserving existing ones
       appendItemsToParent(targetNode, children);
