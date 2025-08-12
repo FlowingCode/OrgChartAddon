@@ -400,7 +400,7 @@ public class OrgChart extends Div {
    *        This must not be the root node's ID.
    * @param siblings a list of {@link OrgChartItem} objects to be added as siblings
    * @throws IllegalArgumentException if the {@code nodeId} belongs to the root node of the chart,
-   *         as the root cannot have siblings
+   *         as the root cannot have siblings or if the {@code nodeId} is not found in the chart
    */
   public void addSiblings(Integer nodeId, List<OrgChartItem> siblings) {
     // First check if selected node is not the root node
@@ -416,6 +416,8 @@ public class OrgChart extends Div {
         // Update parent's children list with the new siblings
         appendItemsToParent(parentNode, siblings);
       }
+    } else {
+      throw new IllegalArgumentException("Node not found: " + nodeId);
     }
 
     // Update the visual representation by calling the client-side method addSiblings
@@ -482,16 +484,18 @@ public class OrgChart extends Div {
    *
    * @param nodeId the ID of the parent node to which the new children will be added
    * @param children a list of {@link OrgChartItem} objects to be added as new children
+   * @throws IllegalArgumentException if the {@code nodeId} is not found in the chart
    */
   public void addChildren(Integer nodeId, List<OrgChartItem> children) {
     // Update the internal data structure
     OrgChartItem targetNode = getById(nodeId, orgChartItem);
+    if (targetNode == null) {
+      throw new IllegalArgumentException("Node not found: " + nodeId);
+    }
     boolean currentChildrenEmpty =
         targetNode.getChildren() == null || targetNode.getChildren().isEmpty();
-    if (targetNode != null) {
-      // Add new children while preserving existing ones
-      appendItemsToParent(targetNode, children);
-    }
+    // Add new children while preserving existing ones
+    appendItemsToParent(targetNode, children);
 
     // Update the visual representation
     String itemsJson = convertToJsonObj(children);
@@ -555,6 +559,7 @@ public class OrgChart extends Div {
    *
    * @param nodeId the ID of the node to remove. All children and subsequent descendants of this
    *        node will also be removed from the chart.
+   * @throws IllegalArgumentException if the {@code nodeId} is not found in the chart
    */
   public void removeNodes(Integer nodeId) {
     // Find the node set for removal
@@ -577,6 +582,8 @@ public class OrgChart extends Div {
       
       // Update the visual representation
       this.getElement().executeJs("this.removeNodes($0)", nodeId);
+    } else {
+      throw new IllegalArgumentException("Node not found: " + nodeId);
     }
   }
 
@@ -674,6 +681,7 @@ public class OrgChart extends Div {
    * @param newDataItem an {@link OrgChartItem} containing the new data to be merged. The ID of this
    *        item is ignored; only its other properties (name, title, custom data, etc) are used for
    *        the update.
+   * @throws IllegalArgumentException if the {@code nodeId} is not found in the chart
    */
   public void updateNode(Integer nodeId, OrgChartItem newDataItem) {
     OrgChartItem nodeToUpdate = getById(nodeId, this.orgChartItem);
@@ -698,6 +706,8 @@ public class OrgChart extends Div {
       // Call the client-side JS function to update the visual representation
       String newDataJson = convertToJsonObj(newDataItem);
       this.getElement().executeJs("this.updateNode($0, $1)", nodeId, newDataJson);
+    } else {
+      throw new IllegalArgumentException("Node not found: " + nodeId);
     }
   }
 
