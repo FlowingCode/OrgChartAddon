@@ -677,15 +677,16 @@ public class OrgChart extends Div {
       if (newDataItem.getClassName() != null) {
         nodeToUpdate.setClassName(newDataItem.getClassName());
       }
-      nodeToUpdate.setHybrid(newDataItem.isHybrid());
-
+      if (nodeToUpdate.isHybrid() != newDataItem.isHybrid()) {
+        nodeToUpdate.setHybrid(newDataItem.isHybrid());
+      }
       if (newDataItem.getData() != null) {
         newDataItem.getData().forEach(nodeToUpdate::setData);
       }
 
       // Call the client-side JS function to update the visual representation
       String newDataJson = convertToJsonObj(newDataItem);
-      this.getElement().executeJs("this.updateNode($0, $1)", nodeId.toString(), newDataJson);
+      this.getElement().executeJs("this.updateNode($0, $1)", nodeId, newDataJson);
     }
   }
 
