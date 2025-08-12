@@ -570,6 +570,11 @@ public class OrgChart extends Div {
         parentNode.setChildren(currentChildren);
       }
 
+      // If removing the root, clear internal root reference
+      if (this.orgChartItem != null && nodeId.equals(this.orgChartItem.getId())) {
+          this.orgChartItem = null;
+      }
+      
       // Update the visual representation
       this.getElement().executeJs("this.removeNodes($0)", nodeId);
     }
