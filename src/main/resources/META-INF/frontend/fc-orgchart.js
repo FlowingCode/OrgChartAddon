@@ -254,6 +254,8 @@ class FCOrgChart extends PolymerElement {
             const dataToMerge = typeof newData === 'string' ? JSON.parse(newData) : newData;
             // Delete the ID from the new data to prevent it from being overwritten
             delete dataToMerge.id;
+            // Avoid children list to be overwritten, the node should keep it's original children list
+            delete dataToMerge.children;
             // Merge the data
             Object.assign(nodeToUpdate, dataToMerge);
 
