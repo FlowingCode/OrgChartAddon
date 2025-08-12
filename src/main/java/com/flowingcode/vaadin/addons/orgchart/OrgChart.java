@@ -434,16 +434,19 @@ public class OrgChart extends Div {
   private void onSiblingsAdded(String nodeId, JsonArray siblingIds) {
     // Find the node where siblings were added
     OrgChartItem targetItem = getById(Integer.valueOf(nodeId), orgChartItem);
+    if (targetItem != null) {
 
-    // Convert the JsonArray to a simple list of integer IDs
-    List<Integer> newSiblingIdList = convertJsonArrayToIntegerList(siblingIds);
+      // Convert the JsonArray to a simple list of integer IDs
+      List<Integer> newSiblingIdList = convertJsonArrayToIntegerList(siblingIds);
 
-    // Convert the list of IDs into a list of the actual OrgChartItem objects
-    List<OrgChartItem> newSiblingItems = newSiblingIdList.stream()
-        .map(id -> getById(id, orgChartItem)).filter(Objects::nonNull).collect(Collectors.toList());
+      // Convert the list of IDs into a list of the actual OrgChartItem objects
+      List<OrgChartItem> newSiblingItems =
+          newSiblingIdList.stream().map(id -> getById(id, orgChartItem)).filter(Objects::nonNull)
+              .collect(Collectors.toList());
 
-    // Fire the event with the parent and the fully populated list of child items
-    fireSiblingsAddedEvent(targetItem, newSiblingItems, true);
+      // Fire the event with the parent and the fully populated list of child items
+      fireSiblingsAddedEvent(targetItem, newSiblingItems, true);
+    }
   }
 
   /**
@@ -504,16 +507,19 @@ public class OrgChart extends Div {
   private void onChildrenAdded(String nodeId, JsonArray childIds) {
     // Find the parent node where children were added
     OrgChartItem parentItem = getById(Integer.valueOf(nodeId), orgChartItem);
+    if (parentItem != null) {
 
-    // Convert the JsonArray to a simple list of integer IDs
-    List<Integer> newChildIdList = convertJsonArrayToIntegerList(childIds);
+      // Convert the JsonArray to a simple list of integer IDs
+      List<Integer> newChildIdList = convertJsonArrayToIntegerList(childIds);
 
-    // Convert the list of IDs into a list of the actual OrgChartItem objects
-    List<OrgChartItem> newChildItems = newChildIdList.stream().map(id -> getById(id, orgChartItem))
-        .filter(Objects::nonNull).collect(Collectors.toList());
+      // Convert the list of IDs into a list of the actual OrgChartItem objects
+      List<OrgChartItem> newChildItems =
+          newChildIdList.stream().map(id -> getById(id, orgChartItem)).filter(Objects::nonNull)
+              .collect(Collectors.toList());
 
-    // Fire the event with the parent and the fully populated list of child items
-    fireChildrenAddedEvent(parentItem, newChildItems, true);
+      // Fire the event with the parent and the fully populated list of child items
+      fireChildrenAddedEvent(parentItem, newChildItems, true);
+    }
   }
 
   /**
