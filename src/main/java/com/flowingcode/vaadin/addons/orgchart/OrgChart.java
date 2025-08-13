@@ -466,7 +466,7 @@ public class OrgChart extends Div {
    * Fires a siblings added event.
    *
    * @param item the node that received new siblings
-   * @param newSibling list of the newly added siblings
+   * @param newSiblings list of the newly added siblings
    * @param fromClient whether the event originated from the client side
    */
   protected void fireSiblingsAddedEvent(OrgChartItem item, List<OrgChartItem> newSiblings,
