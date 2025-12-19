@@ -171,6 +171,11 @@
 			<version>3.10.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-confirm-dialog-flow</artifactId>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 
     <build>
