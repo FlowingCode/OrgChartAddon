@@ -28,6 +28,7 @@ import com.flowingcode.vaadin.addons.orgchart.event.NodeUpdatedEvent;
 import com.flowingcode.vaadin.addons.orgchart.event.NodesRemovedEvent;
 import com.flowingcode.vaadin.addons.orgchart.event.ParentAddedEvent;
 import com.flowingcode.vaadin.addons.orgchart.event.SiblingsAddedEvent;
+import com.flowingcode.vaadin.jsonmigration.JsonMigration;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.ComponentEvent;
@@ -44,6 +45,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.experimental.ExtensionMethod;
 
 /**
  * OrgChart component definition. <br>
@@ -57,6 +59,7 @@ import java.util.stream.Collectors;
 @NpmPackage(value = "orgchart", version = "3.7.0")
 @NpmPackage(value = "html2canvas", version = "1.4.1")
 @NpmPackage(value = "jquery", version = "3.6.2")
+@NpmPackage(value = "@polymer/polymer", version = "3.5.2")
 @JsModule("jquery/dist/jquery.js")
 @JsModule("orgchart/dist/js/jquery.orgchart.js")
 @CssImport("orgchart/dist/css/jquery.orgchart.min.css")
@@ -64,6 +67,7 @@ import java.util.stream.Collectors;
 @JsModule("./fc-orgchart.js")
 @CssImport("./fc-orgchart-styles.css")
 @NpmPackage(value = "json-digger", version = "2.0.2")
+@ExtensionMethod(value = JsonMigration.class, suppressBaseMethods = true)
 public class OrgChart extends Div {
 
   private OrgChartItem orgChartItem;
