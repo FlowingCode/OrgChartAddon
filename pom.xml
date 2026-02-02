@@ -543,7 +543,7 @@
 			<properties>
 				<maven.compiler.source>21</maven.compiler.source>
 				<maven.compiler.target>21</maven.compiler.target>
-				<vaadin.version>25.0.0-beta2</vaadin.version>
+				<vaadin.version>25.0.3</vaadin.version>
 				<jetty.version>11.0.26</jetty.version>
 			</properties>
 			<dependencies>
