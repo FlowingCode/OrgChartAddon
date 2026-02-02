@@ -547,6 +547,11 @@
 				<jetty.version>11.0.26</jetty.version>
 			</properties>
 			<dependencies>
+                <dependency>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-dev</artifactId>
+					<optional>true</optional>
+				</dependency>
 				<dependency>
 					<groupId>com.flowingcode.vaadin.addons.demo</groupId>
 					<artifactId>commons-demo</artifactId>
