@@ -2,7 +2,7 @@
  * #%L
  * OrgChart Add-on
  * %%
- * Copyright (C) 2017 - 2026 Flowing Code
+ * Copyright (C) 2017 - 2026 Flowing Code S.A.
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 
 public class ReflectionUtil {
 
-  /** Reflective call in order to mantain binary compatibility with Vaadin 14 - 24+ */
+  /** Reflective call in order to maintain binary compatibility with Vaadin 14 - 24+ */
   static void setItems(RadioButtonGroup<String> radioButtonGroup,
       String... items) {
     try {
