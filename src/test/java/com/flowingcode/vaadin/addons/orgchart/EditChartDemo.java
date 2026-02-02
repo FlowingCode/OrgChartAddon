@@ -177,7 +177,7 @@ public class EditChartDemo extends VerticalLayout {
     // Action Selector
     actionSelector = new RadioButtonGroup<>();
     actionSelector.setLabel("Select Action");
-    actionSelector.setItems("Add", "Edit", "Delete");
+    ReflectionUtil.setItems(actionSelector,"Add", "Edit", "Delete");
     actionSelector.addValueChangeListener(event -> updateComponentStates());
 
     Div separator = new Div();
@@ -204,7 +204,7 @@ public class EditChartDemo extends VerticalLayout {
     // Relation type selector
     typeSelector = new RadioButtonGroup<String>();
     typeSelector.setLabel("Select Relation Type:");
-    typeSelector.setItems("Parent(root)", "Child", "Sibling");
+    ReflectionUtil.setItems(typeSelector, "Parent(root)", "Child", "Sibling");
     typeSelector.setValue("Child");
     typeSelector.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
 
