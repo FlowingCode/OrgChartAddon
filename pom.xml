@@ -16,6 +16,7 @@
         <drivers.dir>${project.basedir}/drivers</drivers.dir>
 
         <jetty.version>9.4.36.v20210114</jetty.version>
+        <flowingcode.commons.demo.version>3.10.0</flowingcode.commons.demo.version>
     </properties>
 	<organization>
 		<name>Flowing Code S.A.</name>
@@ -174,7 +175,7 @@
         <dependency>
 			<groupId>com.flowingcode.vaadin.addons.demo</groupId>
 			<artifactId>commons-demo</artifactId>
-			<version>3.10.0</version>
+			<version>${flowingcode.commons.demo.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -556,18 +557,13 @@
 				<maven.compiler.target>21</maven.compiler.target>
 				<vaadin.version>25.0.3</vaadin.version>
 				<jetty.version>11.0.26</jetty.version>
+				<flowingcode.commons.demo.version>5.1.0</flowingcode.commons.demo.version>
 			</properties>
 			<dependencies>
                 <dependency>
 					<groupId>com.vaadin</groupId>
 					<artifactId>vaadin-dev</artifactId>
 					<optional>true</optional>
-				</dependency>
-				<dependency>
-					<groupId>com.flowingcode.vaadin.addons.demo</groupId>
-					<artifactId>commons-demo</artifactId>
-					<version>5.1.0</version>
-					<scope>test</scope>
 				</dependency>
 			</dependencies>
 		</profile>
