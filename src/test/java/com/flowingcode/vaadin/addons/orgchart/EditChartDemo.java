@@ -462,8 +462,11 @@ public class EditChartDemo extends VerticalLayout {
 
   private Button createIconButton(VaadinIcon icon) {
     Button iconButton = new Button(icon.create());
-    iconButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_SMALL,
-        ButtonVariant.LUMO_TERTIARY_INLINE);
+    // #if vaadin eq 0
+    iconButton.getThemeNames().addAll(Arrays.asList("icon", "tertiary-inline", "small"));
+    // #endif
+    // show-source iconButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_SMALL,
+    // show-source    ButtonVariant.LUMO_TERTIARY_INLINE);
     return iconButton;
   }
 
