@@ -212,7 +212,10 @@ public class EditChartDemo extends VerticalLayout {
      // #endif
     // show-source typeSelector.setItems("Parent(root)", "Child", "Sibling");
     typeSelector.setValue("Child");
-    typeSelector.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
+    // #if vaadin eq 0
+    typeSelector.getThemeNames().add("vertical");
+    // #endif
+    // show-source typeSelector.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
 
     // New node(s) layout (dynamic)
     newNodeFieldsLayout = createVerticalLayout();
