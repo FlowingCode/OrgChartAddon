@@ -29,6 +29,10 @@ OrgChart Add-On is a Vaadin 14+ NPM mode integration of the library [OrgChart](h
 - Add a chart title
 - Drag and Drop
 
+## Supported versions
+
+Supported versions: Vaadin 14-24 (add-on version 5.x)
+
 ## Online demo
 
 Try the add-on demo at http://addonsv14.flowingcode.com/orgchart
