@@ -16,7 +16,8 @@
 /package-lock.json
 /.classpath
 /node
-tsconfig.json
-types.d.ts
+/tsconfig.json*
+/types.d.ts*
 /frontend/generated
 /frontend/index.html
+/.claude/settings.local.json
