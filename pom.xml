@@ -521,7 +521,8 @@
 										<exclude>**/test/*</exclude>
 										<exclude>**/integration/*</exclude>
 										<exclude>**/DemoView.class</exclude>
-										<exclude>**/DemoLayout.class</exclude>
+										<exclude>**/DemoLayout.class</exclude>                                        
+                                        <exclude>**/dynamic-theme.properties</exclude>
 									</excludes>
 								</configuration>
 							</execution>
