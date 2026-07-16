@@ -21,7 +21,7 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import jQuery from "jquery";
 import html2canvas from 'html2canvas';
-import JSONDigger from "json-digger/dist/json-digger.js";
+import JSONDigger from "./json-digger.js";
 
 /**
  * `fc-orgchart`
