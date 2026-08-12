@@ -20,8 +20,6 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flowingcode.vaadin.addons.orgchart.client.OrgChartState;
 import com.flowingcode.vaadin.addons.orgchart.event.ChildrenAddedEvent;
 import com.flowingcode.vaadin.addons.orgchart.event.NodeUpdatedEvent;
@@ -29,6 +27,7 @@ import com.flowingcode.vaadin.addons.orgchart.event.NodesRemovedEvent;
 import com.flowingcode.vaadin.addons.orgchart.event.ParentAddedEvent;
 import com.flowingcode.vaadin.addons.orgchart.event.SiblingsAddedEvent;
 import com.flowingcode.vaadin.jsonmigration.JsonMigration;
+import com.flowingcode.vaadin.jsonmigration.JsonSerializer;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.ComponentEvent;
@@ -39,7 +38,9 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.shared.Registration;
+import elemental.json.Json;
 import elemental.json.JsonArray;
+import elemental.json.JsonValue;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -97,7 +98,7 @@ public class OrgChart extends Div {
   public void initializeChart() {}
 
   public void setValue(OrgChartItem orgChartItem) {
-    String value = convertToJsonObj(orgChartItem);
+    String value = convertToJsonObj(orgChartItem).toJson();
     getState().value = value;
   }
 
@@ -105,15 +106,20 @@ public class OrgChart extends Div {
     return this.state;
   }
 
-  private String convertToJsonObj(Object orgChartItem) {
-    String result = null;
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-      result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(orgChartItem);
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
+  private JsonValue convertToJsonObj(OrgChartState state) {
+    return JsonSerializer.toJson(state);
+  }
+
+  private JsonValue convertToJsonObj(OrgChartItem orgChartItem) {
+    return orgChartItem.toJson();
+  }
+
+  private JsonValue convertToJsonObj(List<OrgChartItem> items) {
+    JsonArray array = Json.createArray();
+    for (OrgChartItem item : items) {
+      array.set(array.length(), convertToJsonObj(item));
     }
-    return result;
+    return array;
   }
 
   public void setChartNodeTitle(String chartNodeTitle) {
@@ -425,9 +431,10 @@ public class OrgChart extends Div {
     }
 
     // Update the visual representation by calling the client-side method addSiblings
-    String siblingsJson = convertToJsonObj(siblings);
+    JsonValue siblingsJson = convertToJsonObj(siblings);
     this.getElement().executeJs("this.addSiblings($0, $1)", nodeId, siblingsJson);
   }
+
 
   /**
    * Handles sibling addition events from the client side. Converts the received JsonArray of
@@ -502,7 +509,7 @@ public class OrgChart extends Div {
     appendItemsToParent(targetNode, children);
 
     // Update the visual representation
-    String itemsJson = convertToJsonObj(children);
+    JsonValue itemsJson = convertToJsonObj(children);
     if (currentChildrenEmpty) {
       this.getElement().executeJs("this.addChildren($0, $1)", nodeId, itemsJson);
     } else {
@@ -636,7 +643,7 @@ public class OrgChart extends Div {
     this.orgChartItem = newParentItem;
 
     // Update the visual representation by calling the client-side method addParent
-    String parentJson = convertToJsonObj(newParentItem);
+    JsonValue parentJson = convertToJsonObj(newParentItem);
     this.getElement().executeJs("this.addParent($0)", parentJson);
   }
 
@@ -708,7 +715,7 @@ public class OrgChart extends Div {
       }
 
       // Call the client-side JS function to update the visual representation
-      String newDataJson = convertToJsonObj(newDataItem);
+      JsonValue newDataJson = convertToJsonObj(newDataItem);
       this.getElement().executeJs("this.updateNode($0, $1)", nodeId, newDataJson);
     } else {
       throw new IllegalArgumentException("Node not found: " + nodeId);

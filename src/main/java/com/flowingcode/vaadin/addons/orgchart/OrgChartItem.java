@@ -20,6 +20,10 @@
 package com.flowingcode.vaadin.addons.orgchart;
 
 
+import elemental.json.Json;
+import elemental.json.JsonArray;
+import elemental.json.JsonObject;
+import elemental.json.JsonValue;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,8 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** @author pbartolo */
 @SuppressWarnings("serial")
@@ -152,7 +154,6 @@ public class OrgChartItem implements Serializable {
    * @param hybrid {@code true} to mark this node as hybrid; {@code false}
    *               otherwise
    */
-  @JsonProperty("isHybrid")
   public void setHybrid(boolean hybrid) {
     this.hybrid = hybrid;
   }
@@ -192,4 +193,36 @@ public class OrgChartItem implements Serializable {
       printChildren(item.getChildren().get(i), sb, count);
     }
   }
+
+  JsonValue toJson() {
+    JsonObject json = Json.createObject();
+    json.put("name", toJson(name));
+    json.put("title", toJson(title));
+    json.put("className", toJson(className));
+    json.put("id", id != null ? Json.create(id) : Json.createNull());
+    json.put("isHybrid", Json.create(hybrid));
+
+    JsonObject dataJson = Json.createObject();
+    if (data != null) {
+      for (Map.Entry<String, String> entry : data.entrySet()) {
+        dataJson.put(entry.getKey(), toJson(entry.getValue()));
+      }
+    }
+    json.put("data", dataJson);
+
+    JsonArray childrenJson = Json.createArray();
+    if (children != null) {
+      for (OrgChartItem child : children) {
+        childrenJson.set(childrenJson.length(), child.toJson());
+      }
+    }
+    json.put("children", childrenJson);
+
+    return json;
+  }
+
+  private static JsonValue toJson(String value) {
+    return value != null ? Json.create(value) : Json.createNull();
+  }
+
 }
