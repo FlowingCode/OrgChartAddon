@@ -21,3 +21,6 @@
 /frontend/generated
 /frontend/index.html
 /.claude/settings.local.json
+/src/main/bundles
+/src/main/frontend/generated
+/src/main/frontend/index.html
