@@ -23,9 +23,11 @@ package com.flowingcode.vaadin.addons.orgchart.client;
 import com.flowingcode.vaadin.addons.orgchart.client.constants.ChartConstants;
 import com.flowingcode.vaadin.addons.orgchart.client.enums.ChartDirectionEnum;
 import java.io.Serializable;
+import lombok.Getter;
 
 /** @author pbartolo */
 @SuppressWarnings("serial")
+@Getter
 public class OrgChartState implements Serializable {
 
   public String value;

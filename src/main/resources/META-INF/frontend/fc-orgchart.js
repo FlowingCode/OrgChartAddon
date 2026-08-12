@@ -33,9 +33,8 @@ import JSONDigger from "./json-digger.js";
  */
 class FCOrgChart extends PolymerElement {
 
-	initializeOrgChart(statestring,data,identifier) {
+	initializeOrgChart(state,data,identifier) {
         var $ = window.jQuery || jQuery;
-        var state = $.parseJSON(statestring);
 		
         let exportChart = state.chartExportButton;
         let exportExt = state.chartExportFileExtension;
