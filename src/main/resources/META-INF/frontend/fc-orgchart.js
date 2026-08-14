@@ -169,7 +169,7 @@ class FCOrgChart extends PolymerElement {
 
                 // Notify server about siblings added with just the IDs
                 const siblingIds = siblingsData.map(sibling => sibling.id);
-                this.$server.onSiblingsAdded(nodeId, siblingIds);
+                this.$server.onSiblingsAdded(nodeId, siblingIds.join(','));
             }
         }
     }
@@ -190,7 +190,7 @@ class FCOrgChart extends PolymerElement {
 				this._chartInstance.addChildren($node, childrenData);		
 				// Notify server about children added with just the IDs
 				const childIds = childrenData.map(child => child.id);
-				this.$server.onChildrenAdded(nodeId, childIds);
+				this.$server.onChildrenAdded(nodeId, childIds.join(','));
 			}
 		}
 	}
