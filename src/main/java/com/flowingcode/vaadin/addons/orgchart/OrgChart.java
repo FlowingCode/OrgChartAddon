@@ -384,6 +384,28 @@ public class OrgChart extends Div {
   }
 
   /**
+   * Converts a comma-separated string of numeric IDs to a JsonArray.
+   * <p>
+   * IDs are received from the client as a string because {@code String} is the only argument type
+   * that every supported Vaadin version is able to decode for a {@link ClientCallable} method: up
+   * to Vaadin 24 the RPC decoder only accepts {@code String}, {@code Boolean}, {@code Integer},
+   * {@code Double} and {@code elemental.json.JsonValue}, while Vaadin 25 decodes with Jackson and
+   * no longer knows about {@code elemental.json}.
+   *
+   * @param ids comma-separated numeric IDs, possibly empty or {@code null}
+   * @return the IDs as a JsonArray of numbers
+   */
+  private JsonArray convertIdsToJsonArray(String ids) {
+    JsonArray jsonIds = Json.createArray();
+    if (ids != null && !ids.isEmpty()) {
+      for (String id : ids.split(",")) {
+        jsonIds.set(jsonIds.length(), Double.parseDouble(id.trim()));
+      }
+    }
+    return jsonIds;
+  }
+
+  /**
    * Appends a list of items to a parent node's children list.
    * 
    * @param parentNode the node to which children will be added
@@ -437,13 +459,26 @@ public class OrgChart extends Div {
 
 
   /**
+   * Bridge for {@link #onSiblingsAdded(String, JsonArray)}, invoked from the client side. The IDs
+   * are received as a comma-separated string, since {@code JsonArray} arguments cannot be decoded
+   * by all supported Vaadin versions.
+   *
+   * @param nodeId the ID of the node that received new siblings
+   * @param siblingIds comma-separated IDs for the newly added siblings
+   * @see #convertIdsToJsonArray(String)
+   */
+  @ClientCallable
+  private void onSiblingsAdded(String nodeId, String siblingIds) {
+    onSiblingsAdded(nodeId, convertIdsToJsonArray(siblingIds));
+  }
+
+  /**
    * Handles sibling addition events from the client side. Converts the received JsonArray of
    * sibling IDs to a List and fires a {@link SiblingsAddedEvent}.
    *
    * @param nodeId the ID of the node that received new siblings
    * @param siblingIds array of IDs for the newly added siblings
    */
-  @ClientCallable
   private void onSiblingsAdded(String nodeId, JsonArray siblingIds) {
     // Find the node where siblings were added
     OrgChartItem targetItem = getById(Integer.valueOf(nodeId), orgChartItem);
@@ -518,7 +553,20 @@ public class OrgChart extends Div {
     }
   }
 
+  /**
+   * Bridge for {@link #onChildrenAdded(String, JsonArray)}, invoked from the client side. The IDs
+   * are received as a comma-separated string, since {@code JsonArray} arguments cannot be decoded
+   * by all supported Vaadin versions.
+   *
+   * @param nodeId the ID of the parent node that received new children
+   * @param childIds comma-separated IDs for the newly added children
+   * @see #convertIdsToJsonArray(String)
+   */
   @ClientCallable
+  private void onChildrenAdded(String nodeId, String childIds) {
+    onChildrenAdded(nodeId, convertIdsToJsonArray(childIds));
+  }
+
   private void onChildrenAdded(String nodeId, JsonArray childIds) {
     // Find the parent node where children were added
     OrgChartItem parentItem = getById(Integer.valueOf(nodeId), orgChartItem);
