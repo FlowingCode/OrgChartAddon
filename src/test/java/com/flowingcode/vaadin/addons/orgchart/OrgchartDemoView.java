@@ -30,8 +30,8 @@ import com.vaadin.flow.router.Route;
 @SuppressWarnings("serial")
 @ParentLayout(DemoLayout.class)
 @Route("orgchart")
-@StyleSheet("context://frontend/styles/orgchart/demo-styles.css")
-@StyleSheet("context://frontend/styles/orgchart/font-awesome.css")
+@StyleSheet("context://styles/orgchart/demo-styles.css")
+@StyleSheet("context://styles/orgchart/font-awesome.css")
 @GithubLink("https://github.com/FlowingCode/OrgChartAddon")
 public class OrgchartDemoView extends TabbedDemo {
 
